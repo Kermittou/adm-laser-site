@@ -1,0 +1,43 @@
+À : commandes@adm-laser.fr
+Objet : [Commande EXEMPLE2] EXPRESS Expédition en 2 jours — 45 × Acier brut 3 mm — Métal Test SARL
+Pièces jointes : ADM-EXEMPLE2-acier-brut-3mm-x45.dxf
+
+COMMANDE EN LIGNE EXEMPLE2 — vendredi 16 octobre 2026
+
+PAIEMENT BLOQUÉ, PAS ENCORE ENCAISSÉ.
+Après vérification de la pièce : « Capturer » le paiement dans Stripe (7 jours maximum), ou l'annuler.
+→ https://dashboard.stripe.com/test/payments/pi_EXEMPLE
+
+━━━ À FABRIQUER ━━━
+  Matière     : Acier brut
+  ÉPAISSEUR   : 3 mm
+  QUANTITÉ    : 45 pièces
+  Forme       : Rectangle — Longueur 300 mm · Largeur 300 mm
+  Encombrement: 300 × 300 mm · 36 pièces par tôle
+  Fichier     : ADM-EXEMPLE2-acier-brut-3mm-x45.dxf (joint, en mm)
+
+━━━ EXPÉDITION ━━━
+  Délai       : Expédition en 2 jours — à expédier au plus tard le mardi 20 octobre 2026
+  Envoi       : 4 colis (4 envois séparés) · pièce la plus longue 30 cm
+    colis 1  : 12 pièces — 25,93 kg emballage compris
+    colis 2  : 11 pièces — 23,81 kg emballage compris
+    colis 3  : 11 pièces — 23,81 kg emballage compris
+    colis 4  : 11 pièces — 23,81 kg emballage compris
+  Poids       : 95,4 kg de pièces (nettes)
+  Destinataire: Client Test (Métal Test SARL)
+  Adresse     : 1 rue de l'Essai, 77360 Vaires-sur-Marne
+  Téléphone   : +33612345678
+  Bordereau   : NON GÉNÉRÉ — exemple sans compte Boxtal. À éditer sur le compte Boxtal.
+
+━━━ CLIENT ━━━
+  Nom         : Client Test
+  Société     : Métal Test SARL
+  Mail        : client@exemple.test
+  Téléphone   : +33612345678
+  N° de TVA   : FR00123456789
+  Facturation : 1 rue de l'Essai, 77360 Vaires-sur-Marne
+
+━━━ MONTANTS ━━━
+  Pièces      : 335,33 € HT (7,45 € HT la pièce)
+  Expédition  : 50,30 € HT
+  Total payé  : 462,75 € TTC

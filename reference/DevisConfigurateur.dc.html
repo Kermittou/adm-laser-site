@@ -1,0 +1,691 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .opt-btn {
+      border: 1px solid oklch(96% 0.006 250 / 0.22); background: transparent; color: oklch(96% 0.006 250 / 0.72);
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; padding: 8px 13px; border-radius: 3px;
+      cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      display: inline-flex; align-items: center; white-space: nowrap;
+    }
+    .opt-btn.active { color: oklch(12% 0 0); border-color: {{accent}}; background: {{accent}}; }
+    .opt-btn.locked { opacity: 0.32; cursor: not-allowed; }
+    .opt-row { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .forme-btn {
+      border: 1px solid oklch(96% 0.006 250 / 0.18); background: oklch(100% 0 0 / 0.02); color: oklch(96% 0.006 250 / 0.72);
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 11.5px; border-radius: 4px; cursor: pointer;
+      padding: 11px 6px 9px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; line-height: 1.25;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .forme-btn.active { color: oklch(96% 0.006 250); border-color: {{accent}}; background: oklch(100% 0 0 / 0.06); }
+    .forme-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: {{accent}}; margin-bottom: 9px;
+    }
+
+    .stepper { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      border: 1px solid oklch(96% 0.006 250 / 0.14); border-radius: 3px; padding: 5px 6px 5px 12px; }
+    .stepper-btn {
+      width: 26px; height: 26px; border-radius: 3px; border: 1px solid oklch(96% 0.006 250 / 0.2); background: transparent;
+      color: oklch(96% 0.006 250 / 0.85); font-size: 14px; line-height: 1; cursor: pointer; flex-shrink: 0;
+    }
+    .stepper-label { font-size: 12px; color: oklch(96% 0.006 250 / 0.55); }
+    .stepper-val { font-size: 13px; color: oklch(96% 0.006 250); min-width: 62px; text-align: right; }
+
+    .conseil-btn {
+      border: 1px dashed oklch(96% 0.006 250 / 0.3); background: transparent; color: oklch(96% 0.006 250 / 0.62);
+      font-size: 12px; padding: 8px 13px; border-radius: 3px; cursor: pointer;
+    }
+    .q-btn {
+      border: 1px solid oklch(96% 0.006 250 / 0.2); background: transparent; color: oklch(96% 0.006 250 / 0.7);
+      font-size: 12px; padding: 7px 11px; border-radius: 3px; cursor: pointer; text-align: left;
+    }
+    .q-btn.active { color: oklch(12% 0 0); border-color: {{accent}}; background: {{accent}}; }
+
+    .paliers { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+    .palier {
+      border: 1px solid oklch(96% 0.006 250 / 0.16); background: oklch(100% 0 0 / 0.03);
+      border-radius: 3px; padding: 7px 4px 6px; cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; gap: 2px; transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .palier:hover { border-color: oklch(96% 0.006 250 / 0.4); }
+    .palier.active { border-color: {{accent}}; background: oklch(100% 0 0 / 0.07); }
+    .palier .q { font-size: 10.5px; color: oklch(96% 0.006 250 / 0.5); }
+    .palier .pu { font-size: 13px; font-weight: 600; color: oklch(96% 0.006 250); font-variant-numeric: tabular-nums; }
+    .palier .ec { font-size: 9.5px; color: {{accent}}; font-variant-numeric: tabular-nums; min-height: 12px; }
+
+    .ligne-prix { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; margin-top: 6px; }
+    .ligne-prix .k { color: oklch(96% 0.006 250 / 0.5); }
+    .ligne-prix .v { color: oklch(96% 0.006 250 / 0.82); font-variant-numeric: tabular-nums; }
+  </style>
+</helmet>
+<div style="width:100%;height:1040px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:oklch(96% 0.006 250);position:relative;overflow:hidden;background:oklch(23% 0.012 250);">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 48px;border-bottom:1px solid oklch(100% 0 0 / 0.08);">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.02em;">ADM <span style="color:{{accent}}">LASER</span></div>
+    <div style="display:flex;gap:32px;font-size:13px;color:oklch(96% 0.006 250 / 0.6);">
+      <a href="#">Savoir-faire</a>
+      <a href="#">Réalisations</a>
+      <a href="#" style="color:{{accent}}">Devis</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:36px;padding:22px 48px 0;align-items:flex-start;">
+
+    <!-- ============================ COLONNE FORMULAIRE ============================ -->
+    <div style="flex:0 0 600px;display:flex;flex-direction:column;gap:18px;position:relative;">
+      <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;">Demander un devis instantané</h1>
+
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;">
+          <div class="step-num">01 — Matière</div>
+          <button class="conseil-btn" style="margin-bottom:9px;" onClick="{{toggleConseil}}">{{conseilBtnLabel}}</button>
+        </div>
+        <div class="opt-row">
+          <sc-for list="{{matiereOpts}}" as="m" hint-placeholder-count="5">
+            <button class="opt-btn {{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button>
+          </sc-for>
+        </div>
+        <sc-if condition="{{matiereSurDevis}}">
+          <div style="margin-top:9px;padding:11px 13px;border:1px solid {{accent}};border-radius:3px;font-size:12.5px;color:oklch(96% 0.006 250 / 0.8);line-height:1.5;">{{matiereSurDevisMsg}}</div>
+        </sc-if>
+      </div>
+
+      <!-- ---------------------------- CONSEILLER ---------------------------- -->
+      <sc-if condition="{{conseilOuvert}}">
+        <div style="position:absolute;top:104px;left:0;right:0;z-index:5;border:1px solid oklch(96% 0.006 250 / 0.2);border-radius:4px;padding:16px 18px;background:oklch(26% 0.012 250);box-shadow:0 22px 60px oklch(12% 0.01 250 / 0.72);">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;margin-bottom:14px;">Répondez à 5 questions, on vous dit quoi prendre</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{questions}}" as="q" hint-placeholder-count="5">
+              <div>
+                <div style="font-size:11.5px;color:oklch(96% 0.006 250 / 0.5);margin-bottom:6px;">{{q.question}}</div>
+                <div class="opt-row">
+                  <sc-for list="{{q.reponses}}" as="r" hint-placeholder-count="4">
+                    <button class="q-btn {{r.cls}}" onClick="{{r.pick}}">{{r.label}}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid oklch(100% 0 0 / 0.08);">
+            <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:{{accent}};margin-bottom:10px;">Ce qu'on vous conseille</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{conseils}}" as="c" hint-placeholder-count="3">
+                <div style="display:flex;gap:11px;align-items:flex-start;">
+                  <button class="opt-btn" style="flex-shrink:0;" onClick="{{c.pick}}">{{c.label}}</button>
+                  <div style="font-size:11.5px;line-height:1.55;color:oklch(96% 0.006 250 / 0.6);padding-top:6px;">{{c.texte}}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div>
+        <div class="step-num">02 — Nuance / finition</div>
+        <div class="opt-row">
+          <sc-for list="{{nuanceOpts}}" as="n" hint-placeholder-count="8">
+            <button class="opt-btn {{n.cls}}" onClick="{{n.pick}}">{{n.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div>
+        <div class="step-num">03 — Épaisseur <span style="color:oklch(96% 0.006 250 / 0.35);text-transform:none;letter-spacing:0;font-weight:400;">— seules les épaisseurs réellement disponibles dans cette nuance</span></div>
+        <div class="opt-row">
+          <sc-for list="{{epaisseurOpts}}" as="e" hint-placeholder-count="13">
+            <button class="opt-btn {{e.cls}}" onClick="{{e.pick}}">{{e.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div>
+        <div class="step-num">04 — Forme</div>
+        <div class="forme-grid">
+          <sc-for list="{{formeOpts}}" as="f" hint-placeholder-count="10">
+            <button class="forme-btn {{f.cls}}" onClick="{{f.pick}}">
+              <svg viewBox="0 0 40 30" style="width:38px;height:28px;flex-shrink:0;">
+                <path d="{{f.icon}}" fill="oklch(72% 0.006 250 / 0.55)" fill-rule="evenodd"></path>
+              </svg>
+              {{f.label}}
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div class="step-num">05 — Dimensions (mm)</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{dimControls}}" as="d" hint-placeholder-count="4">
+              <div class="stepper">
+                <span class="stepper-label">{{d.label}}</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="stepper-val">{{d.value}}</span>
+                  <button class="stepper-btn" onClick="{{d.down}}">−</button>
+                  <button class="stepper-btn" onClick="{{d.up}}">+</button>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:0 0 190px;">
+          <div class="step-num">06 — Quantité</div>
+          <div class="stepper">
+            <span class="stepper-label">Pièces</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="stepper-val">{{qteVal}}</span>
+              <button class="stepper-btn" onClick="{{qteDown}}">−</button>
+              <button class="stepper-btn" onClick="{{qteUp}}">+</button>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:oklch(96% 0.006 250 / 0.38);line-height:1.5;">{{trouMinNote}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ COLONNE APERÇU ============================ -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+
+      <div style="background:oklch(96% 0.004 250);border-radius:4px;padding:14px 16px 10px;position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+          <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:oklch(35% 0.008 250 / 0.55);">Votre pièce — cotée en direct</div>
+          <div style="font-size:11px;color:oklch(35% 0.008 250 / 0.5);font-variant-numeric:tabular-nums;">{{echelleLabel}}</div>
+        </div>
+        <svg viewBox="{{viewBox}}" style="width:100%;height:352px;display:block;">
+          <path d="{{piecePath}}" fill="oklch(78% 0.004 250)" stroke="oklch(28% 0.01 250)" stroke-width="{{traitFort}}" fill-rule="evenodd" stroke-linejoin="round"></path>
+          <sc-for list="{{cotes}}" as="c" hint-placeholder-count="3">
+            <g>
+              <path d="{{c.trait}}" stroke="oklch(52% 0.13 250)" stroke-width="{{traitFin}}" fill="none"></path>
+              <text x="{{c.tx}}" y="{{c.ty}}" fill="oklch(45% 0.14 250)" font-size="{{coteTaille}}" font-family="IBM Plex Sans, sans-serif" text-anchor="{{c.ancre}}" dominant-baseline="middle">{{c.label}}</text>
+            </g>
+          </sc-for>
+        </svg>
+      </div>
+
+      <div style="background:oklch(28% 0.012 250);border:1px solid oklch(100% 0 0 / 0.08);border-radius:4px;padding:18px 20px 16px;">
+        <div style="font-size:12.5px;color:oklch(96% 0.006 250 / 0.62);line-height:1.5;">{{recapText}}</div>
+        <div style="font-size:11.5px;color:oklch(96% 0.006 250 / 0.4);margin-top:3px;">{{masseText}}</div>
+
+        <div style="border-top:1px solid oklch(100% 0 0 / 0.08);margin-top:14px;padding-top:12px;">
+          <div class="ligne-prix"><span class="k">Matière</span><span class="v">{{pMatiere}} €</span></div>
+          <div class="ligne-prix"><span class="k">Découpe — {{tempsText}}</span><span class="v">{{pDecoupe}} €</span></div>
+          <div class="ligne-prix"><span class="k">Tôle — {{toleText}}</span><span class="v">comprise</span></div>
+          <div class="ligne-prix"><span class="k">Tarif de base — 17,11 € répartis sur {{qteVal}}</span><span class="v">{{pBase}} €</span></div>
+        </div>
+
+        <div style="border-top:1px solid oklch(100% 0 0 / 0.08);margin-top:12px;padding-top:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <span style="font-size:13px;color:oklch(96% 0.006 250 / 0.55);">Prix unitaire</span>
+            <span style="font-size:15px;font-variant-numeric:tabular-nums;">{{unitPriceStr}} €</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:7px;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;">Total {{qteVal}} pièce(s)</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:{{accent}};font-variant-numeric:tabular-nums;">{{totalPriceStr}} €</span>
+          </div>
+          <div style="text-align:right;font-size:11px;color:oklch(96% 0.006 250 / 0.42);margin-top:2px;">{{totalNote}}</div>
+        </div>
+
+        <div style="border-top:1px solid oklch(100% 0 0 / 0.08);margin-top:14px;padding-top:12px;">
+          <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:oklch(96% 0.006 250 / 0.42);margin-bottom:9px;">Plus vous en prenez, moins ça coûte</div>
+          <div class="paliers">
+            <sc-for list="{{paliersOpts}}" as="p" hint-placeholder-count="6">
+              <button class="palier {{p.cls}}" onClick="{{p.pick}}">
+                <span class="q">{{p.qte}}</span>
+                <span class="pu">{{p.pu}} €</span>
+                <span class="ec">{{p.ecart}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <a href="#" style="margin-top:14px;display:flex;justify-content:center;align-items:center;padding:13px;background:{{accent}};color:oklch(14% 0 0);font-weight:600;font-size:14px;border-radius:3px;">Demander ce devis →</a>
+        <div style="margin-top:9px;font-size:10.5px;color:oklch(96% 0.006 250 / 0.34);text-align:center;line-height:1.5;">Calibré sur 8 devis réels du logiciel ADM — écart moyen 1,7 %.</div>
+      </div>
+
+      <div style="font-size:12px;color:oklch(96% 0.006 250 / 0.4);text-align:center;">Pièce trop spécifique ? <a href="#" style="color:{{accent}};text-decoration:underline;">Envoyez-nous votre plan</a></div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#E8362B","options":["#E8362B","#FF4433","#D9291F"]}}'>
+// ---------------------------------------------------------------------------
+//  Données atelier ADM Laser (03/09/2026) — vitesses en m/min, converties en mm/s.
+//  Source unique : catalogue.json + tarifs.json. Ne pas éditer à la main ici.
+// ---------------------------------------------------------------------------
+const MAT = {"acier":{"label":"Acier","densite":7.85,"vitesses":{"0.5":29,"1":29,"1.5":19,"2":14.5,"2.5":8.5,"3":7.6,"4":5,"5":2.5,"6":2.5,"8":2.1,"10":1.8,"12":1.2,"15":0.78},"nuances":{"brut":{"label":"Brut","eps":[0.5,1,1.5,2,2.5,3,4,5,6,8,10,12,15],"epMasse":null},"noir":{"label":"Tôle noire","eps":[1.5],"epMasse":null},"bleue":{"label":"Tôle bleue","eps":[1.5],"epMasse":null},"galvanise":{"label":"Galvanisé","eps":[1,2,3],"epMasse":null},"electrozingue":{"label":"Électrozingué","eps":[1,2,3],"epMasse":null},"corten":{"label":"Corten","eps":[1.5],"epMasse":null},"larme":{"label":"Larmé 3-5","eps":[3],"epMasse":3.5},"perfore":{"label":"Perforé","eps":[1.5],"epMasse":null}}},"inox":{"label":"Inox","densite":7.9,"vitesses":{"0.5":29,"1":29,"1.5":19,"2":11.5,"2.5":8.5,"3":7.6,"4":4.8,"5":2.2,"6":2,"8":1,"10":0.5,"12":0.4},"nuances":{"brut":{"label":"Brut","eps":[1,1.5,2,2.5,3,4,5,6,8,10],"epMasse":null},"marin":{"label":"Marin","eps":[1.5],"epMasse":null},"miroir":{"label":"Miroir","eps":[1.5],"epMasse":null},"brosse":{"label":"Brossé","eps":[1,2,3,4],"epMasse":null}}},"alu":{"label":"Aluminium","densite":2.7,"vitesses":{"0.5":29,"1":29,"1.5":19,"2":11.5,"2.5":8.5,"3":9,"4":4.8,"5":2.3,"6":2,"8":1,"10":0.5,"12":0.4},"nuances":{"brut":{"label":"Brut","eps":[0.5,1,1.5,2,2.5,3,4,5,6,8,10,12],"epMasse":null},"larme":{"label":"Larmé 3-5","eps":[3],"epMasse":3.5}}}};
+const PRIX_KG = {"acier":{"_defaut":2.932,"galvanise":3.79,"electrozingue":3.79,"corten":7.82,"larme":3.54,"perfore":6.35,"noir":2.81,"bleue":3.91},"inox":{"_defaut":10.49,"brosse":12.12,"miroir":15.15,"marin":13.99},"alu":{"_defaut":13.67,"larme":15.31},"cuivre":{"_defaut":11.0},"laiton":{"_defaut":9.0}};
+const T_PERCAGE = {"2":0.3,"4":0.6,"6":1.0,"8":1.5,"10":2.0,"15":3.0};
+
+const SUR_DEVIS = {
+  cuivre: { label: 'Cuivre', msg: "Le cuivre se traite sur devis — envoyez-nous votre plan par mail, on revient vers vous rapidement." },
+  laiton: { label: 'Laiton', msg: "Le laiton se traite sur devis — envoyez-nous votre plan par mail, on revient vers vous rapidement." }
+};
+
+// --- Tarification à trois niveaux (voir tarif-degressif.md) -------------------
+//   par COMMANDE : programmation + traitement de commande, payés une seule fois
+//   par TÔLE     : chargement/déchargement, facturé AU PRORATA de la tôle occupée
+//   par PIÈCE    : matière, coupe, amorçage, tri
+// La dégressivité tombe de cette répartition. Aucune grille de remises nulle part.
+const TAUX_HORAIRE = 121.8;         // €/h — calibré sur 8 devis réels (marge incluse)
+const MARGE_MATIERE = 1.0;          // les prix/kg calibrés contiennent déjà la marge
+const MARGE_MACHINE = 1.0;          // le taux horaire calibré contient déjà la marge
+const T_TRI_PIECE = 10.0;           // s par pièce — déduit des devis réels
+const T_CHARGEMENT_TOLE = 180.0;    // s par tôle — déduit des devis réels
+const MARGE_ENTRE_PIECES = 5;       // mm entre pièces imbriquées
+const TOLE_MAX = [3000, 1500];      // format tôle
+// Tarif de base : payé une fois et AJOUTÉ au prix des pièces, pas un plancher.
+// Comme total = base + quantité x prix_pièce, le total ne peut jamais tomber sous 27 € :
+// le minimum de commande est structurel, il n'y a plus de règle de plancher.
+const TARIF_DE_BASE = 17.11;        // € par commande — déduit des devis à petite quantité
+const PRIX_MINIMUM = 27.0;          // € — minimum de commande, distinct du tarif de base
+const PALIERS = [1, 5, 10, 25, 50, 100];
+
+const FORMES = {
+  rectangle:              { label: 'Rectangle',        params: [['longueur','Longueur',300],['largeur','Largeur',200]] },
+  triangle:               { label: 'Triangle',         params: [['base','Base',300],['hauteur','Hauteur',200]] },
+  disque:                 { label: 'Disque',           params: [['diametre','Diamètre',250]] },
+  rectangle_coupe_coin:   { label: 'Rect. + coupe coin', params: [['longueur','Longueur',300],['largeur','Largeur',200],['coupe_x','Coupe X',90],['coupe_y','Coupe Y',70]] },
+  cadre_coupe_circulaire: { label: 'Cadre + coupe ronde', params: [['longueur','Longueur',280],['largeur','Largeur',220],['diametre_interieur','Ø intérieur',130]] },
+  cadre_coupe_rectangle:  { label: 'Cadre + coupe rect.', params: [['longueur','Longueur',300],['largeur','Largeur',220],['longueur_interieure','Long. int.',170],['largeur_interieure','Larg. int.',100]] },
+  demi_disque_allonge:    { label: 'Demi-disque allongé', params: [['largeur','Largeur',200],['hauteur','Hauteur',300]] },
+  trapeze:                { label: 'Trapèze',          params: [['base','Base',320],['sommet','Sommet',180],['hauteur','Hauteur',210]] },
+  personnalisee:          { label: 'Autres formes',    params: [] }
+};
+
+const QUESTIONS = [
+  { cle:'environnement', question:'Où la pièce va-t-elle vivre ?', reponses:[['interieur',"À l'intérieur, au sec"],['exterieur','Dehors, sous la pluie'],['marin','En bord de mer'],['humide','Intérieur humide']] },
+  { cle:'usage', question:'À quoi sert-elle ?', reponses:[['structure','Structure / mécanique'],['marche','Une marche, un sol'],['decor','Pièce visible, décorative'],['indifferent','Je ne sais pas encore']] },
+  { cle:'pliage', question:'Faudra-t-il la plier ?', reponses:[['oui','Oui'],['non','Non'],['inconnu','Je ne sais pas']] },
+  { cle:'soudure', question:'Faudra-t-il la souder ?', reponses:[['oui','Oui'],['non','Non'],['inconnu','Je ne sais pas']] },
+  { cle:'priorite', question:'Qu’est-ce qui compte le plus ?', reponses:[['prix','Le prix'],['resistance','La résistance'],['legerete','La légèreté'],['esthetique','Le rendu visuel']] }
+];
+
+// Propriétés dictées par l'atelier, utilisées par le conseiller.
+const PROPS = {
+  'acier.brut':          { inox:false, antid:false, esth:false, pliable:true,  eco:true,  txt:'résistant, économique, facile à souder' },
+  'acier.noir':          { inox:false, antid:false, esth:false, pliable:true,  eco:true,  txt:'comme le brut, mais non décapé' },
+  'acier.bleue':         { inox:false, antid:false, esth:false, pliable:false, eco:false, txt:'très dure — mais elle ne se plie pas' },
+  'acier.galvanise':     { inox:true,  antid:false, esth:false, pliable:true,  eco:true,  txt:'ne rouille pas, économique, aspect galvanisé' },
+  'acier.electrozingue': { inox:true,  antid:false, esth:false, pliable:true,  eco:true,  txt:'ne rouille pas, économique, aspect zinc' },
+  'acier.corten':        { inox:true,  antid:false, esth:true,  pliable:true,  eco:false, txt:'rouille stabilisée, très esthétique dehors' },
+  'acier.larme':         { inox:false, antid:true,  esth:false, pliable:true,  eco:true,  txt:'antidérapant, parfait pour des marches extérieures' },
+  'acier.perfore':       { inox:false, antid:false, esth:true,  pliable:true,  eco:false, txt:'esthétique, perforations Ø10mm' },
+  'inox.brut':           { inox:true,  antid:false, esth:false, pliable:true,  eco:false, txt:'ne rouille pas, très résistant, soudable' },
+  'inox.marin':          { inox:true,  antid:false, esth:false, pliable:true,  eco:false, txt:"résiste mieux à l'air salin, soudable", marin:true },
+  'inox.miroir':         { inox:true,  antid:false, esth:true,  pliable:true,  eco:false, txt:'esthétique, effet miroir' },
+  'inox.brosse':         { inox:true,  antid:false, esth:true,  pliable:true,  eco:false, txt:'esthétique, effet brossé' },
+  'alu.brut':            { inox:true,  antid:false, esth:false, pliable:true,  eco:false, txt:'léger, ne rouille pas', alu:true },
+  'alu.larme':           { inox:true,  antid:true,  esth:false, pliable:true,  eco:false, txt:'léger, ne rouille pas, antidérapant', alu:true }
+};
+
+class Component extends DCLogic {
+  clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  fmt(n) { return n.toFixed(2).replace('.', ','); }
+  num(n) { return (Math.round(n * 10) / 10).toString().replace('.', ','); }
+
+  // -- géométrie : surface nette, périmètre à découper, encombrement, perçages --
+  geometrie(forme, d) {
+    const PI = Math.PI;
+    if (forme === 'rectangle') {
+      const L = d.longueur, l = d.largeur;
+      return { s: L * l, p: 2 * (L + l), bx: L, by: l, perc: 1,
+               path: `M0,0 H${L} V${l} H0 Z`,
+               cotes: [['h', 0, L, l], ['v', 0, l, 0]] };
+    }
+    if (forme === 'triangle') {
+      const b = d.base, h = d.hauteur;
+      return { s: b * h / 2, p: b + h + Math.hypot(b, h), bx: b, by: h, perc: 1,
+               path: `M0,0 V${h} H${b} Z`,
+               cotes: [['h', 0, b, h], ['v', 0, h, 0]] };
+    }
+    if (forme === 'disque') {
+      const r = d.diametre / 2;
+      return { s: PI * r * r, p: PI * d.diametre, bx: d.diametre, by: d.diametre, perc: 1,
+               path: `M0,${r} a${r},${r} 0 1,0 ${2 * r},0 a${r},${r} 0 1,0 ${-2 * r},0 Z`,
+               cotes: [['d', 0, d.diametre, r]] };
+    }
+    if (forme === 'rectangle_coupe_coin') {
+      const L = d.longueur, l = d.largeur, cx = Math.min(d.coupe_x, L - 5), cy = Math.min(d.coupe_y, l - 5);
+      return { s: L * l - cx * cy, p: 2 * (L + l), bx: L, by: l, perc: 1,
+               path: `M0,0 H${L} V${l} H${cx} V${l - cy} H0 Z`,
+               cotes: [['h', 0, L, l], ['v', 0, l, 0]] };
+    }
+    if (forme === 'cadre_coupe_circulaire') {
+      const L = d.longueur, l = d.largeur;
+      const di = Math.min(d.diametre_interieur, Math.min(L, l) - 10), r = di / 2;
+      const cx = L / 2, cy = l / 2;
+      return { s: L * l - PI * r * r, p: 2 * (L + l) + PI * di, bx: L, by: l, perc: 2,
+               path: `M0,0 H${L} V${l} H0 Z M${cx - r},${cy} a${r},${r} 0 1,0 ${2 * r},0 a${r},${r} 0 1,0 ${-2 * r},0 Z`,
+               cotes: [['h', 0, L, l], ['v', 0, l, 0], ['di', cx - r, cx + r, cy]] };
+    }
+    if (forme === 'cadre_coupe_rectangle') {
+      const L = d.longueur, l = d.largeur;
+      const Li = Math.min(d.longueur_interieure, L - 10), li = Math.min(d.largeur_interieure, l - 10);
+      const x0 = (L - Li) / 2, y0 = (l - li) / 2;
+      return { s: L * l - Li * li, p: 2 * (L + l) + 2 * (Li + li), bx: L, by: l, perc: 2,
+               path: `M0,0 H${L} V${l} H0 Z M${x0},${y0} H${x0 + Li} V${y0 + li} H${x0} Z`,
+               cotes: [['h', 0, L, l], ['v', 0, l, 0], ['di', x0, x0 + Li, y0 + li / 2]] };
+    }
+    if (forme === 'demi_disque_allonge') {
+      const w = d.largeur, h = Math.max(d.hauteur, d.largeur / 2 + 5), r = w / 2;
+      const droit = h - r;
+      return { s: w * droit + PI * r * r / 2, p: w + 2 * droit + PI * r, bx: w, by: h, perc: 1,
+               path: `M0,${h} V${r} a${r},${r} 0 0,1 ${w},0 V${h} Z`,
+               cotes: [['h', 0, w, h], ['v', 0, h, 0]] };
+    }
+    if (forme === 'trapeze') {
+      const b = d.base, s = Math.min(d.sommet, d.base), h = d.hauteur;
+      const off = (b - s) / 2;
+      return { s: (b + s) * h / 2, p: b + s + 2 * Math.hypot(off, h), bx: b, by: h, perc: 1,
+               path: `M${off},0 H${off + s} L${b},${h} H0 Z`,
+               cotes: [['h', 0, b, h], ['v', 0, h, 0]] };
+    }
+    // personnalisée : silhouette d'exemple, le vrai tracé viendra du modificateur en ligne
+    const L = 300, l = 220;
+    return { s: 52000, p: 1240, bx: L, by: l, perc: 2,
+             path: `M0,40 Q0,0 40,0 H${L - 40} Q${L},0 ${L},40 V${l} H120 L60,${l - 60} H0 Z`,
+             cotes: [['h', 0, L, l], ['v', 0, l, 0]] };
+  }
+
+  // -- dessin coté : construit les traits de cote autour de la pièce --
+  construireCotes(geo, marge) {
+    const fleche = marge * 0.13;
+    const out = [];
+    for (const c of geo.cotes) {
+      const type = c[0];
+      if (type === 'h') {
+        const [, x1, x2, yPiece] = c;
+        const y = yPiece + marge * 0.46;
+        out.push({
+          trait: `M${x1},${yPiece} V${y + fleche} M${x2},${yPiece} V${y + fleche} M${x1},${y} H${x2}`,
+          tx: (x1 + x2) / 2, ty: y + marge * 0.3, ancre: 'middle', label: `${this.num(x2 - x1)} mm`
+        });
+      } else if (type === 'v') {
+        const [, y1, y2, xPiece] = c;
+        const x = xPiece - marge * 0.46;
+        out.push({
+          trait: `M${xPiece},${y1} H${x - fleche} M${xPiece},${y2} H${x - fleche} M${x},${y1} V${y2}`,
+          tx: x - marge * 0.16, ty: (y1 + y2) / 2, ancre: 'end', label: `${this.num(y2 - y1)} mm`
+        });
+      } else {
+        const [, x1, x2, y] = c;
+        const label = type === 'd' ? `Ø ${this.num(x2 - x1)} mm` : `Ø ${this.num(x2 - x1)} mm`;
+        out.push({ trait: `M${x1},${y} H${x2}`, tx: (x1 + x2) / 2, ty: y - marge * 0.16, ancre: 'middle', label: label });
+      }
+    }
+    return out;
+  }
+
+  conseiller(rep) {
+    const env = rep.environnement, usage = rep.usage, pliage = rep.pliage, prio = rep.priorite;
+    const out = [];
+    for (const cle of Object.keys(PROPS)) {
+      const p = PROPS[cle];
+      const [mk, nk] = cle.split('.');
+      if (pliage === 'oui' && !p.pliable) continue;
+      if (usage === 'marche' && !p.antid) continue;
+      if (env === 'marin' && !p.inox) continue;
+      if ((env === 'exterieur' || env === 'humide') && !p.inox && !p.antid) continue;
+
+      let sc = 0;
+      if (env === 'marin') sc += p.marin ? 40 : (p.inox ? 20 : 0);
+      else if (env === 'exterieur' || env === 'humide') sc += p.inox ? 22 : 10;
+      else sc += 8;
+      if (usage === 'marche') sc += 35;
+      else if (usage === 'decor') sc += p.esth ? 30 : 4;
+      else if (usage === 'structure') sc += p.alu ? 8 : (mk === 'inox' ? 20 : 16);
+      if (prio === 'prix') sc += p.eco ? 26 : (mk === 'inox' ? -12 : 14);
+      else if (prio === 'resistance') sc += mk === 'inox' ? 26 : (p.alu ? 4 : 20);
+      else if (prio === 'legerete') sc += p.alu ? 30 : -8;
+      else if (prio === 'esthetique') sc += p.esth ? 28 : -4;
+
+      let txt = p.txt;
+      if ((env === 'exterieur' || env === 'humide') && !p.inox) txt += " — à galvaniser ou peindre après découpe";
+      if (p.alu && usage === 'structure') txt += " — se raye plus vite que l'acier";
+      out.push({ mk, nk, sc, txt, label: `${MAT[mk].label} ${MAT[mk].nuances[nk].label}` });
+    }
+    return out.sort((a, b) => b.sc - a.sc).slice(0, 3);
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#E8362B';
+    const s = this.state;
+
+    const matiere = s.matiere ?? 'acier';
+    const surDevis = SUR_DEVIS[matiere] ?? null;
+    const mDef = MAT[matiere] ?? MAT.acier;
+
+    // nuance : retombe sur la première de la matière si l'ancienne n'existe pas ici
+    const nuanceKeys = Object.keys(mDef.nuances);
+    let nuance = s.nuance ?? nuanceKeys[0];
+    if (!mDef.nuances[nuance]) nuance = nuanceKeys[0];
+    const nDef = mDef.nuances[nuance];
+
+    // épaisseur : contrainte aux épaisseurs réellement dispo dans cette nuance
+    let epaisseur = s.epaisseur ?? 3;
+    if (nDef.eps.indexOf(epaisseur) === -1) {
+      epaisseur = nDef.eps.reduce((best, e) =>
+        Math.abs(e - epaisseur) < Math.abs(best - epaisseur) ? e : best, nDef.eps[0]);
+    }
+
+    const forme = s.forme ?? 'rectangle';
+    const fDef = FORMES[forme];
+    const dims = {};
+    for (const [cle, , defaut] of fDef.params) dims[cle] = (s.dims ?? {})[forme + '.' + cle] ?? defaut;
+    const quantite = s.quantite ?? 10;
+
+    const geo = this.geometrie(forme, dims);
+
+    // ---------------- prix : trois niveaux de coût ----------------
+    const epMasse = nDef.epMasse ?? epaisseur;
+    const masseNette = geo.s * epMasse / 1e6 * mDef.densite;
+    const prixKgTable = PRIX_KG[matiere] ?? { _defaut: 1.2 };
+    const prixKg = prixKgTable[nuance] ?? prixKgTable._defaut;
+    const vitesse = (mDef.vitesses[String(epaisseur)] ?? 5) * 1000 / 60;   // m/min -> mm/s
+    const seuilPercage = Object.keys(T_PERCAGE).map(Number).sort((a, b) => a - b)
+      .find((x) => epaisseur <= x) ?? 15;
+
+    // Combien de pièces tiennent sur une tôle — grille simple, pièce tournée comprise.
+    const grille = (px, py) =>
+      Math.max(0, Math.floor((TOLE_MAX[0] + MARGE_ENTRE_PIECES) / (px + MARGE_ENTRE_PIECES))) *
+      Math.max(0, Math.floor((TOLE_MAX[1] + MARGE_ENTRE_PIECES) / (py + MARGE_ENTRE_PIECES)));
+    const parTole = Math.max(1, grille(geo.bx, geo.by), grille(geo.by, geo.bx));
+
+    // niveau PIÈCE — facturé autant de fois qu'il y a de pièces
+    const masseFacturee = geo.bx * geo.by * epMasse / 1e6 * mDef.densite;  // rectangle de tôle consommé
+    const prixMatiere = masseFacturee * prixKg * MARGE_MATIERE;
+    const tempsPiece = geo.p / vitesse + geo.perc * T_PERCAGE[String(seuilPercage)] + T_TRI_PIECE;
+    const prixPiece = prixMatiere;  // la découpe est facturée au niveau commande
+
+    // niveau TÔLE — au prorata, sinon la 64e pièce coûterait plus cher que la 63e
+    const prixToleUnitaire = 0;  // le chargement est compris dans le temps machine arrondi
+
+    // niveau COMMANDE — payé une seule fois, amorti sur la quantité
+    // Le temps machine se facture à la minute arrondie au-dessus (au-delà de 10 s
+    // entamées), sur la COMMANDE entière — d'où un calcul par quantité.
+    const minutesPour = (q) => {
+      const tot = tempsPiece * q + T_CHARGEMENT_TOLE * q / parTole;
+      const m = Math.floor(tot / 60), s = tot - m * 60;
+      return s > 10 ? m + 1 : m;
+    };
+    const prixPour = (q) => {
+      const t = TARIF_DE_BASE + prixMatiere * q + minutesPour(q) * TAUX_HORAIRE / 60 * MARGE_MACHINE;
+      const tt = Math.max(t, PRIX_MINIMUM);
+      return { u: tt / q, t: tt, min: tt > t + 1e-9 };
+    };
+
+    const prix = prixPour(quantite);
+    const unitPrice = prix.u;
+    const totalPrice = prix.t;
+    const baseUnitaire = TARIF_DE_BASE / quantite;
+
+    // ---------------- dessin ----------------
+    const span = Math.max(geo.bx, geo.by);
+    const marge = span * 0.2;
+    const viewBox = `${-marge * 1.15} ${-marge * 0.55} ${geo.bx + marge * 2} ${geo.by + marge * 1.5}`;
+    const cotes = this.construireCotes(geo, marge);
+
+    // ---------------- options du formulaire ----------------
+    const matiereOpts = Object.keys(MAT).concat(Object.keys(SUR_DEVIS)).map((k) => ({
+      label: (MAT[k] ?? SUR_DEVIS[k]).label,
+      cls: k === matiere ? 'active' : '',
+      pick: () => this.setState({ matiere: k, nuance: null, conseilOuvert: false })
+    }));
+
+    const nuanceOpts = nuanceKeys.map((k) => ({
+      label: mDef.nuances[k].label,
+      cls: k === nuance ? 'active' : '',
+      pick: () => this.setState({ nuance: k })
+    }));
+
+    const toutesEps = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15];
+    const epaisseurOpts = toutesEps.map((v) => {
+      const dispo = nDef.eps.indexOf(v) !== -1;
+      return {
+        label: (v % 1 === 0 ? v : v.toString().replace('.', ',')) + ' mm',
+        cls: !dispo ? 'locked' : (v === epaisseur ? 'active' : ''),
+        pick: dispo ? () => this.setState({ epaisseur: v }) : () => {}
+      };
+    });
+
+    const ICONS = {
+      rectangle: 'M6,5 H34 V25 H6 Z',
+      triangle: 'M6,5 V25 H34 Z',
+      disque: 'M20,5 a10,10 0 1,0 0.1,0 Z',
+      rectangle_coupe_coin: 'M6,5 H34 V25 H17 V17 H6 Z',
+      cadre_coupe_circulaire: 'M6,5 H34 V25 H6 Z M20,9 a6,6 0 1,0 0.1,0 Z',
+      cadre_coupe_rectangle: 'M6,5 H34 V25 H6 Z M15,11 H27 V19 H15 Z',
+      demi_disque_allonge: 'M8,25 V14 a12,7 0 0,1 24,0 V25 Z',
+      trapeze: 'M13,5 H27 L34,25 H6 Z',
+      personnalisee: 'M8,13 h4 v-4 h4 v4 h4 v4 h-4 v4 h-4 v-4 h-4 Z M26,11 h8 v3 h-8 Z M26,17 h8 v3 h-8 Z'
+    };
+    const formeOpts = Object.keys(FORMES).map((k) => ({
+      label: FORMES[k].label,
+      icon: ICONS[k],
+      cls: k === forme ? 'active' : '',
+      pick: () => this.setState({ forme: k })
+    }));
+
+    const pas = (v) => (v >= 500 ? 25 : (v >= 100 ? 10 : 5));
+    const dimControls = fDef.params.map(([cle, label]) => {
+      const v = dims[cle];
+      const set = (nv) => {
+        const d = Object.assign({}, s.dims ?? {});
+        d[forme + '.' + cle] = this.clamp(nv, 5, 3000);
+        this.setState({ dims: d });
+      };
+      return {
+        label: label,
+        value: this.num(v) + ' mm',
+        down: () => set(v - pas(v)),
+        up: () => set(v + pas(v))
+      };
+    });
+
+    // ---------------- conseiller ----------------
+    const rep = s.conseil ?? { environnement: 'interieur', usage: 'structure', pliage: 'non', soudure: 'non', priorite: 'prix' };
+    const questions = QUESTIONS.map((q) => ({
+      question: q.question,
+      reponses: q.reponses.map(([val, label]) => ({
+        label: label,
+        cls: rep[q.cle] === val ? 'active' : '',
+        pick: () => {
+          const nr = Object.assign({}, rep); nr[q.cle] = val;
+          this.setState({ conseil: nr });
+        }
+      }))
+    }));
+    const conseils = this.conseiller(rep).map((c) => ({
+      label: c.label,
+      texte: c.txt,
+      pick: () => this.setState({ matiere: c.mk, nuance: c.nk, conseilOuvert: false })
+    }));
+
+    // Table de paliers. L'écart se calcule par rapport à la quantité ACTUELLE, pas au
+    // prix d'une pièce seule : celui-ci vaut le minimum de commande, donc tous les
+    // pourcentages s'y écraseraient autour de 89 % et 50 pièces afficherait le même
+    // gain que 100. Comparé au choix courant, l'écart redevient une info utile —
+    // c'est ce qui donne envie de monter d'un palier.
+    const paliersOpts = PALIERS.map((q) => {
+      const p = prixPour(q);
+      const gain = Math.round((1 - p.u / unitPrice) * 100);
+      return {
+        qte: q === 1 ? '1 pce' : q + ' pces',
+        pu: this.fmt(p.u),
+        ecart: q > quantite && gain > 0 ? '−' + gain + ' %' : '',
+        cls: q === quantite ? 'active' : '',
+        pick: () => this.setState({ quantite: q })
+      };
+    });
+
+    const qteStep = quantite < 20 ? 1 : 10;
+    const trouMin = epaisseur;
+
+    return {
+      accent: accent,
+
+      matiereOpts: matiereOpts,
+      matiereSurDevis: surDevis !== null,
+      matiereSurDevisMsg: surDevis ? surDevis.msg : '',
+
+      toggleConseil: () => this.setState({ conseilOuvert: !(s.conseilOuvert ?? false) }),
+      conseilOuvert: s.conseilOuvert ?? false,
+      conseilBtnLabel: (s.conseilOuvert ?? false) ? 'Fermer' : 'Quelle matière choisir ?',
+      questions: questions,
+      conseils: conseils,
+
+      nuanceOpts: nuanceOpts,
+      epaisseurOpts: epaisseurOpts,
+      formeOpts: formeOpts,
+      dimControls: dimControls,
+
+      qteVal: quantite,
+      qteDown: () => this.setState({ quantite: this.clamp(quantite - qteStep, 1, 500) }),
+      qteUp: () => this.setState({ quantite: this.clamp(quantite + qteStep, 1, 500) }),
+      trouMinNote: `En ${this.num(epaisseur)} mm, le plus petit trou possible fait Ø ${this.num(trouMin)} mm.`,
+
+      viewBox: viewBox,
+      piecePath: geo.path,
+      cotes: cotes,
+      traitFort: (span / 260).toFixed(2),
+      traitFin: (span / 480).toFixed(2),
+      coteTaille: (span / 21).toFixed(1),
+      echelleLabel: `${this.num(geo.bx)} × ${this.num(geo.by)} mm`,
+
+      recapText: `${mDef.label} ${nDef.label} · ${this.num(epaisseur)} mm · ${fDef.label}`,
+      masseText: `${this.fmt(masseNette)} kg par pièce · ${this.num(geo.p)} mm de coupe · ${this.num(vitesse)} mm/s à cette épaisseur`,
+
+      pMatiere: this.fmt(prixMatiere),
+      pDecoupe: this.fmt(minutesPour(quantite) * TAUX_HORAIRE / 60 / quantite),
+      pTole: this.fmt(prixToleUnitaire),
+      pBase: this.fmt(baseUnitaire),
+      tempsText: `${minutesPour(quantite)} min facturées`,
+      toleText: `${parTole} pièces par tôle`,
+      paliersOpts: paliersOpts,
+
+      unitPriceStr: this.fmt(unitPrice),
+      totalPriceStr: this.fmt(totalPrice),
+      totalNote: `soit ${this.fmt(totalPrice * 1.2)} € TTC`
+    };
+  }
+}
+</script>
+</body>
+</html>

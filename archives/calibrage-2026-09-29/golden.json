@@ -1,0 +1,257 @@
+[
+  {
+    "cle": "acier-3mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 330.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 2.119,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 20.07,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 19.0,
+      "prix_unitaire_ht": 7.45,
+      "total_ht": 335.33
+    },
+    "ecart_pct": 1.62
+  },
+  {
+    "cle": "acier-8mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 836.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 5.652,
+      "vitesse_mm_s": 35.0,
+      "temps_par_piece_s": 45.79,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 38.0,
+      "prix_unitaire_ht": 18.67,
+      "total_ht": 839.97
+    },
+    "ecart_pct": 0.47
+  },
+  {
+    "cle": "cadre-d250-1mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 1,
+      "forme": "cadre_coupe_circulaire",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300,
+        "diametre_interieur": 250
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 138.04,
+    "attendu": {
+      "perimetre_mm": 1985.4,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 0.706,
+      "vitesse_mm_s": 483.3,
+      "temps_par_piece_s": 14.71,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 15.0,
+      "prix_unitaire_ht": 3.13,
+      "total_ht": 140.78
+    },
+    "ecart_pct": 1.98
+  },
+  {
+    "cle": "acier-3mm-5",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 5
+    },
+    "prix_logiciel_adm_ht": 50.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 2.119,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 20.07,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 2.0,
+      "prix_unitaire_ht": 10.45,
+      "total_ht": 52.24
+    },
+    "ecart_pct": 4.48
+  },
+  {
+    "cle": "acier-3mm-10",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 10
+    },
+    "prix_logiciel_adm_ht": 91.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 2.119,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 20.07,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 5.0,
+      "prix_unitaire_ht": 8.94,
+      "total_ht": 89.4
+    },
+    "ecart_pct": -1.76
+  },
+  {
+    "cle": "acier-4mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 4,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 450.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 2.826,
+      "vitesse_mm_s": 83.3,
+      "temps_par_piece_s": 25.0,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 23.0,
+      "prix_unitaire_ht": 9.7,
+      "total_ht": 436.66
+    },
+    "ecart_pct": -2.96
+  },
+  {
+    "cle": "alu-5mm-50",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "alu",
+      "nuance": "brut",
+      "epaisseur_mm": 5,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 50
+    },
+    "prix_logiciel_adm_ht": 929.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 1.215,
+      "vitesse_mm_s": 38.3,
+      "temps_par_piece_s": 42.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 40.0,
+      "prix_unitaire_ht": 18.58,
+      "total_ht": 928.76
+    },
+    "ecart_pct": -0.03
+  },
+  {
+    "cle": "inox-8mm-50",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "inox",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 50
+    },
+    "prix_logiciel_adm_ht": 3151.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "masse_facturee_kg": 5.688,
+      "vitesse_mm_s": 16.7,
+      "temps_par_piece_s": 83.5,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 74.0,
+      "prix_unitaire_ht": 63.01,
+      "total_ht": 3150.69
+    },
+    "ecart_pct": -0.01
+  },
+  {
+    "cle": "cadre-1300-8mm-9",
+    "ajuste_sur_ce_devis": false,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "cadre_coupe_rectangle",
+      "dimensions": {
+        "longueur": 1300,
+        "largeur": 1300,
+        "longueur_interieure": 56,
+        "largeur_interieure": 56
+      },
+      "quantite": 9
+    },
+    "prix_logiciel_adm_ht": 2915.1,
+    "attendu": {
+      "perimetre_mm": 5424,
+      "surface_englobante_mm2": 1690000,
+      "masse_facturee_kg": 106.132,
+      "vitesse_mm_s": 35.0,
+      "temps_par_piece_s": 167.97,
+      "pieces_par_tole": 2,
+      "minutes_facturees": 39.0,
+      "prix_unitaire_ht": 321.88,
+      "total_ht": 2896.89
+    },
+    "ecart_pct": -0.62
+  }
+]

@@ -1,0 +1,100 @@
+{
+  "_role": "Grille de livraison ADM (fournie par Quentin, adm-grille-livraison-v1.json). Les prix client HT sont lus tels quels (prix_std_HT / prix_gf_HT / palette.prix_HT) : la marge et l'emballage y sont déjà. Pour une nouvelle grille, remplacer les valeurs ; les champs « _calcul » sont ceux que le site exploite.",
+  "version": "v1-2026-10-15",
+  "source_couts": "Boxtal, grille tarifaire compte ADM, 15/10/2026, HT, carburant inclus, 1 colis, France métropolitaine continentale",
+  "transporteur_colis": "Colissimo Domicile avec signature (J+2)",
+  "transporteur_lourd": "TNT Express National Palette (J+3)",
+  "formule": "prix_client_HT = arrondi_sup_x,90((cout_transport + emballage) * 1.10)",
+  "marge_securite": 0.1,
+  "poids_facture": "poids net des pièces x 1.15 (emballage)",
+  "seuil_grand_format_cm": 60,
+  "limite_colis": {
+    "poids_kg": 30,
+    "longueur_cm": 150
+  },
+  "hors_zone": [
+    "Corse",
+    "DOM-TOM"
+  ],
+  "tranches": [
+    {
+      "max_kg": 1,
+      "cout_std": 9.6,
+      "cout_gf": 17.9,
+      "emb_std": 1.5,
+      "emb_gf": 3.5,
+      "prix_std_HT": 12.9,
+      "prix_gf_HT": 23.9
+    },
+    {
+      "max_kg": 3,
+      "cout_std": 12.46,
+      "cout_gf": 20.03,
+      "emb_std": 3,
+      "emb_gf": 5,
+      "prix_std_HT": 17.9,
+      "prix_gf_HT": 27.9
+    },
+    {
+      "max_kg": 5,
+      "cout_std": 13.49,
+      "cout_gf": 22.05,
+      "emb_std": 3,
+      "emb_gf": 5,
+      "prix_std_HT": 18.9,
+      "prix_gf_HT": 29.9
+    },
+    {
+      "max_kg": 10,
+      "cout_std": 17.07,
+      "cout_gf": 26.63,
+      "emb_std": 4,
+      "emb_gf": 6,
+      "prix_std_HT": 23.9,
+      "prix_gf_HT": 35.9
+    },
+    {
+      "max_kg": 20,
+      "cout_std": 24.54,
+      "cout_gf": 35.98,
+      "emb_std": 6,
+      "emb_gf": 8,
+      "prix_std_HT": 33.9,
+      "prix_gf_HT": 48.9
+    },
+    {
+      "max_kg": 30,
+      "cout_std": 29.11,
+      "cout_gf": 45.31,
+      "emb_std": 8,
+      "emb_gf": 10,
+      "prix_std_HT": 40.9,
+      "prix_gf_HT": 60.9
+    }
+  ],
+  "palette": {
+    "condition": "poids > 30 kg OU longueur > 150 cm",
+    "cout": 97.6,
+    "emballage": 20,
+    "prix_HT": 129.9
+  },
+  "a_verifier": [
+    "seuil exact 'non mécanisable' Colissimo (dimension max) dans le comparateur Boxtal",
+    "poids max et dimensions max de l'offre TNT palette",
+    "coûts d'emballage réels (carton, mousse, palette) — valeurs actuelles = hypothèses",
+    "recalculer dès signature du contrat Colissimo Entreprise"
+  ],
+  "_calcul": {
+    "coef_poids_emballage": 1.15,
+    "_note_coef": "poids facturé d'un colis = poids net des pièces × coef_poids_emballage (cf. poids_facture).",
+    "palette_poids_max_kg": null,
+    "palette_longueur_max_cm": null,
+    "_note_palette": "À VÉRIFIER (cf. a_verifier) : poids et longueur max de l'offre TNT palette. null = pas de limite appliquée par le site ; l'atelier valide chaque commande avant d'encaisser.",
+    "colissimo": {
+      "standard_longueur_max_cm": 100,
+      "standard_somme_max_cm": 150,
+      "volumineux_somme_max_cm": 200
+    },
+    "_note_colissimo": "Règles La Poste (aide.laposte.fr, colissimo.entreprise.laposte.fr, relevé le 16/10/2026), dimensions du colis emballé : standard si longueur ≤ 100 cm ET L+l+h ≤ 150 cm ; volumineux (non mécanisable) si longueur > 100 cm OU 150 < L+l+h ≤ 200 cm → tarif prix_gf_HT de la grille (décision ADM) ; au-delà de 200 cm, pas de Colissimo (palette). Ces règles remplacent seuil_grand_format_cm et limite_colis.longueur_cm, gardés pour mémoire. Dimensions = pièces empilées + emballage_marge_cm (data/expedition.json) de chaque côté."
+  }
+}

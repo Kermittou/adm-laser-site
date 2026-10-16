@@ -1,0 +1,200 @@
+{
+  "_meta": {
+    "role": "Toutes les valeurs en euros et en secondes du moteur, regroupées ici pour être modifiées sans toucher au code.",
+    "etat": "RÉGLAGES DU LOGICIEL DE DEVIS ADM (15/10/2026) : vrais prix au kg, taux de coupe en €/min par matière et épaisseur, imbrication en bande (10 mm entre pièces et du bord), 20 € de frais de plan par commande, minimum 27 € (manutention comprise), +15 % sur les pièces de plus de 1 m. Ancien calibrage archivé dans archives/calibrage-2026-09-29.",
+    "reglages_du_logiciel": [
+      "prix_kg_eur acier/inox/alu BRUTS = 2 / 8 / 9 €/kg, laiton 18 €/kg (écran « Matériaux »)",
+      "densités acier et inox 8 000 kg/m³ (catalogue.json)",
+      "taux_coupe_eur_min par épaisseur, petite quantité (écran « Tarifs de coupe »)",
+      "frais_plan_eur = 20 € par commande, prix_minimum_eur = 27 € (manutention comprise)"
+    ],
+    "encore_estime": [
+      "prix_kg_eur des nuances NON brutes : écart relatif d'origine reporté sur le nouveau prix brut",
+      "grande_piece : +15 % au-delà de 1 m, ajouté pour retrouver les grands cadres (règle ADM du 15/10/2026)",
+      "temps_percage_s, tarif_trou_eur, tarif_arrondi_eur : ordres de grandeur"
+    ]
+  },
+  "_note_frais_plan": "Frais de plan (programmation) facturés une fois par commande, ajoutés au prix des pièces. Le total ne descend jamais sous prix_minimum_eur : total = max(pièces + frais de plan, minimum).",
+  "frais_plan_eur": 20.0,
+  "_note_taux_coupe": "Taux de coupe en €/min par groupe de matières et tranche d'épaisseur (première tranche dont max_mm ≥ épaisseur). Le temps facturé = longueur / vitesse du catalogue + amorçages, arrondi à la minute sur la commande entière.",
+  "taux_coupe_eur_min": [
+    {
+      "matieres": [
+        "acier",
+        "inox"
+      ],
+      "tranches": [
+        {
+          "max_mm": 4,
+          "eur_min": 10.3
+        },
+        {
+          "max_mm": 10,
+          "eur_min": 7.3
+        },
+        {
+          "max_mm": 12,
+          "eur_min": 5.9
+        },
+        {
+          "max_mm": 15,
+          "eur_min": 4.8
+        }
+      ]
+    },
+    {
+      "matieres": [
+        "alu",
+        "laiton",
+        "cuivre"
+      ],
+      "tranches": [
+        {
+          "max_mm": 1.5,
+          "eur_min": 8.9
+        },
+        {
+          "max_mm": 5,
+          "eur_min": 7.5
+        },
+        {
+          "max_mm": 12,
+          "eur_min": 9.6
+        }
+      ]
+    }
+  ],
+  "_note_grande_piece": "Majoration des pièces dont le plus grand côté dépasse seuil_mm (matière + découpe).",
+  "grande_piece": {
+    "seuil_mm": 1000,
+    "majoration": 0.15
+  },
+  "_note_tarif_de_base_cout": "Coût réel estimé des frais fixes d'une commande : ne change aucun prix affiché, sert seulement au calcul de marge.",
+  "tarif_de_base_cout_eur": 13.0,
+  "_note_marges": "prix_kg_eur et taux_coupe_eur_min sont des tarifs de FACTURATION (réglages du logiciel ADM) : marges à 1.0.",
+  "marge_matiere": 1.0,
+  "marge_machine": 1.0,
+  "_note_temps": "Manutention (chargement, tri) comprise dans le minimum de 27 € : pas de temps machine supplémentaire.",
+  "temps_chargement_tole_s": 0.0,
+  "temps_tri_par_piece_s": 0.0,
+  "marge_entre_pieces_mm": 10.0,
+  "_note_attenuation": "Atténuation de la dégressivité (décision ADM du 15/10/2026) : dès 2 pièces, chaque pièce prend attenuation_degressivite_pct × le prix HT d'une pièce seule. La réduction par rapport à 1 pièce baisse ainsi du même nombre de points à toutes les quantités (0.02 = 2 points). Mettre 0 pour revenir aux prix du logiciel ADM.",
+  "attenuation_degressivite_pct": 0.02,
+  "remise_commerciale_pct": 0.0,
+  "marge_minimum_pct": 0.15,
+  "tva_taux": 0.2,
+  "_note_delais": "Livraison = frais d'envoi (colis ou palette, data/grille-livraison.json) + prix du délai choisi : 7 jours sans supplément, 2 jours + pourcentage_commande. Le retrait à l'atelier est gratuit.",
+  "_note_livraison": "Options du choix client (structure validée par ADM) : 1. retrait à l'atelier gratuit ; 2. livraison = frais d'envoi (2.1 colis ou palette, prix de data/grille-livraison.json) ; 2.2 délai 2 ou 7 jours ; 2.3 le prix du délai s'ajoute aux frais d'envoi. Les options \"transport\": true ajoutent les frais d'envoi ; \"retrait\": true est toujours proposée.",
+  "livraison_options": [
+    {
+      "cle": "express",
+      "libelle": "Expédition en 2 jours",
+      "delai_jours": 2,
+      "prix_eur_ht": 0,
+      "pourcentage_commande": 0.15,
+      "transport": true
+    },
+    {
+      "cle": "standard",
+      "libelle": "Expédition en 7 jours",
+      "delai_jours": 7,
+      "prix_eur_ht": 0,
+      "transport": true
+    },
+    {
+      "cle": "retrait",
+      "libelle": "Retrait à l'atelier",
+      "prix_eur_ht": 0,
+      "retrait": true
+    }
+  ],
+  "prix_kg_eur": {
+    "acier": {
+      "_defaut": 2.0,
+      "galvanise": 2.585,
+      "electrozingue": 2.585,
+      "corten": 5.334,
+      "larme": 2.415,
+      "perfore": 4.332,
+      "noir": 1.917,
+      "bleue": 2.667
+    },
+    "inox": {
+      "_defaut": 8.0,
+      "brosse": 9.243,
+      "miroir": 11.554,
+      "marin": 10.669
+    },
+    "alu": {
+      "_defaut": 9.0,
+      "larme": 10.08
+    },
+    "cuivre": {
+      "_defaut": 11.0
+    },
+    "laiton": {
+      "_defaut": 18.0
+    }
+  },
+  "_note_percage": "Perçage 8-10 mm : 6 s, calé le 15/10/2026 sur 3 devis réels du logiciel ADM (200×200 acier 10 mm : 1 pce 37 €, 10 pces 140 €, 100 pces 1145 €) avec les vitesses du catalogue. 12-15 mm : 6 s par défaut (jamais moins qu'en 10 mm), À CONFIRMER sur un devis réel.",
+  "temps_percage_s": {
+    "2": 0.3,
+    "4": 0.6,
+    "6": 1.0,
+    "8": 1.5,
+    "10": 6.0,
+    "15": 6.0
+  },
+  "tarif_trou_eur": {
+    "2": {
+      "petit": 0.35,
+      "moyen": 0.55,
+      "grand": 0.9
+    },
+    "4": {
+      "petit": 0.45,
+      "moyen": 0.7,
+      "grand": 1.15
+    },
+    "6": {
+      "petit": 0.6,
+      "moyen": 0.95,
+      "grand": 1.55
+    },
+    "8": {
+      "petit": 0.8,
+      "moyen": 1.25,
+      "grand": 2.05
+    },
+    "10": {
+      "petit": 1.0,
+      "moyen": 1.6,
+      "grand": 2.6
+    },
+    "15": {
+      "petit": 1.4,
+      "moyen": 2.2,
+      "grand": 3.6
+    }
+  },
+  "tarif_arrondi_eur": {
+    "2": 0.2,
+    "4": 0.25,
+    "6": 0.35,
+    "8": 0.45,
+    "10": 0.55,
+    "15": 0.75
+  },
+  "matiere_mode": "bande",
+  "matiere_mode_note": "bande = chaque colonne de pièces consomme toute la hauteur de la tôle sur la largeur de la pièce + l'écart entre pièces (imbrication réelle ADM : 10 mm entre pièces et du bord, coupe de chute à 20 mm, voir _note_chute).",
+  "prix_minimum_eur": 27.0,
+  "_note_minimum": "Minimum de commande 27 € HT, manutention comprise : total = max(pièces + frais de plan, 27).",
+  "_note_nuances": "Les prix au kg BRUTS viennent du logiciel ADM. Les nuances non brutes gardent leur écart relatif d'origine : ce sont des estimations, un devis par nuance suffirait à les caler.",
+  "marge_bord_tole_mm": 10.0,
+  "_note_chute": "Coupe de chute, une par commande : elle se fait à ecart_coupe_chute_mm de la dernière colonne de pièces (au lieu de l'écart normal entre pièces). La bande de tôle en plus est facturée une fois par commande, et le temps de la coupe (hauteur de tôle + un amorçage) s'ajoute au temps machine de la commande si coupe_chute vaut true. Laissé à false : le logiciel ADM facture 37 € pour une seule pièce 200×200 acier 10 mm, ce qui exclut le temps de cette coupe (44,20 € sinon) et confirme la bande de 20 mm (34,50 € sans elle).",
+  "ecart_coupe_chute_mm": 20.0,
+  "coupe_chute": false,
+  "_note_arrondi": "Arrondis commerciaux (décision ADM du 16/10/2026) : le total HT des pièces est arrondi à arrondi_total_ht_eur au-dessus (le prix à la pièce affiché = total / quantité) ; les frais d'envoi et le supplément du délai sont arrondis à arrondi_livraison_eur au-dessus. 0 = pas d'arrondi.",
+  "arrondi_total_ht_eur": 1,
+  "arrondi_livraison_eur": 1
+}

@@ -1,0 +1,423 @@
+{
+  "_meta": {
+    "version": "1.1",
+    "source": "Reconstruit le 29/09/2026 depuis l'artboard publié (le conteneur de travail avait été recyclé). Vitesses en m/min, converties en mm/s par le moteur."
+  },
+  "matieres": {
+    "acier": {
+      "label": "Acier",
+      "densite_kg_dm3": 7.85,
+      "devis_automatique": true,
+      "vitesses_m_min": {
+        "0.5": 29,
+        "1": 29,
+        "1.5": 19,
+        "2": 14.5,
+        "2.5": 8.5,
+        "3": 7.6,
+        "4": 5,
+        "5": 2.5,
+        "6": 2.5,
+        "8": 2.1,
+        "10": 1.8,
+        "12": 1.2,
+        "15": 0.78
+      },
+      "nuances": {
+        "brut": {
+          "label": "Brut",
+          "epaisseurs": [
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            15
+          ]
+        },
+        "noir": {
+          "label": "Tôle noire",
+          "epaisseurs": [
+            1.5
+          ]
+        },
+        "bleue": {
+          "label": "Tôle bleue",
+          "epaisseurs": [
+            1.5
+          ]
+        },
+        "galvanise": {
+          "label": "Galvanisé",
+          "epaisseurs": [
+            1,
+            2,
+            3
+          ]
+        },
+        "electrozingue": {
+          "label": "Électrozingué",
+          "epaisseurs": [
+            1,
+            2,
+            3
+          ]
+        },
+        "corten": {
+          "label": "Corten",
+          "epaisseurs": [
+            1.5
+          ]
+        },
+        "larme": {
+          "label": "Larmé 3-5",
+          "epaisseurs": [
+            3
+          ],
+          "epaisseur_masse_mm": 3.5
+        },
+        "perfore": {
+          "label": "Perforé",
+          "epaisseurs": [
+            1.5
+          ]
+        }
+      }
+    },
+    "inox": {
+      "label": "Inox",
+      "densite_kg_dm3": 7.9,
+      "devis_automatique": true,
+      "vitesses_m_min": {
+        "0.5": 29,
+        "1": 29,
+        "1.5": 19,
+        "2": 11.5,
+        "2.5": 8.5,
+        "3": 7.6,
+        "4": 4.8,
+        "5": 2.2,
+        "6": 2,
+        "8": 1,
+        "10": 0.5,
+        "12": 0.4
+      },
+      "nuances": {
+        "brut": {
+          "label": "Brut",
+          "epaisseurs": [
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            4,
+            5,
+            6,
+            8,
+            10
+          ]
+        },
+        "marin": {
+          "label": "Marin",
+          "epaisseurs": [
+            1.5
+          ]
+        },
+        "miroir": {
+          "label": "Miroir",
+          "epaisseurs": [
+            1.5
+          ]
+        },
+        "brosse": {
+          "label": "Brossé",
+          "epaisseurs": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    "alu": {
+      "label": "Aluminium",
+      "densite_kg_dm3": 2.7,
+      "devis_automatique": true,
+      "vitesses_m_min": {
+        "0.5": 29,
+        "1": 29,
+        "1.5": 19,
+        "2": 11.5,
+        "2.5": 8.5,
+        "3": 9,
+        "4": 4.8,
+        "5": 2.3,
+        "6": 2,
+        "8": 1,
+        "10": 0.5,
+        "12": 0.4
+      },
+      "nuances": {
+        "brut": {
+          "label": "Brut",
+          "epaisseurs": [
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            4,
+            5,
+            6,
+            8,
+            10,
+            12
+          ]
+        },
+        "larme": {
+          "label": "Larmé 3-5",
+          "epaisseurs": [
+            3
+          ],
+          "epaisseur_masse_mm": 3.5
+        }
+      }
+    },
+    "cuivre": {
+      "label": "Cuivre",
+      "densite_kg_dm3": 8.96,
+      "devis_automatique": false,
+      "message_devis": "Le cuivre se traite sur devis — écrivez-nous par mail avec votre plan et nous revenons vers vous.",
+      "nuances": {}
+    },
+    "laiton": {
+      "label": "Laiton",
+      "densite_kg_dm3": 8.5,
+      "devis_automatique": false,
+      "message_devis": "Le laiton se traite sur devis — écrivez-nous par mail avec votre plan et nous revenons vers vous.",
+      "nuances": {}
+    }
+  },
+  "contraintes": {
+    "format_tole_max_mm": [
+      3000,
+      1500
+    ],
+    "diametre_trou_min_regle": "epaisseur",
+    "diametre_trou_min_note": "Un trou ne peut pas être plus petit que l'épaisseur de la tôle : en 10mm, le plus petit trou possible fait Ø10mm."
+  },
+  "formes": {
+    "rectangle": {
+      "label": "Rectangle",
+      "parametres": [
+        {
+          "cle": "longueur",
+          "label": "Longueur",
+          "min": 20,
+          "max": 3000,
+          "defaut": 300
+        },
+        {
+          "cle": "largeur",
+          "label": "Largeur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 200
+        }
+      ],
+      "percages": 1
+    },
+    "triangle": {
+      "label": "Triangle",
+      "parametres": [
+        {
+          "cle": "base",
+          "label": "Base",
+          "min": 20,
+          "max": 3000,
+          "defaut": 300
+        },
+        {
+          "cle": "hauteur",
+          "label": "Hauteur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 200
+        }
+      ],
+      "percages": 1
+    },
+    "disque": {
+      "label": "Disque",
+      "parametres": [
+        {
+          "cle": "diametre",
+          "label": "Diamètre",
+          "min": 20,
+          "max": 1500,
+          "defaut": 250
+        }
+      ],
+      "percages": 1
+    },
+    "rectangle_coupe_coin": {
+      "label": "Rectangle et coupe en coin",
+      "parametres": [
+        {
+          "cle": "longueur",
+          "label": "Longueur",
+          "min": 20,
+          "max": 3000,
+          "defaut": 300
+        },
+        {
+          "cle": "largeur",
+          "label": "Largeur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 200
+        },
+        {
+          "cle": "coupe_x",
+          "label": "Coupe X",
+          "min": 5,
+          "max": 1500,
+          "defaut": 90
+        },
+        {
+          "cle": "coupe_y",
+          "label": "Coupe Y",
+          "min": 5,
+          "max": 1500,
+          "defaut": 70
+        }
+      ],
+      "percages": 1
+    },
+    "cadre_coupe_circulaire": {
+      "label": "Cadre et coupe circulaire",
+      "parametres": [
+        {
+          "cle": "longueur",
+          "label": "Longueur",
+          "min": 20,
+          "max": 3000,
+          "defaut": 280
+        },
+        {
+          "cle": "largeur",
+          "label": "Largeur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 220
+        },
+        {
+          "cle": "diametre_interieur",
+          "label": "Ø intérieur",
+          "min": 1,
+          "max": 1400,
+          "defaut": 130
+        }
+      ],
+      "percages": 2
+    },
+    "cadre_coupe_rectangle": {
+      "label": "Cadre et coupe rectangle",
+      "parametres": [
+        {
+          "cle": "longueur",
+          "label": "Longueur",
+          "min": 20,
+          "max": 3000,
+          "defaut": 300
+        },
+        {
+          "cle": "largeur",
+          "label": "Largeur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 220
+        },
+        {
+          "cle": "longueur_interieure",
+          "label": "Long. int.",
+          "min": 1,
+          "max": 2900,
+          "defaut": 170
+        },
+        {
+          "cle": "largeur_interieure",
+          "label": "Larg. int.",
+          "min": 1,
+          "max": 1400,
+          "defaut": 100
+        }
+      ],
+      "percages": 2
+    },
+    "demi_disque_allonge": {
+      "label": "Demi-disque et allonge",
+      "parametres": [
+        {
+          "cle": "largeur",
+          "label": "Largeur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 200
+        },
+        {
+          "cle": "hauteur",
+          "label": "Hauteur totale",
+          "min": 20,
+          "max": 3000,
+          "defaut": 300
+        }
+      ],
+      "percages": 1
+    },
+    "trapeze": {
+      "label": "Trapèze",
+      "parametres": [
+        {
+          "cle": "base",
+          "label": "Base",
+          "min": 20,
+          "max": 3000,
+          "defaut": 320
+        },
+        {
+          "cle": "sommet",
+          "label": "Sommet",
+          "min": 5,
+          "max": 3000,
+          "defaut": 180
+        },
+        {
+          "cle": "hauteur",
+          "label": "Hauteur",
+          "min": 20,
+          "max": 1500,
+          "defaut": 210
+        }
+      ],
+      "percages": 1
+    },
+    "personnalisee": {
+      "label": "Autres formes",
+      "parametres": [],
+      "percages": 1,
+      "editeur_en_ligne": true,
+      "description": "Modificateur de pièce en ligne : le client dessine et cote sa pièce. Le moteur reçoit surface et périmètre."
+    }
+  }
+}

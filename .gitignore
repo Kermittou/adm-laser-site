@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+.env*.local
+.DS_Store
+__pycache__/
+# mails de développement (sans SMTP)
+boite-envoi/
+
+# archive de travail (envoyée à part)
+photos-a-refaire.zip

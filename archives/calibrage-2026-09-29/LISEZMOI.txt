@@ -1,0 +1,7 @@
+Calibrage du 29/09/2026 (moteur « prix au kg gonflés »), archivé le 15/10/2026 avant le passage
+aux réglages réels du logiciel de devis ADM (vrais €/kg, imbrication en bande, taux de coupe par
+épaisseur, 20 € de frais de plan, minimum 27 €, +15 % grandes pièces).
+
+Écart avec les 9 devis réels : 1,7 % en moyenne, 0,6 % sur le 9e (cadres 1300).
+Pour revenir à ce calibrage : recopier tarifs.json, catalogue.json et golden.json dans data/,
+et moteur_devis.py dans reference/ (le moteur TypeScript devra suivre).

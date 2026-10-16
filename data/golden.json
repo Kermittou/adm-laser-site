@@ -1,0 +1,377 @@
+[
+  {
+    "cle": "acier-3mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 330.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 2.79,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 10.07,
+      "taux_coupe_eur_min": 10.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 8.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 8.62,
+      "total_ht": 388
+    },
+    "ecart_pct": 17.58
+  },
+  {
+    "cle": "acier-8mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 836.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 7.44,
+      "vitesse_mm_s": 35.0,
+      "temps_par_piece_s": 35.79,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 27.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 20.67,
+      "total_ht": 930
+    },
+    "ecart_pct": 11.24
+  },
+  {
+    "cle": "cadre-d250-1mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 1,
+      "forme": "cadre_coupe_circulaire",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300,
+        "diametre_interieur": 250
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 138.04,
+    "attendu": {
+      "perimetre_mm": 1985.4,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 0.93,
+      "vitesse_mm_s": 483.3,
+      "temps_par_piece_s": 4.71,
+      "taux_coupe_eur_min": 10.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 4.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 3.78,
+      "total_ht": 170
+    },
+    "ecart_pct": 23.15
+  },
+  {
+    "cle": "acier-3mm-5",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 5
+    },
+    "prix_logiciel_adm_ht": 50.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 2.79,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 10.07,
+      "taux_coupe_eur_min": 10.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 1.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 12.6,
+      "total_ht": 63
+    },
+    "ecart_pct": 26.0
+  },
+  {
+    "cle": "acier-3mm-10",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 3,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 10
+    },
+    "prix_logiciel_adm_ht": 91.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 2.79,
+      "vitesse_mm_s": 126.7,
+      "temps_par_piece_s": 10.07,
+      "taux_coupe_eur_min": 10.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 2.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 10.5,
+      "total_ht": 105
+    },
+    "ecart_pct": 15.38
+  },
+  {
+    "cle": "acier-4mm-45",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 4,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 45
+    },
+    "prix_logiciel_adm_ht": 450.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 3.72,
+      "vitesse_mm_s": 83.3,
+      "temps_par_piece_s": 15.0,
+      "taux_coupe_eur_min": 10.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 12.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 11.44,
+      "total_ht": 515
+    },
+    "ecart_pct": 14.44
+  },
+  {
+    "cle": "alu-5mm-50",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "alu",
+      "nuance": "brut",
+      "epaisseur_mm": 5,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 50
+    },
+    "prix_logiciel_adm_ht": 929.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 1.569,
+      "vitesse_mm_s": 38.3,
+      "temps_par_piece_s": 32.3,
+      "taux_coupe_eur_min": 7.5,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 27.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 19.5,
+      "total_ht": 975
+    },
+    "ecart_pct": 4.95
+  },
+  {
+    "cle": "inox-8mm-50",
+    "ajuste_sur_ce_devis": true,
+    "entree": {
+      "matiere": "inox",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 300,
+        "largeur": 300
+      },
+      "quantite": 50
+    },
+    "prix_logiciel_adm_ht": 3151.0,
+    "attendu": {
+      "perimetre_mm": 1200,
+      "surface_englobante_mm2": 90000,
+      "surface_facturee_m2": 0.1163,
+      "masse_facturee_kg": 7.44,
+      "vitesse_mm_s": 16.7,
+      "temps_par_piece_s": 73.5,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 36,
+      "minutes_facturees": 62.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 71.18,
+      "total_ht": 3559
+    },
+    "ecart_pct": 12.95
+  },
+  {
+    "cle": "cadre-1300-8mm-9",
+    "ajuste_sur_ce_devis": false,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 8,
+      "forme": "cadre_coupe_rectangle",
+      "dimensions": {
+        "longueur": 1300,
+        "largeur": 1300,
+        "longueur_interieure": 56,
+        "largeur_interieure": 56
+      },
+      "quantite": 9
+    },
+    "prix_logiciel_adm_ht": 2915.1,
+    "attendu": {
+      "perimetre_mm": 5424,
+      "surface_englobante_mm2": 1690000,
+      "surface_facturee_m2": 1.965,
+      "masse_facturee_kg": 125.76,
+      "vitesse_mm_s": 35.0,
+      "temps_par_piece_s": 157.97,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 2,
+      "minutes_facturees": 24.0,
+      "majoration_grande_piece_pct": 0.15,
+      "prix_unitaire_ht": 320.89,
+      "total_ht": 2888
+    },
+    "ecart_pct": -0.93
+  },
+  {
+    "cle": "acier-10mm-200-1",
+    "ajuste_sur_ce_devis": false,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 10,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 200,
+        "largeur": 200
+      },
+      "quantite": 1
+    },
+    "prix_logiciel_adm_ht": 37.0,
+    "attendu": {
+      "perimetre_mm": 800,
+      "surface_englobante_mm2": 40000,
+      "surface_facturee_m2": 0.045,
+      "masse_facturee_kg": 3.6,
+      "vitesse_mm_s": 30.0,
+      "temps_par_piece_s": 32.67,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 98,
+      "minutes_facturees": 1.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 37.0,
+      "total_ht": 37
+    },
+    "ecart_pct": 0.0
+  },
+  {
+    "cle": "acier-10mm-200-10",
+    "ajuste_sur_ce_devis": false,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 10,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 200,
+        "largeur": 200
+      },
+      "quantite": 10
+    },
+    "prix_logiciel_adm_ht": 140.0,
+    "attendu": {
+      "perimetre_mm": 800,
+      "surface_englobante_mm2": 40000,
+      "surface_facturee_m2": 0.045,
+      "masse_facturee_kg": 3.6,
+      "vitesse_mm_s": 30.0,
+      "temps_par_piece_s": 32.67,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 98,
+      "minutes_facturees": 6.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 14.6,
+      "total_ht": 146
+    },
+    "ecart_pct": 4.29
+  },
+  {
+    "cle": "acier-10mm-200-100",
+    "ajuste_sur_ce_devis": false,
+    "entree": {
+      "matiere": "acier",
+      "nuance": "brut",
+      "epaisseur_mm": 10,
+      "forme": "rectangle",
+      "dimensions": {
+        "longueur": 200,
+        "largeur": 200
+      },
+      "quantite": 100
+    },
+    "prix_logiciel_adm_ht": 1145.0,
+    "attendu": {
+      "perimetre_mm": 800,
+      "surface_englobante_mm2": 40000,
+      "surface_facturee_m2": 0.045,
+      "masse_facturee_kg": 3.6,
+      "vitesse_mm_s": 30.0,
+      "temps_par_piece_s": 32.67,
+      "taux_coupe_eur_min": 7.3,
+      "pieces_par_tole": 98,
+      "minutes_facturees": 55.0,
+      "majoration_grande_piece_pct": 0.0,
+      "prix_unitaire_ht": 12.18,
+      "total_ht": 1218
+    },
+    "ecart_pct": 6.38
+  }
+]

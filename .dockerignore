@@ -1,0 +1,11 @@
+# Jamais dans l'image ni dans le contexte de build
+node_modules
+.next
+.env
+.env*.local
+boite-envoi
+photos-a-refaire.zip
+archives
+reference/__pycache__
+*.tsbuildinfo
+.git

@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "role": "Toutes les valeurs en euros et en secondes du moteur, regroupées ici pour être modifiées sans toucher au code.",
+    "etat": "CALIBRÉ le 29/09/2026 sur 9 devis réels du logiciel ADM. Écart moyen 1,7 % sur les 8 devis d'ajustement, 0,6 % sur le 9e (jamais vu par le calibrage).",
+    "cale_sur_des_devis_reels": [
+      "tarif_de_base_eur = 17.11 et prix_minimum_eur = 27 (deux choses différentes)",
+      "taux_horaire_machine_eur_h = 121.8, marge incluse",
+      "prix_kg_eur pour acier/inox/alu BRUTS, marge incluse",
+      "temps_tri_par_piece_s = 10, temps_chargement_tole_s = 180",
+      "matiere_mode = bounding_box (c'est le rectangle englobant qui est facturé)"
+    ],
+    "encore_estime": [
+      "prix_kg_eur des nuances NON brutes (galvanisé, corten, larmé, brossé, miroir, marin, perforé...) : écart relatif d'origine reporté sur la base calibrée. Un devis par nuance suffirait à les caler.",
+      "temps_percage_s, tarif_trou_eur, tarif_arrondi_eur : ordres de grandeur, poids négligeable dans le prix final",
+      "tarif_de_base_cout_eur : ne change aucun prix affiché, sert seulement au calcul de marge"
+    ]
+  },
+  "_note_tarif_de_base": "Part fixe de la commande (programmation, devis, facture, emballage, expédition), AJOUTÉE au prix des pièces. À ne pas confondre avec prix_minimum_eur, qui est un plancher de facturation. Les deux coexistent : total = max(base + variable, minimum).",
+  "tarif_de_base_eur": 17.11,
+  "_note_tarif_de_base_cout": "PLACEHOLDER. Les 27 € sont un PRIX facturé. Ce qu'ils coûtent réellement ne change aucun prix affiché — il sert uniquement au calcul de la marge sur les petites commandes.",
+  "tarif_de_base_cout_eur": 13.0,
+  "taux_horaire_machine_eur_h": 121.8,
+  "_note_marges": "prix_kg_eur et taux_horaire_machine_eur_h sont des COÛTS. Mettre 1.0 si le taux horaire est déjà un tarif de facturation.",
+  "marge_matiere": 1.0,
+  "marge_machine": 1.0,
+  "_note_temps": "Trois niveaux : une fois par commande, une fois par tôle (au prorata), une fois par pièce. C'est cette répartition qui produit la dégressivité.",
+  "temps_chargement_tole_s": 180.0,
+  "temps_tri_par_piece_s": 10.0,
+  "marge_entre_pieces_mm": 5.0,
+  "remise_commerciale_pct": 0.0,
+  "marge_minimum_pct": 0.15,
+  "tva_taux": 0.2,
+  "_note_delais": "Livraison = frais de livraison (transport_colis) + prix du délai choisi : 7 jours sans supplément, 2 jours + pourcentage_commande. Le retrait à l'atelier est gratuit.",
+  "_note_livraison": "Expédition des commandes payées en ligne (France métropolitaine), facturée une fois par commande. Prix HT = prix_eur_ht + pourcentage_commande × total HT des pièces. Pièce plus longue que colis_longueur_max_mm ou plus lourde qu'un colis : transport chiffré sur devis (mail). Sinon, autant de colis que nécessaire, chacun ≤ colis_poids_max_kg emballage compris (poids d'emballage : data/expedition.json). Les options \"retrait\": true (retrait gratuit à l'atelier) sont toujours proposées, même quand la livraison passe sur devis.",
+  "livraison_options": [
+    { "cle": "express", "libelle": "Expédition en 2 jours", "delai_jours": 2, "prix_eur_ht": 0, "pourcentage_commande": 0.15, "transport": true },
+    { "cle": "standard", "libelle": "Expédition en 7 jours", "delai_jours": 7, "prix_eur_ht": 0, "transport": true },
+    { "cle": "retrait", "libelle": "Retrait à l'atelier", "prix_eur_ht": 0, "retrait": true }
+  ],
+  "_note_transport_colis": "Frais de livraison des options \"transport\": true = somme, pour chaque colis, du coût transporteur selon son poids (emballage compris) × (1 + majoration). La majoration couvre l'emballage et le dépôt. GRILLE = tarifs publics Colissimo 2026 France métropolitaine (laposte.fr/professionnel/tarif-colissimo) — À REMPLACER par vos tarifs réels Boxtal / Colissimo HT.",
+  "transport_colis": {
+    "majoration": 0.2,
+    "grille_eur": [
+      { "jusqua_kg": 0.25, "eur": 5.49 },
+      { "jusqua_kg": 0.5, "eur": 7.59 },
+      { "jusqua_kg": 0.75, "eur": 9.29 },
+      { "jusqua_kg": 1, "eur": 9.59 },
+      { "jusqua_kg": 2, "eur": 11.19 },
+      { "jusqua_kg": 5, "eur": 17.39 },
+      { "jusqua_kg": 10, "eur": 25.29 },
+      { "jusqua_kg": 15, "eur": 31.99 },
+      { "jusqua_kg": 30, "eur": 39.59 }
+    ]
+  },
+  "colis_poids_max_kg": 30,
+  "colis_longueur_max_mm": 1000,
+  "prix_kg_eur": {
+    "acier": {
+      "_defaut": 2.932,
+      "galvanise": 3.79,
+      "electrozingue": 3.79,
+      "corten": 7.82,
+      "larme": 3.54,
+      "perfore": 6.35,
+      "noir": 2.81,
+      "bleue": 3.91
+    },
+    "inox": {
+      "_defaut": 10.49,
+      "brosse": 12.12,
+      "miroir": 15.15,
+      "marin": 13.99
+    },
+    "alu": {
+      "_defaut": 13.67,
+      "larme": 15.31
+    },
+    "cuivre": {
+      "_defaut": 11.0
+    },
+    "laiton": {
+      "_defaut": 9.0
+    }
+  },
+  "temps_percage_s": {
+    "2": 0.3,
+    "4": 0.6,
+    "6": 1.0,
+    "8": 1.5,
+    "10": 2.0,
+    "15": 3.0
+  },
+  "tarif_trou_eur": {
+    "2": {
+      "petit": 0.35,
+      "moyen": 0.55,
+      "grand": 0.9
+    },
+    "4": {
+      "petit": 0.45,
+      "moyen": 0.7,
+      "grand": 1.15
+    },
+    "6": {
+      "petit": 0.6,
+      "moyen": 0.95,
+      "grand": 1.55
+    },
+    "8": {
+      "petit": 0.8,
+      "moyen": 1.25,
+      "grand": 2.05
+    },
+    "10": {
+      "petit": 1.0,
+      "moyen": 1.6,
+      "grand": 2.6
+    },
+    "15": {
+      "petit": 1.4,
+      "moyen": 2.2,
+      "grand": 3.6
+    }
+  },
+  "tarif_arrondi_eur": {
+    "2": 0.2,
+    "4": 0.25,
+    "6": 0.35,
+    "8": 0.45,
+    "10": 0.55,
+    "15": 0.75
+  },
+  "matiere_mode": "bounding_box",
+  "matiere_mode_note": "bounding_box = on facture le rectangle de tôle réellement consommé.",
+  "_calibrage": "Calibré le 29/09/2026 sur 8 devis réels du logiciel ADM : platines 300x300 acier 1/3/4/8 mm (qté 5/10/45), cadres acier, alu 5 mm et inox 8 mm (qté 50). Matière facturée sur le RECTANGLE ENGLOBANT, temps machine à la minute arrondie au-dessus sur la commande entière. Les coefficients incluent la marge, d'où marge_matiere et marge_machine à 1.",
+  "prix_minimum_eur": 27.0,
+  "_note_minimum": "Les 27 € sont un MINIMUM de commande, pas le tarif de base : les devis à petite quantité ont montré que la part fixe additive vaut ~17 €. Les deux coexistent — total = max(base + variable, 27). Le minimum ne mord qu'en dessous de 2 pièces.",
+  "_note_nuances": "Seules les nuances BRUTES d'acier, inox et alu sont calibrées sur des devis réels. Les autres nuances gardent leur écart relatif d'origine, reporté sur la base calibrée — ce sont des estimations. Un devis par nuance suffirait à les caler aussi."
+}

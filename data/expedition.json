@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "role": "Réglages transporteur pour la génération automatique des bordereaux (Boxtal API v3). Pas de prix ici : les prix d'expédition facturés au client sont dans tarifs.json.",
+    "documentation": "https://developer.boxtal.com/fr/fr/apiv3/documentation"
+  },
+  "_note_offre": "Code d'offre Boxtal des COLIS (Colissimo Domicile avec signature = POFR-ColissimoExpert). Les palettes (TNT Express National Palette) ne sont pas créées automatiquement : l'atelier les commande sur Boxtal.",
+  "offre_colis": "POFR-ColissimoExpert",
+  "_note_categorie": "Catégorie de contenu Boxtal (npm run boxtal:categories pour la liste). Aucune catégorie « pièces métalliques » chez Boxtal : 50380 « Matériel de chauffage, chaudronnerie » retenue pour les tests (15/10/2026) — à confirmer par ADM (alternatives : 50500 Quincaillerie, 50150 Pièces de rechange autres).",
+  "categorie_contenu": "content:v1:50380",
+  "description_contenu": "Pièces métalliques découpées au laser",
+  "format_etiquette": "PDF_A4",
+  "_note_emballage": "ESTIMATION à ajuster par ADM : marge ajoutée de chaque côté des pièces (cm) pour les dimensions du colis. Le poids déclaré est le poids facturé de la grille (pièces × coef_poids_emballage, data/grille-livraison.json).",
+  "emballage_marge_cm": 2,
+  "expediteur": {
+    "societe": "ADM Laser",
+    "prenom": "Atelier",
+    "nom": "ADM Laser",
+    "numero": "3",
+    "rue": "Impasse de la Centrale",
+    "code_postal": "77360",
+    "ville": "Vaires-sur-Marne",
+    "pays": "FR",
+    "telephone": "+33160207814",
+    "email": "commandes@adm-laser.fr"
+  }
+}
