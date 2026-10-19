@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ipDe, tropDEnvois } from "@/lib/anti-abus";
+import { ipDe, sansCaracteresDeControle, tropDEnvois } from "@/lib/anti-abus";
 import { devis, tarifs } from "@/lib/devis/moteur";
 import { texteDevis, libellePiece } from "@/lib/devis/resume";
 import type { Piece } from "@/lib/devis/types";
@@ -17,6 +17,8 @@ type Corps = {
 };
 
 export async function POST(req: Request) {
+  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
+
   let corps: Corps;
   try {
     corps = (await req.json()) as Corps;
@@ -28,7 +30,7 @@ export async function POST(req: Request) {
   // Champ piège invisible : un robot le remplit, un humain non.
   if ((c.site_web ?? "").trim() !== "") return NextResponse.json({ ok: true });
 
-  const nom = (c.nom ?? "").trim();
+  const nom = sansCaracteresDeControle(c.nom ?? "");
   const email = (c.email ?? "").trim();
   const telephone = (c.telephone ?? "").trim();
   const message = (c.message ?? "").trim();
@@ -51,7 +53,6 @@ export async function POST(req: Request) {
   const resultat = devis(piece);
   if (!resultat.ok) return erreur(resultat.message);
 
-  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
   if (!mailPossible()) {
     console.error("[devis] SMTP non configuré : demande non envoyée.");
     return erreur(`L'envoi en ligne est momentanément indisponible. ${repli}`, 503);

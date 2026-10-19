@@ -17,6 +17,8 @@ const repli = `Demandez votre devis, écrivez-nous à ${site.email} ou appelez l
  * par ADM depuis le tableau de bord Stripe après validation de la pièce par l'atelier.
  */
 export async function POST(req: Request) {
+  if (tropDEnvois(`commande:${ipDe(req)}`)) return erreur(`Trop de tentatives en peu de temps. ${repli}`, 429);
+
   let corps: { piece?: Partial<Piece>; livraison?: string; envoi?: string; cgv?: boolean };
   try {
     corps = await req.json();
@@ -45,8 +47,6 @@ export async function POST(req: Request) {
     console.error("[commande] STRIPE_SECRET_KEY absente : paiement en ligne indisponible.");
     return erreur(`Le paiement en ligne est momentanément indisponible. ${repli}`, 503);
   }
-  if (tropDEnvois(`commande:${ipDe(req)}`)) return erreur(`Trop de tentatives en peu de temps. ${repli}`, 429);
-
   const origine = process.env.NODE_ENV === "production" ? SITE_URL : new URL(req.url).origin;
   const r = commande.resultat;
   const libelle = `${piece.quantite} × ${libellePiece(piece)}`;

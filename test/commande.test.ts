@@ -318,8 +318,14 @@ describe("structure du choix de livraison (validée par ADM)", () => {
   });
 
   it("le configurateur affiche les étapes 1, 2, 2.1, 2.2 et 2.3", async () => {
-    const { readFileSync } = await import("node:fs");
-    const src = readFileSync("src/components/Configurateur.tsx", "utf-8");
+    const { readdirSync, readFileSync } = await import("node:fs");
+    // Tout le configurateur, fichier principal et sous-composants : déplacer un bloc d'un fichier
+    // à l'autre ne doit pas faire passer ce test au vert par accident.
+    const dossier = "src/components/configurateur";
+    const src = [
+      readFileSync("src/components/Configurateur.tsx", "utf-8"),
+      ...readdirSync(dossier).map((f) => readFileSync(`${dossier}/${f}`, "utf-8")),
+    ].join("\n");
     for (const libelle of [
       "1. {retrait.libelle}",
       "2. Livraison",

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ipDe, tropDEnvois } from "@/lib/anti-abus";
+import { ipDe, sansCaracteresDeControle, tropDEnvois } from "@/lib/anti-abus";
 import { envoyerMail, mailPossible } from "@/lib/mail";
 import { site } from "@/lib/site";
 
@@ -12,6 +12,9 @@ const erreur = (message: string, status = 400) => NextResponse.json({ ok: false,
 const repli = `Écrivez-nous directement à ${site.email} ou appelez le ${site.telephone}.`;
 
 export async function POST(req: Request) {
+  // En premier : inutile de lire une pièce jointe de 10 Mo pour la jeter ensuite.
+  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
+
   let form: FormData;
   try {
     form = await req.formData();
@@ -22,7 +25,7 @@ export async function POST(req: Request) {
   // Champ piège invisible : un robot le remplit, un humain non. On répond « ok » sans rien envoyer.
   if (String(form.get("site_web") ?? "").trim() !== "") return NextResponse.json({ ok: true });
 
-  const nom = String(form.get("nom") ?? "").trim();
+  const nom = sansCaracteresDeControle(String(form.get("nom") ?? ""));
   const email = String(form.get("email") ?? "").trim();
   const telephone = String(form.get("telephone") ?? "").trim();
   const message = String(form.get("message") ?? "").trim();
@@ -42,8 +45,6 @@ export async function POST(req: Request) {
     if (fichier.size > TAILLE_MAX_PJ) return erreur(`Le fichier dépasse 10 Mo. Envoyez-le directement à ${site.email}.`);
     piecesJointes.push({ nom: fichier.name, contenu: Buffer.from(await fichier.arrayBuffer()), type: fichier.type || undefined });
   }
-
-  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
 
   if (!mailPossible()) {
     console.error("[contact] SMTP non configuré : message non envoyé.");
