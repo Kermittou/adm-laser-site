@@ -5,7 +5,7 @@
   },
   "_note_offre": "Code d'offre Boxtal des COLIS (Colissimo Domicile avec signature = POFR-ColissimoExpert). Les palettes (TNT Express National Palette) ne sont pas créées automatiquement : l'atelier les commande sur Boxtal.",
   "offre_colis": "POFR-ColissimoExpert",
-  "_note_categorie": "Catégorie de contenu Boxtal (npm run boxtal:categories pour la liste). Aucune catégorie « pièces métalliques » chez Boxtal : 50380 « Matériel de chauffage, chaudronnerie » retenue pour les tests (15/10/2026) — à confirmer par ADM (alternatives : 50500 Quincaillerie, 50150 Pièces de rechange autres).",
+  "_note_categorie": "Catégorie de contenu Boxtal (npm run boxtal:categories pour la liste). Aucune catégorie « pièces métalliques » chez Boxtal : 50380 « Matériel de chauffage, chaudronnerie », confirmée par ADM le 19/10/2026.",
   "categorie_contenu": "content:v1:50380",
   "description_contenu": "Pièces métalliques découpées au laser",
   "format_etiquette": "PDF_A4",

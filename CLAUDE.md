@@ -171,9 +171,10 @@ Perçage 8-10 mm porté à 6 s (au lieu de 2 s) : c'est ce qui fait tomber les t
 200×200 en 10 mm à moins de 1,3 %, vitesses du catalogue inchangées. 12-15 mm mis à 6 s
 par défaut, à confirmer sur un devis réel.
 
-Écart connu, non résolu : le site est trop cher en 3 mm (≈ 7,5 s de coupe facturés par le
-logiciel par platine 300×300 contre 10,1 s ici). **À caler sur les temps de coupe par pièce
-affichés par le logiciel ADM**, pas en bidouillant des coefficients.
+Écart connu, **accepté par ADM le 19/10/2026** : le site est trop cher en 3 mm (≈ 7,5 s de coupe
+facturés par le logiciel par platine 300×300 contre 10,1 s ici). On le laisse tel quel. Si un jour
+il faut le réduire, **se caler sur les temps de coupe par pièce affichés par le logiciel ADM**,
+pas sur des coefficients bidouillés.
 
 `test/golden.test.ts` borne ces écarts : un changement qui les fait sortir doit être expliqué.
 
@@ -289,8 +290,8 @@ C'est un vrai enjeu commercial, pas une case à cocher.
   proposée dès que la commande dépasse un colis (le client choisit colis ou palette) et seule
   solution si une pièce dépasse 30 kg ou 200 cm cumulés une fois emballée. Limites de la palette (`_calcul.palette_*`) : **120 × 80 × 150 cm, 999 kg**,
   relevées sur la page transporteur Boxtal le 19/10/2026 — une pièce qui déborde du plateau passe
-  en livraison sur devis (le retrait reste proposé). Son guide emballage annonce 130 cm de long :
-  à trancher avec Boxtal. null = aucune limite appliquée. Hors zone : Corse et DOM-TOM
+  en livraison sur devis (le retrait reste proposé). 120 cm retenus contre les 130 cm de son guide
+  emballage, tranché par ADM le 19/10/2026. null = aucune limite appliquée. Hors zone : Corse et DOM-TOM
   (alerte dans le mail atelier, pas de bordereau).
 - **Transport : Boxtal** (API v3, Colissimo Expert ; jeton Bearer obtenu avec les clés via
   `/iam/account-app/token`, testé sur api.boxtal.build le 15/10/2026). Bordereaux colis générés après paiement ;
@@ -302,6 +303,10 @@ C'est un vrai enjeu commercial, pas une case à cocher.
 
 Ne pas combler ces trous avec du plausible. Mettre un `TODO` visible et le signaler.
 
+Tranché par ADM le 19/10/2026 (ne plus demander) : catégorie Boxtal 50380 « chaudronnerie »,
+palette TNT 120 cm, **inox 10 mm maximum** (le « 12 mm » d'adm-laser.fr est à corriger sur
+l'ancien site), écart de prix en 3 mm accepté, soudure repoussée.
+
 Trouvé sur adm-laser.fr et la fiche Google le 16/10/2026 (ne plus demander) : coordonnées,
 SIRET/RCS/TVA, horaires, machines, logo (`public/images/`), photos d'atelier,
 11 photos vitrine de pièces fournies par ADM (`public/images/vitrine-*.webp`, 16/10/2026),
@@ -310,12 +315,9 @@ note Google 5,0 / 6 avis, **alu 10 mm maximum**.
 Encore manquant :
 - Hébergeur du NOUVEAU site (société qui héberge le VPS Dokploy) — l'actuel 1&1 ne vaut que pour l'ancien site
 - Soudure : procédés, matières et épaisseurs soudées (« TIG/MIG » retiré : non sourcé)
+  — reporté par ADM le 19/10/2026, `/savoir-faire` reste volontairement général
 - Tolérances de découpe et de pliage
 - CGV et mentions de vente à distance (juriste)
-- Inox : 10 mm au catalogue mais « 12 mm dans l'inox » sur adm-laser.fr — à trancher
-- Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
-- Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test)
-- Longueur max de la palette TNT : 120 cm (page transporteur Boxtal) ou 130 cm (guide emballage Boxtal) ?
 
 ---
 
