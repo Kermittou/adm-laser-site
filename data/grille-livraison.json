@@ -80,16 +80,17 @@
   },
   "a_verifier": [
     "seuil exact 'non mécanisable' Colissimo (dimension max) dans le comparateur Boxtal",
-    "poids max et dimensions max de l'offre TNT palette",
+    "longueur max de la palette TNT : 120 cm sur la page transporteur Boxtal, 130 cm sur son guide emballage — trancher avec Boxtal (80 cm de large et 999 kg concordent)",
     "coûts d'emballage réels (carton, mousse, palette) — valeurs actuelles = hypothèses",
     "recalculer dès signature du contrat Colissimo Entreprise"
   ],
   "_calcul": {
     "coef_poids_emballage": 1.15,
     "_note_coef": "poids facturé d'un colis = poids net des pièces × coef_poids_emballage (cf. poids_facture).",
-    "palette_poids_max_kg": null,
-    "palette_longueur_max_cm": null,
-    "_note_palette": "À VÉRIFIER (cf. a_verifier) : poids et longueur max de l'offre TNT palette. null = pas de limite appliquée par le site ; l'atelier valide chaque commande avant d'encaisser.",
+    "palette_poids_max_kg": 999,
+    "palette_longueur_max_cm": 120,
+    "palette_largeur_max_cm": 80,
+    "_note_palette": "Offre « TNT Express National Palette » de Boxtal (boxtal.com/fr/fr/preuves/transporteurs/tnt, relevé le 19/10/2026) : 120 × 80 × 150 cm, 999 kg, J+3. Les deux dimensions sont comparées à l'encombrement brut d'une pièce, hors emballage : une pièce qui déborde de la palette passe en livraison sur devis. null = pas de limite appliquée par le site ; l'atelier valide chaque commande avant d'encaisser.",
     "colissimo": {
       "standard_longueur_max_cm": 100,
       "standard_somme_max_cm": 150,

@@ -287,8 +287,10 @@ C'est un vrai enjeu commercial, pas une case à cocher.
   découpage en colis le moins cher ; le mail atelier donne les dimensions de chaque colis.
 - **Colis :** 30 kg facturés, dimensions Colissimo ci-dessus, plusieurs colis si besoin. **Palette TNT 129,90 € HT**
   proposée dès que la commande dépasse un colis (le client choisit colis ou palette) et seule
-  solution si une pièce dépasse 30 kg ou 200 cm cumulés une fois emballée. Limites de la palette : à vérifier
-  (`_calcul.palette_*`, null = aucune limite appliquée). Hors zone : Corse et DOM-TOM
+  solution si une pièce dépasse 30 kg ou 200 cm cumulés une fois emballée. Limites de la palette (`_calcul.palette_*`) : **120 × 80 × 150 cm, 999 kg**,
+  relevées sur la page transporteur Boxtal le 19/10/2026 — une pièce qui déborde du plateau passe
+  en livraison sur devis (le retrait reste proposé). Son guide emballage annonce 130 cm de long :
+  à trancher avec Boxtal. null = aucune limite appliquée. Hors zone : Corse et DOM-TOM
   (alerte dans le mail atelier, pas de bordereau).
 - **Transport : Boxtal** (API v3, Colissimo Expert ; jeton Bearer obtenu avec les clés via
   `/iam/account-app/token`, testé sur api.boxtal.build le 15/10/2026). Bordereaux colis générés après paiement ;
@@ -312,7 +314,8 @@ Encore manquant :
 - CGV et mentions de vente à distance (juriste)
 - Inox : 10 mm au catalogue mais « 12 mm dans l'inox » sur adm-laser.fr — à trancher
 - Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
-- Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test) et limites de la palette TNT
+- Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test)
+- Longueur max de la palette TNT : 120 cm (page transporteur Boxtal) ou 130 cm (guide emballage Boxtal) ?
 
 ---
 

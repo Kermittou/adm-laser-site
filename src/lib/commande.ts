@@ -49,6 +49,7 @@ export type GrilleLivraison = {
     coef_poids_emballage: number;
     palette_poids_max_kg: number | null;
     palette_longueur_max_cm: number | null;
+    palette_largeur_max_cm: number | null;
     colissimo: { standard_longueur_max_cm: number; standard_somme_max_cm: number; volumineux_somme_max_cm: number };
   };
 };
@@ -150,6 +151,7 @@ export function expedition(r: ResultatDevis, config: ConfigExpedition = EXPEDITI
   const poids_kg = arrondi(r.masse_nette_kg * r.quantite, 1);
   const poids_facture_kg = arrondi(poidsPiece * r.quantite, 1);
   const longueur_mm = Math.max(...r.geometrie.encombrement_mm);
+  const largeur_mm = Math.min(...r.geometrie.encombrement_mm);
   const maxKg = g.limite_colis.poids_kg;
   const sommeMax = g._calcul.colissimo.volumineux_somme_max_cm;
 
@@ -198,10 +200,11 @@ export function expedition(r: ResultatDevis, config: ConfigExpedition = EXPEDITI
 
   // --- palette : dès que la commande ne tient pas dans un seul colis
   const besoinPalette = colis.length !== 1;
-  const { palette_poids_max_kg: pMax, palette_longueur_max_cm: lMax } = g._calcul;
+  const { palette_poids_max_kg: pMax, palette_longueur_max_cm: lMax, palette_largeur_max_cm: laMax } = g._calcul;
   const paletteTropLourde = pMax !== null && poids_facture_kg > pMax;
   const paletteTropLongue = lMax !== null && longueur_mm > lMax * 10;
-  if (besoinPalette && !paletteTropLourde && !paletteTropLongue) {
+  const paletteTropLarge = laMax !== null && largeur_mm > laMax * 10;
+  if (besoinPalette && !paletteTropLourde && !paletteTropLongue && !paletteTropLarge) {
     envois.push({ type: "palette", libelle: "1 palette", transporteur: g.transporteur_lourd, prix_ht: auDessus(g.palette.prix_HT, config.arrondiEur) });
   }
   envois.sort((a, b) => a.prix_ht - b.prix_ht);
@@ -210,9 +213,11 @@ export function expedition(r: ResultatDevis, config: ConfigExpedition = EXPEDITI
   if (!envois.length) {
     const pourquoi = paletteTropLongue
       ? `pièce de ${kg(longueur_mm / 1000)} m, trop longue pour une palette`
-      : paletteTropLourde
-        ? `${kg(poids_facture_kg)} kg, trop lourd pour une palette`
-        : (raisonColis ?? "envoi impossible à chiffrer");
+      : paletteTropLarge
+        ? `pièce de ${kg(largeur_mm / 1000)} m de large, trop large pour une palette`
+        : paletteTropLourde
+          ? `${kg(poids_facture_kg)} kg, trop lourd pour une palette`
+          : (raisonColis ?? "envoi impossible à chiffrer");
     return { mode: "sur_devis", poids_kg, poids_facture_kg, longueur_mm, grand_format, colis: [], envois, options: retraits, raison: `Livraison sur devis : ${pourquoi}.` };
   }
   return {

@@ -16,6 +16,7 @@ const longue1300: Piece = { ...petite, epaisseur_mm: 1, dimensions: { longueur: 
 const longue1600: Piece = { ...petite, epaisseur_mm: 1, dimensions: { longueur: 1600, largeur: 100 }, quantite: 1 };
 const lourde: Piece = { ...petite, epaisseur_mm: 15, dimensions: { longueur: 800, largeur: 800 }, quantite: 1 };
 const plaque1000: Piece = { ...petite, epaisseur_mm: 1, dimensions: { longueur: 1000, largeur: 1000 }, quantite: 1 };
+const plaque1100: Piece = { ...petite, epaisseur_mm: 1, dimensions: { longueur: 1100, largeur: 800 }, quantite: 1 };
 
 describe("tarifs.json — options de livraison", () => {
   it("retrait gratuit, ou livraison (frais d'envoi) + délai : 7 jours sans supplément, 2 jours + 15 %", () => {
@@ -140,10 +141,10 @@ describe("plus d'un colis : le client choisit entre colis et palette", () => {
 });
 
 describe("palette seule (la pièce ne passe pas en colis)", () => {
-  it("plaque 1000 × 1000 : 213 cm cumulés une fois emballée, hors Colissimo", () => {
-    const e = expedition(calculer(plaque1000));
+  it("1100 × 800 : hors Colissimo, mais pile sur le plateau de la palette", () => {
+    const e = expedition(calculer(plaque1100));
     expect(e.envois.map((x) => x.type)).toEqual(["palette"]);
-    expect(e.raison).toMatch(/104 × 104 × 5 cm, plus de 200 cm cumulés/);
+    expect(e.raison).toMatch(/114 × 84 × 5 cm, plus de 200 cm cumulés/);
   });
 
   it("une pièce de plus de 30 kg emballée (800×800 en 15 mm)", () => {
@@ -151,19 +152,45 @@ describe("palette seule (la pièce ne passe pas en colis)", () => {
     expect(e.envois.map((x) => x.type)).toEqual(["palette"]);
     expect(e.raison).toMatch(/88,3 kg/);
   });
+});
 
-  it("les cadres 1300×1300 du devis golden", () => {
-    expect(expedition(calculer(cadres1300)).mode).toBe("palette");
+describe("limites de la palette TNT (120 × 80 cm, 999 kg)", () => {
+  it("la grille porte les limites relevées chez Boxtal", () => {
+    expect(GRILLE._calcul.palette_longueur_max_cm).toBe(120);
+    expect(GRILLE._calcul.palette_largeur_max_cm).toBe(80);
+    expect(GRILLE._calcul.palette_poids_max_kg).toBe(999);
   });
 
-  it("au-delà des limites de palette renseignées : livraison sur devis, retrait toujours possible", () => {
-    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul: { ...GRILLE._calcul, palette_poids_max_kg: 500 } } };
-    const e = expedition(calculer(cadres1300), config);
+  it("plaque 1000 × 1000 : 1 m de large, elle déborde du plateau de 80 cm", () => {
+    const e = expedition(calculer(plaque1000));
     expect(e.mode).toBe("sur_devis");
-    expect(e.raison).toMatch(/trop lourd pour une palette/);
+    expect(e.raison).toMatch(/1 m de large, trop large pour une palette/);
     expect(e.options.map((o) => o.cle)).toEqual(["retrait"]);
-    expect(construireCommande(cadres1300, "standard", undefined, config).ok).toBe(false);
-    expect(construireCommande(cadres1300, "retrait", undefined, config).ok).toBe(true);
+  });
+
+  it("les cadres 1300×1300 du devis golden : 1,3 m, trop long pour la palette", () => {
+    const e = expedition(calculer(cadres1300));
+    expect(e.mode).toBe("sur_devis");
+    expect(e.raison).toMatch(/1,3 m, trop longue pour une palette/);
+    expect(construireCommande(cadres1300, "standard").ok).toBe(false);
+    expect(construireCommande(cadres1300, "retrait").ok).toBe(true);
+  });
+
+  it("trop lourd pour une palette : livraison sur devis, retrait toujours possible", () => {
+    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul: { ...GRILLE._calcul, palette_poids_max_kg: 50 } } };
+    const e = expedition(calculer(lourde), config);
+    expect(e.mode).toBe("sur_devis");
+    expect(e.raison).toMatch(/88,3 kg, trop lourd pour une palette/);
+    expect(e.options.map((o) => o.cle)).toEqual(["retrait"]);
+    expect(construireCommande(lourde, "standard", undefined, config).ok).toBe(false);
+    expect(construireCommande(lourde, "retrait", undefined, config).ok).toBe(true);
+  });
+
+  it("limites à null : le site n'applique aucune limite de palette", () => {
+    const _calcul = { ...GRILLE._calcul, palette_poids_max_kg: null, palette_longueur_max_cm: null, palette_largeur_max_cm: null };
+    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul } };
+    expect(expedition(calculer(cadres1300), config).mode).toBe("palette");
+    expect(expedition(calculer(plaque1000), config).mode).toBe("palette");
   });
 });
 
