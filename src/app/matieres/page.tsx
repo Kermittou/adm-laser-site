@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Conseiller } from "@/components/Conseiller";
 import { IconeFleche } from "@/components/Icones";
+import { filDAriane, JsonLd } from "@/components/JsonLd";
 import { Button, Container, Section, SurTitre } from "@/components/ui";
 import { PROPS } from "@/lib/conseiller";
 import { catalogue, listeEpaisseurs, mm, plageEpaisseurs } from "@/lib/devis/catalogue";
+import { adressePage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Découpe Corten, tôle larmée, inox brossé sur mesure",
   description:
     "Acier brut, galvanisé, Corten, tôle larmée, inox brossé ou miroir, aluminium : 14 nuances découpées au laser sur mesure. Le questionnaire vous aide à choisir.",
-  alternates: { canonical: "/matieres" },
+  ...adressePage("/matieres"),
 };
 
 // Nom d'usage de chaque nuance, tel qu'un client le cherche.
@@ -62,6 +64,7 @@ export default function Matieres() {
 
   return (
     <>
+      <JsonLd data={filDAriane("Matières", "/matieres")} />
       <section className="bg-hero text-blanc">
         <Container className="py-16 md:py-20">
           <SurTitre>Matières</SurTitre>

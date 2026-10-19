@@ -6,13 +6,14 @@ import { IconeDevis, IconeFleche, IconeLaser, IconePliage, IconeQualite, IconeSo
 import { StatsBar } from "@/components/StatsBar";
 import { Button, Card, EnTete, Section } from "@/components/ui";
 import { formatTole, mm, plageEpaisseurs, plageEpaisseursGlobale } from "@/lib/devis/catalogue";
+import { adressePage } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "Découpe laser Seine-et-Marne (77) — tôlerie sur mesure | ADM Laser" },
   description:
     "Découpe laser, pliage et soudure sur mesure à Vaires-sur-Marne (77). Acier, inox et aluminium, de la pièce unique à la série. Devis en ligne en 30 secondes.",
-  alternates: { canonical: "/" },
+  ...adressePage("/"),
 };
 
 const plage = (m: string) => {

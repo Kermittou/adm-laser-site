@@ -47,14 +47,31 @@ export function localBusiness(): Record<string, unknown> {
       closes: h.fermeture,
     })),
     vatID: site.legal.tva.replace(/\s/g, ""),
-    knowsAbout: ["Découpe laser", "Pliage de tôle", "Soudure TIG", "Soudure MIG", "Tôlerie", "Acier", "Inox", "Aluminium"],
+    // Pas de procédé de soudure nommé ici : « TIG/MIG » a été retiré du site faute de source (CLAUDE.md,
+    // « Informations manquantes »). Déclarer à Google ce qu'ADM n'a pas confirmé serait pire qu'un oubli.
+    knowsAbout: ["Découpe laser", "Pliage de tôle", "Soudure", "Tôlerie", "Acier", "Inox", "Aluminium"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Prestations",
-      itemListElement: ["Découpe laser sur mesure", "Pliage de tôle", "Soudure TIG/MIG"].map((nom) => ({
+      itemListElement: ["Découpe laser sur mesure", "Pliage de tôle", "Soudure"].map((nom) => ({
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: nom, areaServed: site.adresse.departement },
       })),
     },
+  };
+}
+
+/**
+ * Fil d'Ariane d'une page interne. Le site est plat : Accueil > la page. Google s'en sert pour
+ * afficher « adm-laser.fr › Savoir-faire » au lieu de l'URL brute dans ses résultats.
+ */
+export function filDAriane(titre: string, chemin: string): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: titre, item: `${SITE_URL}${chemin}` },
+    ],
   };
 }

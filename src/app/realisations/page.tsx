@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { filDAriane, JsonLd } from "@/components/JsonLd";
 import { Button, Container, Section, SurTitre } from "@/components/ui";
+import { adressePage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Réalisations — pièces découpées, pliées et soudées",
   description:
     "Pièces découpées au laser, pliées et soudées dans notre atelier de Vaires-sur-Marne (Seine-et-Marne) : brides, platines, supports pliés, charnières, panneaux décoratifs.",
-  alternates: { canonical: "/realisations" },
+  ...adressePage("/realisations"),
 };
 
 // Photos vitrine fournies par ADM (16/10/2026, public/images/vitrine-*.webp) : de vraies pièces de
@@ -60,6 +62,7 @@ const CATEGORIES = [
 export default function Realisations() {
   return (
     <>
+      <JsonLd data={filDAriane("Réalisations", "/realisations")} />
       <section className="bg-hero text-blanc">
         <Container className="py-16 md:py-20">
           <SurTitre>Réalisations</SurTitre>

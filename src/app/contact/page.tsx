@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { filDAriane, JsonLd } from "@/components/JsonLd";
 import { IconeHorloge, IconeLieu, IconeMail, IconeTelephone } from "@/components/Icones";
 import { Container, Section, SurTitre } from "@/components/ui";
+import { adressePage } from "@/lib/seo";
 import { adresseUneLigne, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact et accès — tôlerie à Vaires-sur-Marne",
   description:
     "Envoyez votre plan (DXF, DWG, PDF, STEP) ou décrivez votre pièce de tôlerie : réponse sous 48 h. ADM Laser, 3 Impasse de la Centrale, 77360 Vaires-sur-Marne.",
-  alternates: { canonical: "/contact" },
+  ...adressePage("/contact"),
 };
 
 export default function Contact() {
@@ -21,6 +23,7 @@ export default function Contact() {
 
   return (
     <>
+      <JsonLd data={filDAriane("Contact", "/contact")} />
       <section className="bg-hero text-blanc">
         <Container className="py-16 md:py-20">
           <SurTitre>Contact</SurTitre>

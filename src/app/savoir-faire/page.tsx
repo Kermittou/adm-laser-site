@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { IconeFleche, IconeLaser, IconePliage, IconeSoudure } from "@/components/Icones";
+import { filDAriane, JsonLd } from "@/components/JsonLd";
 import { Button, Card, Container, EnTete, Section, SurTitre, Todo } from "@/components/ui";
 import { catalogue, formatTole, listeEpaisseurs, mm, plageEpaisseurs } from "@/lib/devis/catalogue";
+import { adressePage } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Découpe laser, pliage et soudure — capacités machine",
   description:
     "Découpe laser Trumpf 3 kW sur tôle 1500 × 3000 mm, pliage jusqu'à 3 m, soudure : nos capacités réelles en acier, inox et alu, à Vaires-sur-Marne.",
-  alternates: { canonical: "/savoir-faire" },
+  ...adressePage("/savoir-faire"),
 };
 
 export default function SavoirFaire() {
@@ -19,6 +21,7 @@ export default function SavoirFaire() {
 
   return (
     <>
+      <JsonLd data={filDAriane("Savoir-faire", "/savoir-faire")} />
       <section className="bg-hero text-blanc">
         <Container className="py-16 md:py-20">
           <SurTitre>Savoir-faire</SurTitre>
