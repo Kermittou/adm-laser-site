@@ -9,8 +9,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
   alternates: { canonical: "/cgv" },
-  // Pas d'indexation tant que le juriste n'a pas validé le texte et complété les TODO.
-  robots: { index: false, follow: true },
+  // Indexées une fois les textes validés par le juriste (site.textesJuridiquesValides).
+  robots: { index: site.textesJuridiquesValides, follow: true },
 };
 
 /*
@@ -346,7 +346,22 @@ export default function Cgv() {
         </p>
       </Article>
 
-      <Article n={18} titre="Droit applicable et juridiction">
+      {site.mediateur && (
+        <Article n={18} titre="Médiation de la consommation">
+          <p>
+            En cas de litige, le consommateur adresse d&apos;abord une réclamation écrite à ADM Laser. À défaut de solution dans un délai de
+            2 mois, il peut recourir gratuitement au médiateur de la consommation dont relève ADM Laser : {site.mediateur.nom} –{" "}
+            {site.mediateur.adresse} –{" "}
+            <a href={site.mediateur.site} className="text-steel underline underline-offset-4">
+              {site.mediateur.site.replace(/^https?:\/\//, "")}
+            </a>
+            .
+          </p>
+          <p>Le consommateur peut également saisir les juridictions compétentes.</p>
+        </Article>
+      )}
+
+      <Article n={site.mediateur ? 19 : 18} titre="Droit applicable et juridiction">
         <p>
           Les présentes CGV sont soumises au droit français. En cas de litige avec un consommateur, celui-ci peut saisir la juridiction du
           lieu où il demeurait lors de la conclusion du contrat ou de la survenance du fait dommageable. Pour tout litige avec un

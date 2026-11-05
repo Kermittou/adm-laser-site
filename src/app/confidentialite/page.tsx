@@ -7,8 +7,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   alternates: { canonical: "/confidentialite" },
-  // Pas d'indexation tant que le juriste n'a pas validé le texte et complété les TODO.
-  robots: { index: false, follow: true },
+  // Indexées une fois les textes validés par le juriste (site.textesJuridiquesValides).
+  robots: { index: site.textesJuridiquesValides, follow: true },
 };
 
 /*

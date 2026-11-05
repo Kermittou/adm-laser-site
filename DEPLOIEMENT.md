@@ -9,15 +9,25 @@ Tout ce qui est marqué **[ADM]** demande un accès ou une décision d'ADM.
 
 | Élément | Où le trouver | État |
 |---|---|---|
-| CGV + mentions de vente à distance + politique de confidentialité | juriste **[ADM]** | à rédiger — sans CGV, ne pas ouvrir la vente |
-| Hébergeur du serveur Dokploy (pour les mentions légales) | facture du serveur **[ADM]** | à fournir |
-| Clés Stripe **live** (`sk_live_…`) | dashboard.stripe.com → Développeurs → Clés API **[ADM]** | compte Stripe à activer |
+| CGV + politique de confidentialité | textes d'ADM en ligne (/cgv, /confidentialite) | relecture juriste conseillée, puis `site.textesJuridiquesValides = true` |
+| Médiateur de la consommation (obligatoire pour les particuliers) | adhésion **[ADM]** | à souscrire, puis `site.mediateur` (l'article des CGV apparaît tout seul) |
+| Hébergeur (mentions légales) | `site.hebergeur` | renseigné ; nom à vérifier sur la facture du VPS (1&1 → IONOS SARL ?) |
+| Clés Stripe **live** (`sk_live_…`) | dashboard.stripe.com → Développeurs → Clés API **[ADM]** | compte Stripe à activer ; ne jamais réutiliser une clé montrée en clair |
 | Clés Boxtal **production** | developer.boxtal.com → application API v3 en production **[ADM]** | à créer |
 | Mot de passe de commandes@adm-laser.fr | espace client IONOS **[ADM]** | déjà en place en test |
 
 ---
 
-## 1. Créer l'application dans Dokploy
+## Ce qui est déjà en place (05/11/2026)
+
+- Serveur : **VPS Linux M+ IONOS**, Ubuntu 24.04, IP `217.160.179.174`.
+- Dokploy installé : `http://217.160.179.174:3000` (page d'administration, encore en http).
+- Projet « ADM laser », service `site` : GitHub `Kermittou/adm-laser-site`, branche **`main-kt4ces`**,
+  Build Type Dockerfile, déploiement automatique à chaque push.
+- Adresse provisoire : `http://adm-laser-site-likbu6-5e23a7-217-160-179-174.sslip.io`, clés de **test**
+  Stripe/Boxtal + SMTP, webhook Stripe de test : commande de bout en bout validée le 05/11/2026.
+
+## 1. Créer l'application dans Dokploy (déjà fait — pour mémoire)
 
 1. Dokploy → **Create Application** → source : le dépôt Git du projet (ou upload du dossier).
 2. **Build type : Dockerfile** (le fichier `Dockerfile` est à la racine du projet).
@@ -77,6 +87,9 @@ Sans lui, une commande payée ne déclenche NI le mail atelier, NI le bordereau,
 
 ## 5. Basculer le domaine
 
+0. Dans Dokploy, service `site` → **Domains** : ajouter `www.adm-laser.fr` et `adm-laser.fr`, port 3000,
+   **HTTPS activé** (Let's Encrypt). Garder l'adresse sslip.io le temps de vérifier, puis la supprimer.
+
 Aujourd'hui `adm-laser.fr` pointe sur IONOS (`217.160.0.56`, `www` → `217.160.0.222`).
 
 1. Espace IONOS → Domaines → adm-laser.fr → DNS : remplacer les enregistrements **A** de `@` et `www`
@@ -84,6 +97,12 @@ Aujourd'hui `adm-laser.fr` pointe sur IONOS (`217.160.0.56`, `www` → `217.160.
 2. **Ne pas toucher** aux enregistrements MX, SPF (`v=spf1 include:_spf-eu.ionos.com ~all`), DKIM
    (`s1-ionos._domainkey`, `s2-ionos._domainkey`) et DMARC : ils font marcher les mails, et sont corrects.
 3. Attendre la propagation (quelques minutes à quelques heures), puis vérifier le cadenas HTTPS.
+
+## 5 bis. Sécuriser la page d'administration Dokploy
+
+Dokploy → Settings → **Web Server** (ou « Server Domain ») : lui donner une adresse en https, par
+exemple `dokploy.adm-laser.fr` (enregistrement **A** vers `217.160.179.174` chez IONOS). Une fois
+l'accès https vérifié, retirer le port **3000** du pare-feu IONOS. Mot de passe Dokploy long et unique.
 
 ## 6. Contrôles après mise en ligne
 
@@ -93,8 +112,9 @@ Aujourd'hui `adm-laser.fr` pointe sur IONOS (`217.160.0.56`, `www` → `217.160.
       puis **Annuler** dans Stripe → mail « commande annulée » reçu, aucun débit.
 - [ ] Une commande en **livraison colis** : bordereau Boxtal joint au mail atelier ; annuler ensuite.
 - [ ] Google Search Console : déclarer `https://www.adm-laser.fr/sitemap.xml`.
-- [ ] Une fois les textes du juriste en place : retirer le `noindex` des pages juridiques et les
-      ajouter au sitemap (`src/app/sitemap.ts`).
+- [ ] Une fois les textes validés : `textesJuridiquesValides: true` dans `src/lib/site.ts` (retire le
+      bandeau « en cours de validation », autorise Google, ajoute les pages au sitemap).
+- [ ] Fusionner `main-kt4ces` dans `main` sur GitHub, puis dans Dokploy passer la branche à `main`.
 
 ## 7. Au quotidien
 

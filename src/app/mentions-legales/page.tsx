@@ -7,8 +7,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Mentions légales",
   alternates: { canonical: "/mentions-legales" },
-  // Placeholder : pas d'indexation tant que le texte définitif n'est pas en ligne.
-  robots: { index: false, follow: true },
+  // Indexées une fois les textes validés par le juriste (site.textesJuridiquesValides).
+  robots: { index: site.textesJuridiquesValides, follow: true },
 };
 
 export default function MentionsLegales() {
@@ -31,7 +31,7 @@ export default function MentionsLegales() {
   return (
     <PageJuridique titre="Mentions légales">
       <h2 className="text-[30px] text-steel">Informations sur l&apos;entreprise</h2>
-      <p className="mt-2 text-texte-doux">Reprises des mentions légales actuellement publiées, en attente de validation.</p>
+      {!site.textesJuridiquesValides && <p className="mt-2 text-texte-doux">En attente de validation par notre conseil juridique.</p>}
       <dl className="mt-6 divide-y divide-bordure rounded-card border border-bordure">
         {lignes.map(([k, v]) => (
           <div key={k} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">

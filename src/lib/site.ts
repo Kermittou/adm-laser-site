@@ -72,6 +72,17 @@ export const site = {
   avisGoogle: { url: "https://maps.google.com/?cid=2974897766081181147" as string | null, note: 5 as number | null, nombre: 6 as number | null },
   // Hébergeur du VPS (Dokploy), donné par ADM le 05/11/2026.
   hebergeur: { nom: "1&1 Internet SARL", adresse: "7, place de la Gare, BP 70109, 57201 Sarreguemines Cedex" } as { nom: string; adresse: string } | null,
+  /**
+   * Médiateur de la consommation (obligatoire pour vendre aux particuliers). Tant qu'il vaut
+   * null, l'article « Médiation » n'apparaît pas dans les CGV. Exemple une fois l'adhésion faite :
+   * { nom: "…", adresse: "…", site: "https://…" }
+   */
+  mediateur: null as { nom: string; adresse: string; site: string } | null,
+  /**
+   * Passe à true quand le juriste a validé CGV, confidentialité et mentions légales : retire le
+   * bandeau « en cours de validation », autorise l'indexation Google et les ajoute au sitemap.
+   */
+  textesJuridiquesValides: false as boolean,
 } as const;
 
 export const adresseUneLigne = `${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`;
