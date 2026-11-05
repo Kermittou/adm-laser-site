@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Découpe laser, pliage et soudure — capacités machine",
   description:
-    "Découpe laser Trumpf 3 kW sur tôle 1500 × 3000 mm, pliage jusqu'à 3 m, soudure : nos capacités réelles en acier, inox et alu, à Vaires-sur-Marne.",
+    "Découpe laser Trumpf 3 kW sur tôle 1500 × 3000 mm, pliage jusqu'à 3 m, soudure TIG et MIG : nos capacités réelles en acier, inox et alu, à Vaires-sur-Marne.",
   alternates: { canonical: "/savoir-faire" },
 };
 
@@ -158,8 +158,15 @@ export default function SavoirFaire() {
         <EnTete id="t-soudure" titre="Soudure" className="mt-4">
           <p>Assemblage de vos pièces découpées et pliées : des ensembles prêts à poser, pas seulement des pièces découpées.</p>
         </EnTete>
+        <ul className="mt-8 flex flex-wrap gap-3">
+          {site.soudure.procedes.map((p) => (
+            <li key={p} className="rounded-btn border border-bordure bg-blanc px-4 py-2 font-display text-xl font-extrabold text-steel">
+              Soudure {p}
+            </li>
+          ))}
+        </ul>
         <p className="mt-6">
-          <Todo>postes de soudure, matières et épaisseurs soudées — à préciser par ADM</Todo>
+          <Todo>matières et épaisseurs soudées — à préciser par ADM</Todo>
         </p>
       </Section>
 
@@ -183,9 +190,16 @@ export default function SavoirFaire() {
           </div>
           <div>
             <h2 className="text-[34px] text-steel md:text-[44px]">Tolérances</h2>
-            <p className="mt-6">
-              <Todo>tolérances de découpe et de pliage — à fournir par ADM</Todo>
-            </p>
+            <dl className="mt-6 space-y-4 text-[17px]">
+              <div>
+                <dt className="text-texte-doux">Découpe laser</dt>
+                <dd className="font-display text-2xl font-extrabold text-steel">{site.tolerances.decoupe}</dd>
+              </div>
+              <div>
+                <dt className="text-texte-doux">Pliage</dt>
+                <dd>{site.tolerances.pliage ?? <Todo>tolérance de pliage — à fournir par ADM</Todo>}</dd>
+              </div>
+            </dl>
           </div>
         </div>
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">

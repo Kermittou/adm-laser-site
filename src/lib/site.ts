@@ -39,6 +39,11 @@ export const site = {
   delaiReponse: "réponse sous 48 h",
   formatsFichiers: ["DXF", "DWG", "PDF", "STEP"],
 
+  /** Procédés confirmés par ADM le 05/11/2026. Matières et épaisseurs soudées : à fournir. */
+  soudure: { procedes: ["TIG", "MIG"] },
+  /** Tolérances confirmées par ADM le 05/11/2026 (pliage : à fournir). */
+  tolerances: { decoupe: "± 0,1 à 0,2 mm selon la matière et l'épaisseur", pliage: null as string | null },
+
   machines: {
     laser: { nom: "Trumpf TruLaser 2030", puissance: "3 kW", format: "1500 × 3000 mm" },
     plieuses: [

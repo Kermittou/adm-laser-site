@@ -256,7 +256,7 @@ mode sombre.
 | `/savoir-faire` | Découpe laser, pliage, soudure. Capacités machine, formats, matières, tolérances |
 | `/realisations` | Galerie de pièces réelles **(photos à fournir par Quentin — mettre des emplacements clairement marqués, ne pas inventer de fausses réalisations)** |
 | `/contact` | Formulaire + coordonnées + plan Vaires-sur-Marne |
-| `/mentions-legales`, `/cgv`, `/confidentialite` | **Placeholders explicites.** Textes à fournir, ne pas rédiger de fausses mentions légales. `/confidentialite` contient l'inventaire technique des données (à tenir à jour), pas de texte juridique. |
+| `/mentions-legales`, `/cgv`, `/confidentialite` | **Placeholders explicites.** Textes à fournir, ne pas rédiger de fausses mentions légales. `/confidentialite` : texte d'ADM, à tenir à jour si le site change (prestataire, cookies). |
 
 SEO : métadonnées par page, données structurées `LocalBusiness`, sitemap, `robots.txt`. Cibler
 « découpe laser Seine-et-Marne », « découpe laser sur mesure », « tôlerie Vaires-sur-Marne ».
@@ -312,9 +312,10 @@ hébergement = **VPS Linux M+ IONOS** (Ubuntu 24.04, Dokploy). Photos d'atelier 
 
 Encore manquant :
 - Raison sociale et adresse exactes de l'entité IONOS qui facture le VPS (voir la facture) → `site.hebergeur`
-- Soudure : procédés, matières et épaisseurs soudées (« TIG/MIG » retiré : non sourcé)
-- Tolérances de pliage (découpe : ± 0,1 à 0,2 mm, confirmé le 05/11/2026)
-- CGV : texte fourni le 05/11/2026 et en ligne sur /cgv (encore en noindex). Tolérance ± 0,1 à 0,2 mm et film de protection sur les finitions décoratives (miroir, brossé…) confirmés par ADM le 05/11/2026. Restent : **médiateur de la consommation** (article retiré à la demande d'ADM le 05/11/2026, à rajouter dès l'adhésion : obligatoire pour vendre aux particuliers), validation par le juriste. Le configurateur exige 2 cases (CGV + renonciation à la rétractation, pièce sur mesure) et le bouton « Commande avec obligation de paiement »
+- Soudure : matières et épaisseurs soudées (procédés **TIG et MIG** confirmés par ADM le 05/11/2026, `site.soudure`)
+- Tolérances de pliage (découpe : ± 0,1 à 0,2 mm, confirmé le 05/11/2026, `site.tolerances`)
+- CGV : texte fourni le 05/11/2026 et en ligne sur /cgv (encore en noindex). Tolérance ± 0,1 à 0,2 mm et film de protection sur les finitions décoratives (miroir, brossé…) confirmés par ADM le 05/11/2026. Restent : **médiateur de la consommation** (article retiré à la demande d'ADM le 05/11/2026, à rajouter dès l'adhésion : obligatoire pour vendre aux particuliers), validation par le juriste. Contrat formé à la capture du paiement par l'atelier, carte bancaire uniquement (choix ADM 05/11/2026). Le configurateur exige 2 cases (CGV + renonciation à la rétractation, pièce sur mesure) et le bouton « Commande avec obligation de paiement »
+- Politique de confidentialité : texte fourni le 05/11/2026 et en ligne sur /confidentialite (noindex), ajusté au site réel (aucun cookie ni Google Analytics, pas de base de données, OpenStreetMap et Boxtal ajoutés). Restent : hébergeur (facture IONOS), expert-comptable, validation par le juriste. Si une mesure d'audience est ajoutée : bandeau cookies + mise à jour de la page.
 - Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
 - Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test)
 

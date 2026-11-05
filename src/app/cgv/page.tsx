@@ -114,7 +114,9 @@ export default function Cgv() {
         <p>
           <Gras>Commande via le configurateur.</Gras> Le Client valide sa configuration, vérifie le récapitulatif (caractéristiques,
           quantité, prix total HT et TTC, frais de livraison, délai), peut corriger toute erreur, puis confirme par un bouton portant la
-          mention « Commande avec obligation de paiement » et procède au paiement. Le contrat est formé à la confirmation du paiement.
+          mention « Commande avec obligation de paiement » et procède au paiement. Le montant est alors bloqué sur sa carte. Le contrat
+          est formé lorsque l&apos;atelier valide la commande et débite ce montant, au plus tard 7 jours après la commande ; le Client en
+          est informé par e-mail.
         </p>
         <p>
           <Gras>Commande sur plan.</Gras> Le devis est valable 30 jours. Le contrat est formé à l&apos;acceptation du devis par le Client et au
@@ -123,8 +125,8 @@ export default function Cgv() {
         <p>
           ADM Laser envoie une confirmation de commande par e-mail, reprenant l&apos;ensemble des informations contractuelles et un lien
           vers les présentes CGV. ADM Laser peut refuser une commande en cas de litige de paiement en cours, de fichier inexploitable ou de
-          pièce techniquement irréalisable : le montant bloqué sur la carte est alors libéré sans être débité, ou, s&apos;il a déjà été
-          débité, remboursé intégralement sous 14 jours.
+          pièce techniquement irréalisable : le montant bloqué sur la carte est alors libéré sans être débité, et le Client en est
+          informé par e-mail.
         </p>
       </Article>
 
@@ -147,8 +149,7 @@ export default function Cgv() {
         <p>
           Le paiement s&apos;effectue en ligne, au moment de la commande, par carte bancaire via le prestataire de paiement sécurisé Stripe.
           Le montant est bloqué sur la carte du Client à la commande, puis débité après vérification et validation de la commande par
-          l&apos;atelier, au plus tard 7 jours après la commande. Les commandes sur devis peuvent aussi être réglées par virement bancaire ;
-          la commande n&apos;est alors lancée en fabrication qu&apos;à réception des fonds.
+          l&apos;atelier, au plus tard 7 jours après la commande. Le paiement en ligne se fait uniquement par carte bancaire.
         </p>
         <p>Les données bancaires sont traitées exclusivement par le prestataire de paiement ; ADM Laser n&apos;y a pas accès.</p>
         <p>Une facture est transmise par e-mail à l&apos;expédition.</p>
@@ -171,7 +172,7 @@ export default function Cgv() {
       <Article n={8} titre="Tolérances et aspect des matières">
         <p>
           <Gras>Tolérances.</Gras> Les pièces sont découpées au laser fibre avec une tolérance dimensionnelle de{" "}
-± 0,1 à 0,2 mm selon la matière et l&apos;épaisseur, et une tolérance de
+{site.tolerances.decoupe}, et une tolérance de
           planéité conforme aux normes des tôles fournies par les aciéries. Le diamètre minimal d&apos;un trou est égal à l&apos;épaisseur
           de la tôle.
         </p>
@@ -194,8 +195,8 @@ export default function Cgv() {
       <Article n={9} titre="Délais de fabrication et d'expédition">
         <p>
           ADM Laser s&apos;engage à expédier la commande dans le délai choisi par le Client lors de la commande, soit{" "}
-          {delais.map((d) => `${d} jours ouvrés`).join(" ou ")}, à compter de la formation du contrat (paiement confirmé et, pour une pièce
-          sur plan, devis accepté). Les jours ouvrés s&apos;entendent du lundi au vendredi, hors jours fériés.
+          {delais.map((d) => `${d} jours ouvrés`).join(" ou ")}, à compter de la commande en ligne (pour une pièce sur plan : de
+          l&apos;acceptation du devis et du paiement). Les jours ouvrés s&apos;entendent du lundi au vendredi, hors jours fériés.
         </p>
         <p>
           Le délai de livraison total est indiqué dans le récapitulatif avant la commande. À défaut d&apos;indication, la livraison
