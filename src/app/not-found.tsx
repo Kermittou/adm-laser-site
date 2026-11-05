@@ -10,7 +10,7 @@ export default function NotFound() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href="/">Retour à l&apos;accueil</Button>
           <Button href="/devis" variante="outline">
-            Devis en ligne
+            Commandez vos pièces
           </Button>
         </div>
       </Container>

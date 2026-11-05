@@ -38,7 +38,7 @@ export function Header() {
             <IconeTelephone /> {site.telephone}
           </a>
           <Link href="/devis" className="rounded-btn bg-accent px-4 py-2.5 text-[15px] font-semibold text-blanc transition-colors hover:bg-accent-hover">
-            Devis en ligne
+            Commandez vos pièces
           </Link>
         </div>
 
@@ -73,7 +73,7 @@ export function Header() {
           </ul>
           <div className="mt-5 flex flex-col gap-3">
             <Link href="/devis" className="rounded-btn-lg bg-accent px-6 py-3.5 text-center font-semibold text-blanc">
-              Devis en ligne
+              Commandez vos pièces
             </Link>
             <a href={`tel:${site.telephoneIntl}`} className="flex items-center justify-center gap-2 rounded-btn-lg border border-blanc/35 px-6 py-3.5 font-semibold text-blanc">
               <IconeTelephone /> {site.telephone}

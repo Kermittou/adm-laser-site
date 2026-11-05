@@ -15,7 +15,7 @@ export default async function Devis({ searchParams }: { searchParams: Promise<{ 
   return (
     <section className="bg-hero min-h-[calc(100dvh-72px)] text-blanc">
       <Container className="max-w-[1320px] py-10 md:py-14">
-        <p className="mb-3 text-[13px] font-semibold tracking-[0.18em] text-accent uppercase">Devis en ligne</p>
+        <p className="mb-3 text-[13px] font-semibold tracking-[0.18em] text-accent uppercase">Commandez vos pièces</p>
         <h1 className="text-[34px] md:text-[44px]">Votre devis de découpe laser, en 30 secondes</h1>
         <p className="mt-3 mb-10 max-w-[680px] text-[17px] text-gris-clair-3">
           Choisissez la matière, l&apos;épaisseur, la forme et les dimensions : le prix s&apos;affiche instantanément, sans attendre un

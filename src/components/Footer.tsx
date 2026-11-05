@@ -20,7 +20,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2.5 text-[15px]">
             <li>
               <Link href="/devis" className="hover:text-blanc">
-                Devis en ligne
+                Commandez vos pièces
               </Link>
             </li>
             {NAV.map((l) => (

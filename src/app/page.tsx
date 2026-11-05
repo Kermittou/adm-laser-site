@@ -150,7 +150,7 @@ export default function Accueil() {
       {/* ------------------------------------------------ Devis en ligne */}
       <Section ton="sombre" aria-labelledby="devis-en-ligne">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <EnTete id="devis-en-ligne" surTitre="Devis en ligne" titre="Votre prix en quelques secondes." sombre>
+          <EnTete id="devis-en-ligne" surTitre="Commandez vos pièces" titre="Votre prix en quelques secondes." sombre>
             <p>
               Choisissez la matière, l&apos;épaisseur, la forme et les dimensions : le prix s&apos;affiche instantanément. Pour une
               pièce complexe ou une grande série, notre équipe prend le relais sur demande.
