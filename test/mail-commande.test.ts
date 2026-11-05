@@ -127,6 +127,19 @@ describe("utilitaires", () => {
     expect(plusJoursOuvres(vendredi, 5).getDate()).toBe(23);
   });
 
+  it("jours ouvrés : les jours fériés ne comptent pas (11 novembre, Pâques, Ascension, Noël)", () => {
+    const iso = (d: Date) => d.toISOString().slice(0, 10);
+    expect(iso(plusJoursOuvres(new Date("2026-11-09T10:00:00+01:00"), 2))).toBe("2026-11-12");
+    expect(iso(plusJoursOuvres(new Date("2027-03-26T10:00:00+01:00"), 1))).toBe("2027-03-30"); // lundi de Pâques 29/03/2027
+    expect(iso(plusJoursOuvres(new Date("2026-05-13T10:00:00+02:00"), 1))).toBe("2026-05-15"); // Ascension 14/05/2026
+    expect(iso(plusJoursOuvres(new Date("2026-12-24T10:00:00+01:00"), 2))).toBe("2026-12-29");
+  });
+
+  it("jours ouvrés : une commande passée à 0 h 30 heure de Paris compte du bon jour", () => {
+    // lundi 16/11 0 h 30 à Paris = dimanche 23 h 30 UTC : le délai part du lundi, pas du dimanche.
+    expect(plusJoursOuvres(new Date("2026-11-15T23:30:00Z"), 1).toISOString().slice(0, 10)).toBe("2026-11-17");
+  });
+
   it("référence courte depuis l'identifiant Stripe", () => {
     expect(referenceCommande("cs_test_a1hBFDSQudENXf9qXLgTzv1uRxne")).toBe("ZV1URXNE");
     expect(referenceCommande("cs_live_ABCDEFGH12345678")).toBe("12345678");

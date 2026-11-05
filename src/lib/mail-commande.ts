@@ -38,14 +38,38 @@ export const referenceCommande = (idStripe: string) => idStripe.replace(/^cs_(te
 const ligneAdresse = (a?: Adresse | null) =>
   a ? [a.ligne1, a.ligne2, `${a.codePostal ?? ""} ${a.ville ?? ""}`.trim(), a.pays && a.pays !== "FR" ? a.pays : null].filter(Boolean).join(", ") : "—";
 
-/** Date + n jours ouvrés (lundi → vendredi ; jours fériés non comptés). */
+/** Dimanche de Pâques (calendrier grégorien, algorithme de Meeus), à midi UTC. */
+function paques(annee: number): Date {
+  const a = annee % 19, b = Math.floor(annee / 100), c = annee % 100;
+  const h = (19 * a + b - Math.floor(b / 4) - Math.floor((b - Math.floor((8 * b + 13) / 25)) / 3) + 15) % 30;
+  const l = (32 + 2 * (b % 4) + 2 * Math.floor(c / 4) - h - (c % 4)) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const mois = Math.floor((h + l - 7 * m + 114) / 31);
+  const jour = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(annee, mois - 1, jour, 12));
+}
+
+/** Jours fériés de métropole (AAAA-MM-JJ), lundi de Pentecôte compris. */
+export function joursFeries(annee: number): Set<string> {
+  const iso = (d: Date) => d.toISOString().slice(0, 10);
+  const p = paques(annee).getTime();
+  const apresPaques = (n: number) => iso(new Date(p + n * 86_400_000));
+  const fixes = ["01-01", "05-01", "05-08", "07-14", "08-15", "11-01", "11-11", "12-25"].map((md) => `${annee}-${md}`);
+  return new Set([...fixes, apresPaques(1), apresPaques(39), apresPaques(50)]);
+}
+
+/**
+ * Date + n jours ouvrés, comptés sur le calendrier de Paris : ni samedi, ni dimanche, ni jour
+ * férié. Sert à l'échéance des mails et à la date de remise au transporteur (Boxtal).
+ */
 export function plusJoursOuvres(date: Date, jours: number): Date {
-  const d = new Date(date);
+  const [a, m, j] = date.toLocaleDateString("sv-SE", { timeZone: "Europe/Paris" }).split("-").map(Number);
+  const d = new Date(Date.UTC(a, m - 1, j, 12));
   let restant = jours;
   while (restant > 0) {
-    d.setDate(d.getDate() + 1);
-    const j = d.getDay();
-    if (j !== 0 && j !== 6) restant--;
+    d.setUTCDate(d.getUTCDate() + 1);
+    const jour = d.getUTCDay();
+    if (jour !== 0 && jour !== 6 && !joursFeries(d.getUTCFullYear()).has(d.toISOString().slice(0, 10))) restant--;
   }
   return d;
 }
