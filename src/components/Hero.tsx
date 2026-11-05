@@ -35,7 +35,7 @@ export function Hero() {
             Vos pièces métalliques, découpées avec <span className="text-accent">précision</span>.
           </h1>
           <p className="mt-6 max-w-[540px] text-lg leading-relaxed text-gris-clair-3">
-            Découpe laser, pliage et soudure sur mesure de l&apos;acier, de l&apos;inox et de l&apos;aluminium, dans notre atelier
+            Découpe laser, pliage et soudure sur mesure : vos pièces en acier, inox et aluminium, façonnées dans notre atelier
             de {site.adresse.ville}.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

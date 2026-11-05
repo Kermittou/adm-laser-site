@@ -30,7 +30,7 @@ export default function Accueil() {
 
       {/* ------------------------------------------------ Savoir-faire */}
       <Section aria-labelledby="savoir-faire">
-        <EnTete id="savoir-faire" surTitre="Notre savoir-faire" titre="Nous découpons, plions et soudons le métal avec une précision qui évite les allers-retours.">
+        <EnTete id="savoir-faire" surTitre="Notre savoir-faire" titre="Nous découpons, plions et soudons vos pièces métalliques, de la pièce unique à la série.">
           <p>
             De la pièce unique à la petite série, nous travaillons l&apos;acier, l&apos;inox et l&apos;aluminium sur notre parc
             Trumpf. Toutes les étapes, de la découpe à la soudure, sont réalisées dans notre atelier, sans sous-traitance.

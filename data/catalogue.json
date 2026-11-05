@@ -198,14 +198,14 @@
       "label": "Cuivre",
       "densite_kg_dm3": 8.96,
       "devis_automatique": false,
-      "message_devis": "Le cuivre est chiffré uniquement sur devis : envoyez-nous votre plan par e-mail, nous vous répondrons rapidement.",
+      "message_devis": "Les demandes pour du cuivre se traitent sur devis : envoyez-nous votre plan par e-mail, nous vous répondrons rapidement.",
       "nuances": {}
     },
     "laiton": {
       "label": "Laiton",
       "densite_kg_dm3": 8.5,
       "devis_automatique": false,
-      "message_devis": "Le laiton est chiffré uniquement sur devis : envoyez-nous votre plan par e-mail, nous vous répondrons rapidement.",
+      "message_devis": "Les demandes pour du laiton se traitent sur devis : envoyez-nous votre plan par e-mail, nous vous répondrons rapidement.",
       "nuances": {}
     }
   },

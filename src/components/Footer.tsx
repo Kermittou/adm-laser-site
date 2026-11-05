@@ -10,7 +10,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-[300px] text-[15px] leading-relaxed">
-            Découpe laser, pliage et soudure sur mesure de l&apos;acier, de l&apos;inox et de l&apos;aluminium, dans notre atelier
+            Découpe laser, pliage et soudure sur mesure : vos pièces en acier, inox et aluminium, façonnées dans notre atelier
             de {site.adresse.ville}.
           </p>
         </div>
