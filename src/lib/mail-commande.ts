@@ -323,6 +323,13 @@ export function mailSuiviClient(c: DonneesCommande, etape: "validee" | "annulee"
           ? `Nous vous préviendrons dès qu'elle sera prête à retirer à l'atelier : ${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}.`
           : `Expédition prévue au plus tard le ${echeance ? dateLongue(echeance) : "délai choisi"}.`,
         "",
+        ...(site.avisGoogle.url
+          ? [
+              "Une fois vos pièces reçues, votre avis nous aidera beaucoup. Vous pouvez le laisser en quelques secondes sur Google :",
+              site.avisGoogle.url,
+              "",
+            ]
+          : []),
         ...signature,
       ].join("\n"),
     };

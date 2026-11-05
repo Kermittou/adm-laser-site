@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import { describe, expect, it } from "vitest";
 import { mailAtelier, mailClient, mailSuiviClient, plusJoursOuvres, referenceCommande, type DonneesCommande } from "@/lib/mail-commande";
 import type { Piece } from "@/lib/devis/types";
@@ -182,6 +183,8 @@ describe("mail de confirmation au client", () => {
 describe("mails de suivi au client (capture / annulation dans Stripe)", () => {
   it("validée : en fabrication, montant débité, date d'expédition", () => {
     const m = mailSuiviClient(base, "validee");
+    expect(m.texte).toContain("votre avis nous aidera");
+    expect(m.texte).toContain(site.avisGoogle.url ?? "");
     expect(m.sujet).toBe("ADM Laser — votre commande AB12CD34 est validée");
     expect(m.texte).toMatch(/notre atelier a validé votre commande AB12CD34 \(10 × Acier brut · 3 mm · Rectangle\)/);
     expect(m.texte).toMatch(/a été débité/);
