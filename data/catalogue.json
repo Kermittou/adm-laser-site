@@ -192,7 +192,7 @@
           "epaisseur_masse_mm": 3.5
         }
       },
-      "_note_epaisseur_max": "10 mm maximum en alu, selon adm-laser.fr (« Épaisseurs : 15 mm dans l'acier, 12 mm dans l'inox, 10 mm dans l'alu »), relevé le 16/10/2026."
+      "_note_epaisseur_max": "10 mm maximum en alu, selon adm-laser.fr (« Épaisseurs : 15 mm dans l'acier, 12 mm dans l'inox, 10 mm dans l'alu »), relevé le 16/10/2026. Inox : 10 mm maximum, confirmé par ADM le 05/11/2026 (le 12 mm de l'ancien site ne vaut plus)."
     },
     "cuivre": {
       "label": "Cuivre",

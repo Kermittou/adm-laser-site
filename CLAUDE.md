@@ -305,12 +305,15 @@ SIRET/RCS/TVA, horaires, machines, logo (`public/images/`), photos d'atelier,
 11 photos vitrine de pièces fournies par ADM (`public/images/vitrine-*.webp`, 16/10/2026),
 note Google 5,0 / 6 avis, **alu 10 mm maximum**.
 
+Décidé par ADM le 05/11/2026 (ne plus demander) : **inox 10 mm maximum** (le « 12 mm » de
+l'ancien site ne vaut plus) ; photo vitrine « OBJECTAL » : accord du client, elle reste ;
+hébergement = **VPS Linux M+ IONOS** (Ubuntu 24.04, Dokploy). Photos d'atelier HD : à venir.
+
 Encore manquant :
-- Hébergeur du NOUVEAU site (société qui héberge le VPS Dokploy) — l'actuel 1&1 ne vaut que pour l'ancien site
+- Raison sociale et adresse exactes de l'entité IONOS qui facture le VPS (voir la facture) → `site.hebergeur`
 - Soudure : procédés, matières et épaisseurs soudées (« TIG/MIG » retiré : non sourcé)
 - Tolérances de découpe et de pliage
 - CGV et mentions de vente à distance (juriste)
-- Inox : 10 mm au catalogue mais « 12 mm dans l'inox » sur adm-laser.fr — à trancher
 - Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
 - Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test) et limites de la palette TNT
 
