@@ -313,8 +313,8 @@ hébergement = **VPS Linux M+ IONOS** (Ubuntu 24.04, Dokploy). Photos d'atelier 
 Encore manquant :
 - Raison sociale et adresse exactes de l'entité IONOS qui facture le VPS (voir la facture) → `site.hebergeur`
 - Soudure : procédés, matières et épaisseurs soudées (« TIG/MIG » retiré : non sourcé)
-- Tolérances de découpe et de pliage
-- CGV : texte fourni le 05/11/2026 et en ligne sur /cgv (encore en noindex). Restent : tolérances (art. 8), film de protection inox/alu (art. 8), **médiateur de la consommation** (art. 18, obligatoire), validation par le juriste. Le configurateur exige 2 cases (CGV + renonciation à la rétractation, pièce sur mesure) et le bouton « Commande avec obligation de paiement »
+- Tolérances de pliage (découpe : ± 0,1 à 0,2 mm, confirmé le 05/11/2026)
+- CGV : texte fourni le 05/11/2026 et en ligne sur /cgv (encore en noindex). Tolérance ± 0,1 à 0,2 mm et film de protection sur les finitions décoratives (miroir, brossé…) confirmés par ADM le 05/11/2026. Restent : **médiateur de la consommation** (art. 18, obligatoire), validation par le juriste. Le configurateur exige 2 cases (CGV + renonciation à la rétractation, pièce sur mesure) et le bouton « Commande avec obligation de paiement »
 - Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
 - Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test)
 

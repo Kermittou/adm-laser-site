@@ -172,7 +172,7 @@ export default function Cgv() {
       <Article n={8} titre="Tolérances et aspect des matières">
         <p>
           <Gras>Tolérances.</Gras> Les pièces sont découpées au laser fibre avec une tolérance dimensionnelle de{" "}
-          <Todo>± [0,1 à 0,2] mm selon la matière et l&apos;épaisseur — à confirmer par l&apos;atelier</Todo>, et une tolérance de
+± 0,1 à 0,2 mm selon la matière et l&apos;épaisseur, et une tolérance de
           planéité conforme aux normes des tôles fournies par les aciéries. Le diamètre minimal d&apos;un trou est égal à l&apos;épaisseur
           de la tôle.
         </p>
@@ -187,7 +187,8 @@ export default function Cgv() {
           <li>variations de teinte, de grain ou de brossage entre deux tôles d&apos;un même lot.</li>
         </Liste>
         <p>
-          Les pièces en inox et en aluminium sont livrées <Todo>avec ou sans film de protection selon la nuance — à confirmer</Todo>.
+          Les pièces à finition décorative (inox miroir, inox brossé…) sont livrées avec un film de protection ; les autres nuances sont
+          livrées sans film.
         </p>
       </Article>
 
