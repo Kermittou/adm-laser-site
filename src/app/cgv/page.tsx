@@ -308,7 +308,7 @@ export default function Cgv() {
         <p>
           <Gras>Conformité.</Gras> Le Client contrôle les pièces dès réception. Toute réclamation pour non-conformité apparente doit être
           formulée par écrit, photos à l&apos;appui, dans les 5 jours ouvrés suivant la réception. Passé ce délai, les pièces sont réputées
-          acceptées. Si la non-conformité est reconnue, ADM Laser choisit entre la refabrication des pièces ou leur remboursement, à
+          acceptées. Si la non-conformité est reconnue, ADM Laser choisit entre la refabrication des pièces et leur remboursement, à
           l&apos;exclusion de toute autre indemnité. Aucun retour n&apos;est accepté sans accord préalable.
         </p>
         <p>

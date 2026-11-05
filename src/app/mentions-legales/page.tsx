@@ -18,7 +18,7 @@ export default function MentionsLegales() {
     ["Société", site.raisonSociale],
     ["Siège social", `${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`],
     ["Téléphone", site.telephone],
-    ["Mail", site.email],
+    ["E-mail", site.email],
     ["Représentant légal", site.legal.representant],
     ["Forme juridique", site.legal.formeJuridique],
     ["Immatriculation", site.legal.rcs],

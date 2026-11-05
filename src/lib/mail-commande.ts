@@ -182,7 +182,7 @@ export function mailAtelier(c: DonneesCommande): MailAtelier {
     ...(retrait
       ? [
           "  Mode        : RETRAIT À L'ATELIER — pas d'envoi, pas de bordereau.",
-          "  À faire     : prévenir le client (mail ou téléphone) dès que la commande est prête.",
+          "  À faire     : prévenir le client (e-mail ou téléphone) dès que la commande est prête.",
         ]
       : [
           `  Délai       : ${c.livraison.libelle ?? "?"}${echeance ? ` — à expédier au plus tard le ${dateLongue(echeance)}` : ""}`,
@@ -202,7 +202,7 @@ export function mailAtelier(c: DonneesCommande): MailAtelier {
     "━━━ CLIENT ━━━",
     `  Nom         : ${c.client.nom ?? "—"}`,
     `  Société     : ${c.client.societe ?? "—"}`,
-    `  Mail        : ${c.client.email ?? "—"}`,
+    `  E-mail      : ${c.client.email ?? "—"}`,
     `  Téléphone   : ${c.client.telephone ?? "—"}`,
     `  N° de TVA   : ${c.client.tva ?? "—"}`,
     `  Facturation : ${ligneAdresse(c.client.facturation)}`,
@@ -248,7 +248,7 @@ export function mailClient(c: DonneesCommande): { sujet: string; texte: string }
   const texte = [
     `Bonjour${prenomNom ? ` ${prenomNom}` : ""},`,
     "",
-    "Merci pour votre commande : nous l'avons bien reçue.",
+    "Nous vous remercions pour votre commande, que nous avons bien reçue.",
     "",
     `━━━ VOTRE COMMANDE ${c.reference} — ${dateLongue(c.date)} ━━━`,
     p ? `  Pièce       : ${libellePiece(p)}` : "",
@@ -262,28 +262,30 @@ export function mailClient(c: DonneesCommande): { sujet: string; texte: string }
     "━━━ ET MAINTENANT ━━━",
     "  1. Notre atelier vérifie votre pièce.",
     "  2. Le montant est seulement bloqué sur votre carte : il n'est débité qu'après cette",
-    "     vérification. Si un point doit être précisé, nous vous contactons avant tout débit.",
+    "     vérification. Si un point doit être précisé, nous vous contacterons avant tout débit.",
     ...(retrait
       ? [
-          "  3. Nous vous prévenons dès que votre commande est prête à retirer :",
+          "  3. Nous vous préviendrons dès que votre commande sera prête à être retirée :",
           `     ${site.nom}, ${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`,
           `     (${horaires}).`,
         ]
       : [`  3. Expédition prévue au plus tard le ${echeance ? dateLongue(echeance) : "délai choisi"}${palette ? ", sur palette" : ""}.`]),
     "",
     `Votre commande est soumise à nos conditions générales de vente, acceptées lors de la commande : ${SITE_URL}/cgv`,
-    "Pièce fabriquée sur mesure selon vos indications : pas de droit de rétractation (article L221-28, 3° du Code de la consommation).",
+    "Votre pièce étant fabriquée sur mesure selon vos indications, cette commande n'ouvre pas de droit de rétractation (article L221-28, 3° du Code de la consommation).",
     "",
-    "Une question ? Répondez simplement à ce mail, ou appelez-nous au " + site.telephone + ".",
+    "Pour toute question, il vous suffit de répondre à cet e-mail ou de nous appeler au " + site.telephone + ".",
     "",
-    `${site.nom} — ${site.nomComplet}`,
+    "Cordialement,",
+    "",
+    `L'équipe ${site.nom} — ${site.nomComplet}`,
     `${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`,
     `${site.telephone} · ${site.email}`,
   ]
     .filter((l, i, a) => l !== "" || a[i - 1] !== "")
     .join("\n");
 
-  return { sujet: `${site.nom} — votre commande ${c.reference} est bien reçue`, texte };
+  return { sujet: `${site.nom} — votre commande ${c.reference} a bien été reçue`, texte };
 }
 
 /**
@@ -298,9 +300,11 @@ export function mailSuiviClient(c: DonneesCommande, etape: "validee" | "annulee"
   const p = c.piece;
   const quoi = p ? `${p.quantite} × ${libellePiece(p)}` : "votre commande";
   const signature = [
-    "Une question ? Répondez simplement à ce mail, ou appelez-nous au " + site.telephone + ".",
+    "Pour toute question, il vous suffit de répondre à cet e-mail ou de nous appeler au " + site.telephone + ".",
     "",
-    `${site.nom} — ${site.nomComplet}`,
+    "Cordialement,",
+    "",
+    `L'équipe ${site.nom} — ${site.nomComplet}`,
     `${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`,
     `${site.telephone} · ${site.email}`,
   ];
@@ -312,11 +316,11 @@ export function mailSuiviClient(c: DonneesCommande, etape: "validee" | "annulee"
       texte: [
         bonjour,
         "",
-        `Bonne nouvelle : notre atelier a validé votre commande ${c.reference} (${quoi}). Elle part en fabrication.`,
-        `Le montant de ${eur(c.montantTtc)} € TTC a été débité.`,
+        `Nous avons le plaisir de vous informer que notre atelier a validé votre commande ${c.reference} (${quoi}). Sa fabrication est lancée.`,
+        `Le montant de ${eur(c.montantTtc)} € TTC a été débité de votre carte.`,
         "",
         retrait
-          ? `Nous vous prévenons dès qu'elle est prête à retirer à l'atelier : ${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}.`
+          ? `Nous vous préviendrons dès qu'elle sera prête à retirer à l'atelier : ${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}.`
           : `Expédition prévue au plus tard le ${echeance ? dateLongue(echeance) : "délai choisi"}.`,
         "",
         ...signature,
@@ -328,11 +332,11 @@ export function mailSuiviClient(c: DonneesCommande, etape: "validee" | "annulee"
     texte: [
       bonjour,
       "",
-      `Votre commande ${c.reference} (${quoi}) a été annulée.`,
+      `Nous vous informons que votre commande ${c.reference} (${quoi}) a été annulée.`,
       `Le montant de ${eur(c.montantTtc)} € TTC qui était bloqué sur votre carte a été libéré : rien n'a été débité.`,
-      "Selon votre banque, il peut apparaître encore quelques jours sur votre compte avant de disparaître.",
+      "Selon votre banque, ce montant peut encore apparaître quelques jours sur votre compte avant de disparaître.",
       "",
-      "Si vous ne vous attendiez pas à cette annulation, ou pour adapter votre pièce, contactez-nous : nous trouverons une solution.",
+      "Si vous ne vous attendiez pas à cette annulation, ou si vous souhaitez adapter votre pièce, contactez-nous : nous trouverons ensemble une solution.",
       "",
       ...signature,
     ].join("\n"),

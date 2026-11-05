@@ -154,7 +154,7 @@ it("pas de ligne vide parasite dans le bloc expédition", () => {
 describe("mail de confirmation au client", () => {
   it("récapitule la commande et les étapes, sans rien d'interne", () => {
     const m = mailClient(base);
-    expect(m.sujet).toBe("ADM Laser — votre commande AB12CD34 est bien reçue");
+    expect(m.sujet).toBe("ADM Laser — votre commande AB12CD34 a bien été reçue");
     expect(m.texte).toMatch(/Bonjour Client Test,/);
     expect(m.texte).toMatch(/Quantité\s+: 10 pièces/);
     expect(m.texte).toMatch(/Prix\s+: 79,00 € HT\n/);
