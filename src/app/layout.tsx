@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | ADM Laser",
   },
   description:
-    "Découpe laser, pliage et soudure sur mesure à Vaires-sur-Marne (77). Acier, inox, aluminium, de la pièce unique à la série. Votre devis en ligne en 30 secondes.",
+    "Découpe laser, pliage et soudure sur mesure à Vaires-sur-Marne (77). Acier, inox et aluminium, de la pièce unique à la série. Votre devis en ligne en 30 secondes.",
   applicationName: site.nom,
   openGraph: {
     type: "website",

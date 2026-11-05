@@ -75,7 +75,7 @@ export function geometrie(forme: string, d: Record<string, number>): Geometrie {
       if (h < w / 2) {
         throw new DevisImpossible(
           "dimension_invalide",
-          `La hauteur totale doit valoir au moins la moitié de la largeur (${w / 2} mm ici) pour former le demi-disque.`,
+          `La hauteur totale doit être au moins égale à la moitié de la largeur (soit ${(w / 2).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} mm ici) pour former le demi-disque.`,
         );
       }
       const droit = h - w / 2; // partie rectangulaire sous le demi-disque
@@ -95,6 +95,6 @@ export function geometrie(forme: string, d: Record<string, number>): Geometrie {
     }
 
     default:
-      throw new DevisImpossible("forme_inconnue", "Cette forme n'est pas disponible en ligne. Envoyez-nous votre plan, nous la chiffrons.");
+      throw new DevisImpossible("forme_inconnue", "Cette forme n'est pas disponible en ligne. Envoyez-nous votre plan : nous la chiffrerons.");
   }
 }

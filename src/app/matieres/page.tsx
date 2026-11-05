@@ -21,14 +21,14 @@ const NOM_USAGE: Record<string, string> = {
   "acier.galvanise": "Tôle galvanisée",
   "acier.electrozingue": "Tôle électrozinguée",
   "acier.corten": "Acier Corten",
-  "acier.larme": "Tôle larmée acier",
+  "acier.larme": "Tôle larmée en acier",
   "acier.perfore": "Tôle perforée",
   "inox.brut": "Inox brut",
   "inox.marin": "Inox marin",
   "inox.miroir": "Inox miroir",
   "inox.brosse": "Inox brossé",
   "alu.brut": "Aluminium brut",
-  "alu.larme": "Tôle larmée aluminium",
+  "alu.larme": "Tôle larmée en aluminium",
 };
 
 function etiquettes(cle: string): string[] {
@@ -68,7 +68,7 @@ export default function Matieres() {
           <h1 className="max-w-[860px] text-[40px] md:text-[54px]">Acier, inox, aluminium : {nbNuances} nuances découpées sur mesure</h1>
           <p className="mt-6 max-w-[640px] text-lg leading-relaxed text-gris-clair-3">
             De la tôle d&apos;acier brut au Corten, de l&apos;inox brossé à la tôle larmée pour vos marches : chaque nuance a ses atouts et
-            ses limites. Pas sûr de votre choix ? Cinq questions suffisent.
+            ses limites. Vous hésitez ? Cinq questions suffisent pour vous orienter.
           </p>
           <div className="mt-8">
             <Button href="#conseiller">
@@ -83,8 +83,8 @@ export default function Matieres() {
           Quelle matière choisir ?
         </h2>
         <p className="mt-4 mb-10 max-w-[640px] text-[17px] leading-relaxed text-texte-doux">
-          Dites-nous où vivra la pièce et ce qu&apos;on attend d&apos;elle : nous classons les nuances, avec ce qui joue pour chacune — et
-          les réserves.
+          Indiquez-nous où sera installée la pièce et ce que vous en attendez : nous classons les nuances en précisant, pour chacune,
+          ses atouts et ses réserves.
         </p>
         <Conseiller />
       </Section>

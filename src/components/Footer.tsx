@@ -10,8 +10,8 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-[300px] text-[15px] leading-relaxed">
-            Découpe laser, pliage et soudure sur mesure — acier, inox et aluminium, façonnés dans notre atelier de{" "}
-            {site.adresse.ville}.
+            Découpe laser, pliage et soudure sur mesure de l&apos;acier, de l&apos;inox et de l&apos;aluminium, dans notre atelier
+            de {site.adresse.ville}.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export function Footer() {
             {site.nomComplet} · {site.adresse.ville} (77), France · {site.email} · {site.telephone}
           </p>
           <p className="flex flex-wrap gap-x-5 gap-y-1">
-            <span>© 2026 {site.nom} — Tous droits réservés.</span>
+            <span>© 2026 {site.nom}. Tous droits réservés.</span>
             <Link href="/mentions-legales" className="hover:text-blanc">
               Mentions légales
             </Link>

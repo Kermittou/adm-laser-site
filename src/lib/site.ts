@@ -31,11 +31,11 @@ export const site = {
   emailCommandes: "commandes@adm-laser.fr",
 
   horaires: [
-    { jours: "Lundi – Jeudi", ouverture: "07:30", fermeture: "17:00", schema: ["Monday", "Tuesday", "Wednesday", "Thursday"] },
+    { jours: "Lundi – jeudi", ouverture: "07:30", fermeture: "17:00", schema: ["Monday", "Tuesday", "Wednesday", "Thursday"] },
     { jours: "Vendredi", ouverture: "07:30", fermeture: "12:00", schema: ["Friday"] },
   ],
 
-  experience: "+50 ans d'expérience",
+  experience: "Plus de 50 ans d'expérience",
   delaiReponse: "réponse sous 48 h",
   formatsFichiers: ["DXF", "DWG", "PDF", "STEP"],
 
@@ -54,8 +54,8 @@ export const site = {
   machines: {
     laser: { nom: "Trumpf TruLaser 2030", puissance: "3 kW", format: "1500 × 3000 mm" },
     plieuses: [
-      { nom: "Trumpf TrumaBend V85", force: "85 t", longueur: "2000 mm" },
-      { nom: "Trumpf TruBend 3100", force: "100 t", longueur: "3000 mm" },
+      { nom: "Trumpf TrumaBend V85", force: "85 t", longueur: "2\u202f000 mm" },
+      { nom: "Trumpf TruBend 3100", force: "100 t", longueur: "3\u202f000 mm" },
     ],
   },
 

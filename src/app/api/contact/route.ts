@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   try {
     form = await req.formData();
   } catch {
-    return erreur("Le formulaire n'a pas pu être lu. Réessayez.");
+    return erreur("Le formulaire n'a pas pu être lu. Veuillez réessayer.");
   }
 
   // Champ piège invisible : un robot le remplit, un humain non. On répond « ok » sans rien envoyer.
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   const fichier = form.get("plan");
 
   if (!nom || nom.length > 120) return erreur("Indiquez votre nom.");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) return erreur("Votre adresse mail ne semble pas valide.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) return erreur("Votre adresse e-mail ne semble pas valide.");
   if (telephone.length > 40) return erreur("Le numéro de téléphone est trop long.");
   if (message.length < 5 || message.length > 5000) return erreur("Décrivez votre besoin en quelques mots (5 000 caractères maximum).");
   if (!consentement) return erreur("Merci d'accepter que nous utilisions vos coordonnées pour vous répondre.");
@@ -38,12 +38,12 @@ export async function POST(req: Request) {
   const piecesJointes: { nom: string; contenu: Buffer; type?: string }[] = [];
   if (fichier instanceof File && fichier.size > 0) {
     const ext = fichier.name.split(".").pop()?.toLowerCase() ?? "";
-    if (!EXTENSIONS_PJ.includes(ext)) return erreur(`Format de fichier non accepté. Formats possibles : ${EXTENSIONS_PJ.join(", ").toUpperCase()}.`);
+    if (!EXTENSIONS_PJ.includes(ext)) return erreur(`Format de fichier non accepté. Formats acceptés : ${EXTENSIONS_PJ.join(", ").toUpperCase()}.`);
     if (fichier.size > TAILLE_MAX_PJ) return erreur(`Le fichier dépasse 10 Mo. Envoyez-le directement à ${site.email}.`);
     piecesJointes.push({ nom: fichier.name, contenu: Buffer.from(await fichier.arrayBuffer()), type: fichier.type || undefined });
   }
 
-  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
+  if (tropDEnvois(ipDe(req))) return erreur(`Trop de messages envoyés en peu de temps. ${repli}`, 429);
 
   if (!mailPossible()) {
     console.error("[contact] SMTP non configuré : message non envoyé.");
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     });
   } catch (e) {
     console.error("[contact] échec d'envoi", e);
-    return erreur(`Votre message n'a pas pu partir. ${repli}`, 502);
+    return erreur(`Votre message n'a pas pu être envoyé. ${repli}`, 502);
   }
 
   return NextResponse.json({ ok: true });

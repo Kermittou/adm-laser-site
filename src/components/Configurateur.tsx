@@ -133,7 +133,7 @@ function ConseillerCompact({ onChoisir, onFermer }: { onChoisir: (matiere: strin
   return (
     <div className="mt-4 rounded-card border border-blanc/15 bg-steel-deep p-5 shadow-2xl">
       <div className="flex items-baseline justify-between gap-4">
-        <p className="font-display text-2xl font-extrabold">Répondez à 5 questions, on vous dit quoi prendre</p>
+        <p className="font-display text-2xl font-extrabold">Répondez à 5 questions : nous vous conseillons une matière</p>
         <button type="button" onClick={onFermer} className="cursor-pointer text-sm text-gris-clair-2 underline underline-offset-4 hover:text-blanc">
           Fermer
         </button>
@@ -163,7 +163,7 @@ function ConseillerCompact({ onChoisir, onFermer }: { onChoisir: (matiere: strin
 
       {resultat && (
         <div aria-live="polite" className="mt-5 border-t border-blanc/10 pt-4">
-          <p className="mb-3 text-[13px] font-semibold tracking-[0.12em] text-accent uppercase">Ce qu&apos;on vous conseille</p>
+          <p className="mb-3 text-[13px] font-semibold tracking-[0.12em] text-accent uppercase">Nos recommandations</p>
           {resultat.message && <p className="text-gris-clair-3">{resultat.message}</p>}
           <ol className="space-y-3">
             {resultat.recommandations.map((r) => (
@@ -222,7 +222,7 @@ function DemandeDevis({ piece, onAnnuler }: { piece: Piece; onAnnuler: () => voi
       const data = (await res.json()) as { ok: boolean; message?: string };
       setEtat(data.ok ? { statut: "ok" } : { statut: "erreur", message: data.message });
     } catch {
-      setEtat({ statut: "erreur", message: `Connexion impossible. Écrivez-nous à ${site.email} ou appelez le ${site.telephone}.` });
+      setEtat({ statut: "erreur", message: `La connexion a échoué. Réessayez, écrivez-nous à ${site.email} ou appelez le ${site.telephone}.` });
     }
   }
 
@@ -232,14 +232,14 @@ function DemandeDevis({ piece, onAnnuler }: { piece: Piece; onAnnuler: () => voi
         <p className="flex items-center gap-2 font-semibold">
           <IconeCheck className="text-accent" /> Demande envoyée.
         </p>
-        <p className="mt-1 text-sm text-gris-clair-3">Nous revenons vers vous pour confirmer votre devis — {site.delaiReponse}.</p>
+        <p className="mt-1 text-sm text-gris-clair-3">Nous revenons vers vous pour confirmer votre devis ({site.delaiReponse}).</p>
       </div>
     );
   }
 
   return (
     <form onSubmit={envoyer} className="mt-4 space-y-3 rounded-btn-lg border border-blanc/15 bg-blanc/4 p-4">
-      <p className="text-sm text-gris-clair-3">Nous recevons votre configuration et ce prix. Laissez-nous de quoi vous répondre :</p>
+      <p className="text-sm text-gris-clair-3">Votre configuration et ce prix nous seront transmis. Indiquez vos coordonnées pour recevoir notre réponse :</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block text-sm text-gris-clair-2">
           Nom *
@@ -251,7 +251,7 @@ function DemandeDevis({ piece, onAnnuler }: { piece: Piece; onAnnuler: () => voi
         </label>
       </div>
       <label className="block text-sm text-gris-clair-2">
-        Adresse mail *
+        Adresse e-mail *
         <input name="email" type="email" required maxLength={200} autoComplete="email" className={champ} />
       </label>
       <label className="block text-sm text-gris-clair-2">
@@ -270,7 +270,7 @@ function DemandeDevis({ piece, onAnnuler }: { piece: Piece; onAnnuler: () => voi
       </label>
       {etat.statut === "erreur" && (
         <p role="alert" className="rounded-btn border border-accent/40 bg-accent/15 px-3 py-2 text-sm text-blanc">
-          {etat.message ?? "Une erreur est survenue."}
+          {etat.message ?? "Une erreur est survenue. Réessayez ou contactez-nous."}
         </p>
       )}
       <div className="flex flex-wrap items-center gap-3">
@@ -338,14 +338,14 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
       }
       setEtat({ statut: "erreur", message: data.message });
     } catch {
-      setEtat({ statut: "erreur", message: `Connexion impossible. Écrivez-nous à ${site.email} ou appelez le ${site.telephone}.` });
+      setEtat({ statut: "erreur", message: `La connexion a échoué. Réessayez, écrivez-nous à ${site.email} ou appelez le ${site.telephone}.` });
     }
   }
 
   if (!r.ok || !exp) {
     return (
       <div role="alert" className="mt-4 rounded-btn-lg border border-accent/50 bg-accent/10 p-4 text-blanc">
-        {r.ok ? "Cette commande ne peut pas être payée en ligne." : r.message}
+        {r.ok ? "Cette commande ne peut pas être payée en ligne. Demandez votre devis : nous vous répondrons rapidement." : r.message}
       </div>
     );
   }
@@ -389,7 +389,7 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
                 <span className="flex flex-col">
                   <span className="text-[15px]">2. Livraison</span>
                   <span className="text-xs text-gris-clair">
-                    France métropolitaine continentale (hors {GRILLE.hors_zone.join(" et ")}) · {nb(exp.poids_facture_kg)} kg emballés
+                    France métropolitaine continentale (hors {GRILLE.hors_zone.join(" et ")}) · {nb(exp.poids_facture_kg)} kg, emballage compris
                   </span>
                 </span>
               </span>
@@ -466,7 +466,7 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
           {exp.raison && <p className="mt-2 text-sm text-gris-clair-3">{exp.raison}</p>}
           {envoiChoisi === "colis" && exp.colis.length > 1 && (
             <p className="mt-2 text-sm text-gris-clair-3">
-              Votre commande part en {exp.colis.length} colis de {nb(GRILLE.limite_colis.poids_kg)} kg maximum, expédiés séparément, chacun avec son suivi.
+              Votre commande sera expédiée en {exp.colis.length} colis séparés de {nb(GRILLE.limite_colis.poids_kg)} kg maximum, chacun avec son propre suivi.
             </p>
           )}
         </fieldset>
@@ -515,10 +515,10 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
       {!commande && (
         <p className="text-sm text-gris-clair-2">
           {choix !== "livraison"
-            ? "Choisissez le retrait à l'atelier ou la livraison pour voir le total."
+            ? "Choisissez le retrait à l'atelier ou la livraison pour afficher le total."
             : !envoiChoisi
-              ? "Choisissez l'envoi en colis ou sur palette, puis le délai, pour voir le total."
-              : "Choisissez le délai d'expédition pour voir le total."}
+              ? "Choisissez l'envoi en colis ou sur palette, puis le délai, pour afficher le total."
+              : "Choisissez le délai d'expédition pour afficher le total."}
         </p>
       )}
       {commande && !commande.ok && (
@@ -570,12 +570,12 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
       <ul className="space-y-1.5 text-sm text-gris-clair-3">
         <li className="flex gap-2">
           <IconeCheck className="mt-0.5 shrink-0 text-accent" />
-          Le montant est bloqué sur votre carte, puis débité seulement après validation de votre pièce par l&apos;atelier.
+          Le montant est bloqué sur votre carte et n&apos;est débité qu&apos;après validation de votre pièce par l&apos;atelier.
         </li>
         <li className="flex gap-2">
           <IconeCheck className="mt-0.5 shrink-0 text-accent" />
           {choix === "retrait"
-            ? "Paiement sécurisé par Stripe. Nous vous prévenons dès que votre commande est prête à retirer."
+            ? "Paiement sécurisé par Stripe. Nous vous prévenons dès que votre commande est prête à être retirée."
             : "Paiement sécurisé par Stripe. Vous saisirez vos adresses de facturation et de livraison à l'étape suivante."}
         </li>
       </ul>
@@ -595,13 +595,13 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
         <input type="checkbox" checked={surMesure} onChange={(e) => setSurMesure(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
         <span>
           J&apos;ai compris que ma pièce est fabriquée sur mesure selon mes indications et que je ne dispose donc pas du droit de
-          rétractation (article L221-28, 3° du Code de la consommation). *
+          rétractation (article L. 221-28, 3° du Code de la consommation). *
         </span>
       </label>
 
       {etat.statut === "erreur" && (
         <p role="alert" className="rounded-btn border border-accent/40 bg-accent/15 px-3 py-2 text-sm text-blanc">
-          {etat.message ?? "Une erreur est survenue."}
+          {etat.message ?? "Une erreur est survenue. Réessayez ou contactez-nous."}
         </p>
       )}
 
@@ -787,7 +787,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
             </div>
           </Etape>
 
-          <Etape num="03" titre="Épaisseur" aide="Seules les épaisseurs réellement disponibles dans cette nuance.">
+          <Etape num="03" titre="Épaisseur" aide="Seules les épaisseurs disponibles dans cette nuance sont proposées.">
             <div className="flex flex-wrap gap-2">
               {epaisseurs.map((e) => (
                 <Option key={e} actif={e === epaisseur} onClick={() => setEpaisseur(e)}>
@@ -826,7 +826,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
                 ))}
               </div>
               <p className="mt-3 text-sm text-gris-clair">
-                En {mm(epaisseur)} mm, le plus petit trou possible fait Ø {mm(epaisseur)} mm.
+                En {mm(epaisseur)} mm d&apos;épaisseur, le plus petit trou réalisable mesure Ø {mm(epaisseur)} mm.
               </p>
             </Etape>
           )}
@@ -912,7 +912,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
           <p className="font-display text-[28px] leading-tight font-extrabold">Une forme sur mesure ?</p>
           <p className="mt-3 text-gris-clair-3">
             L&apos;éditeur de tracé en ligne arrive bientôt. En attendant, envoyez-nous votre plan ({site.formatsFichiers.join(", ")}) : nous
-            le chiffrons, {site.delaiReponse}.
+            le chiffrons ({site.delaiReponse}).
           </p>
           <Link
             href="/contact#formulaire"
@@ -983,7 +983,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
               </div>
 
               <div className="mt-5 border-t border-blanc/10 pt-4">
-                <p className="mb-2.5 text-xs tracking-[0.1em] text-gris-clair uppercase">Plus vous en prenez, moins ça coûte</p>
+                <p className="mb-2.5 text-xs tracking-[0.1em] text-gris-clair uppercase">Prix dégressifs selon la quantité</p>
                 <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
                   {paliers.map(({ q, r }) => {
                     if (!r.ok) return null;
@@ -1005,7 +1005,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
                     );
                   })}
                 </div>
-                <p className="mt-2 text-xs text-gris-clair">Prix unitaire {suffixe} par quantité · écart calculé par rapport à votre quantité.</p>
+                <p className="mt-2 text-xs text-gris-clair">Prix unitaire {suffixe} selon la quantité · écart calculé par rapport à votre quantité actuelle.</p>
               </div>
 
               {mode === null && (
@@ -1020,12 +1020,12 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
                   </button>
                   {transportSurDevis && (
                     <div className="rounded-btn border border-blanc/15 bg-blanc/4 px-3 py-2.5 text-center text-sm text-gris-clair-3">
-                      <p>{exp?.raison} Demandez votre devis ci-dessous : nous vous envoyons le prix livré par mail.</p>
+                      <p>{exp?.raison} Demandez votre devis ci-dessous : nous vous enverrons par e-mail le prix livraison comprise.</p>
                     </div>
                   )}
                   {!transportSurDevis && exp?.mode === "sur_devis" && (
                     <p className="text-center text-sm text-gris-clair-3">
-                      {exp.raison} Commandez avec retrait à l&apos;atelier, ou demandez un devis de livraison.
+                      {exp.raison} Vous pouvez commander avec retrait à l&apos;atelier ou demander un devis de livraison.
                     </p>
                   )}
                   <button
@@ -1045,7 +1045,7 @@ export function Configurateur({ initial }: { initial?: { matiere?: string; nuanc
       )}
 
       <p className="text-center text-sm text-gris-clair-2">
-        Pièce trop spécifique ?{" "}
+        Pièce plus complexe ?{" "}
         <Link href="/contact#formulaire" className="font-semibold text-blanc underline underline-offset-4 hover:text-accent">
           Envoyez-nous votre plan
         </Link>

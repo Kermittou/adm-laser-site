@@ -67,7 +67,7 @@ export const tarifs = tarifsJson as unknown as Tarifs;
 export type Contexte = { catalogue: Catalogue; tarifs: Tarifs };
 const DEFAUT: Contexte = { catalogue: catalogueParDefaut, tarifs };
 
-const CONTACT = "Contactez-nous, nous vous faisons un devis sur mesure.";
+const CONTACT = "Contactez-nous : nous vous établirons un devis sur mesure.";
 
 /* --------------------------------------------------------------------- utilitaires */
 
@@ -109,7 +109,7 @@ function matiere(cleMatiere: string, ctx: Contexte): Matiere {
 function nuance(cleMatiere: string, cleNuance: string, ctx: Contexte): Nuance {
   const m = matiere(cleMatiere, ctx);
   if (!m.devis_automatique) {
-    throw new DevisImpossible("devis_manuel", m.message_devis ?? `${m.label} : sur devis uniquement. ${CONTACT}`);
+    throw new DevisImpossible("devis_manuel", m.message_devis ?? `${m.label} : uniquement sur devis. ${CONTACT}`);
   }
   const n = m.nuances[cleNuance];
   if (!n) throw new DevisImpossible("nuance_inconnue", `Cette finition n'est pas proposée en ${m.label.toLowerCase()}. ${CONTACT}`);
@@ -127,8 +127,8 @@ function validerEpaisseur(p: Piece, ctx: Contexte): void {
     const n = nuance(p.matiere, p.nuance, ctx);
     throw new DevisImpossible(
       "epaisseur_indisponible",
-      `${m.label} ${n.label.toLowerCase()} n'existe qu'en ${listeEpaisseurs(dispo)} (demandé : ${mm(p.epaisseur_mm)} mm). ` +
-        `Choisissez l'une de ces épaisseurs, ou contactez-nous pour une autre.`,
+      `${m.label} ${n.label.toLowerCase()} n'est disponible qu'en ${listeEpaisseurs(dispo)} (épaisseur demandée : ${mm(p.epaisseur_mm)} mm). ` +
+        `Choisissez l'une de ces épaisseurs ou contactez-nous pour une autre.`,
     );
   }
 }
@@ -141,8 +141,8 @@ export function diametreTrouMinMm(epaisseur_mm: number): number {
 function refusTrou(diametre: number, epaisseur: number): DevisImpossible {
   return new DevisImpossible(
     "trou_trop_petit",
-    `En ${mm(epaisseur)} mm d'épaisseur, le plus petit trou possible fait Ø${mm(diametreTrouMinMm(epaisseur))} mm ` +
-      `(demandé : ${mm(diametre)} mm). Agrandissez la découpe, choisissez une tôle plus fine, ou contactez-nous.`,
+    `En ${mm(epaisseur)} mm d'épaisseur, le plus petit trou réalisable mesure Ø ${mm(diametreTrouMinMm(epaisseur))} mm ` +
+      `(demandé : ${mm(diametre)} mm). Agrandissez la découpe, choisissez une tôle plus fine ou contactez-nous.`,
   );
 }
 
@@ -201,7 +201,7 @@ function validerSaisie(p: Piece, ctx: Contexte): void {
   }
   const forme = ctx.catalogue.formes[p.forme];
   if (!forme) {
-    throw new DevisImpossible("forme_inconnue", "Cette forme n'est pas disponible en ligne. Envoyez-nous votre plan, nous la chiffrons.");
+    throw new DevisImpossible("forme_inconnue", "Cette forme n'est pas disponible en ligne. Envoyez-nous votre plan : nous la chiffrerons.");
   }
   for (const param of forme.parametres) {
     const v = p.dimensions[param.cle];
@@ -220,7 +220,7 @@ function validerBornesMax(p: Piece, ctx: Contexte): void {
     if (p.dimensions[param.cle] > param.max) {
       throw new DevisImpossible(
         "dimension_invalide",
-        `La cote « ${param.label} » ne peut pas dépasser ${mm(param.max)} mm en ligne. Au-delà, contactez-nous.`,
+        `La cote « ${param.label} » ne peut pas dépasser ${mm(param.max)} mm en ligne. Au-delà, contactez-nous pour un devis.`,
       );
     }
   }
@@ -248,7 +248,7 @@ function validerEncombrement(geo: Geometrie, ctx: Contexte): void {
     throw new DevisImpossible(
       "hors_format",
       `Votre pièce (${mm(arrondi(bx, 1))} × ${mm(arrondi(by, 1))} mm) dépasse notre format de tôle ` +
-        `(${mm(fx)} × ${mm(fy)} mm). Contactez-nous pour l'étudier.`,
+        `(${mm(fx)} × ${mm(fy)} mm). Contactez-nous : nous étudierons votre demande.`,
     );
   }
 }

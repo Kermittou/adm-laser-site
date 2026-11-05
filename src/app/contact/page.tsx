@@ -26,7 +26,7 @@ export default function Contact() {
           <SurTitre>Contact</SurTitre>
           <h1 className="max-w-[820px] text-[40px] md:text-[54px]">Un plan à chiffrer ? Écrivez-nous.</h1>
           <p className="mt-6 max-w-[640px] text-lg leading-relaxed text-gris-clair-3">
-            Envoyez votre plan ({site.formatsFichiers.join(", ")}) ou décrivez votre pièce — {site.delaiReponse}.
+            Envoyez-nous votre plan ({site.formatsFichiers.join(", ")}) ou décrivez votre pièce : {site.delaiReponse}.
           </p>
         </Container>
       </section>

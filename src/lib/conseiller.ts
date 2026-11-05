@@ -15,21 +15,21 @@ import { catalogue } from "@/lib/devis/catalogue";
 export const QUESTIONS = [
   {
     cle: "environnement",
-    question: "Où la pièce va-t-elle vivre ?",
+    question: "Où la pièce sera-t-elle installée ?",
     reponses: [
       ["interieur", "À l'intérieur, au sec"],
-      ["exterieur", "Dehors, sous la pluie"],
+      ["exterieur", "À l'extérieur, exposée à la pluie"],
       ["marin", "En bord de mer"],
-      ["humide", "Intérieur humide"],
+      ["humide", "À l'intérieur, en milieu humide"],
     ],
   },
   {
     cle: "usage",
-    question: "À quoi sert-elle ?",
+    question: "À quoi servira-t-elle ?",
     reponses: [
       ["structure", "Structure / mécanique"],
-      ["marche", "Une marche, un sol"],
-      ["decor", "Pièce visible, décorative"],
+      ["marche", "Marche ou sol"],
+      ["decor", "Pièce visible ou décorative"],
       ["indifferent", "Je ne sais pas encore"],
     ],
   },
@@ -90,7 +90,7 @@ export const PROPS: Record<string, Props> = {
   "acier.electrozingue": { inox: true, antid: false, esth: false, pliable: true, eco: true, txt: "ne rouille pas, économique, aspect zinc" },
   "acier.corten": { inox: true, antid: false, esth: true, pliable: true, eco: false, txt: "rouille stabilisée, très esthétique dehors" },
   "acier.larme": { inox: false, antid: true, esth: false, pliable: true, eco: true, txt: "antidérapant, parfait pour des marches extérieures" },
-  "acier.perfore": { inox: false, antid: false, esth: true, pliable: true, eco: false, txt: "esthétique, perforations Ø10mm" },
+  "acier.perfore": { inox: false, antid: false, esth: true, pliable: true, eco: false, txt: "esthétique, perforations Ø 10 mm" },
   "inox.brut": { inox: true, antid: false, esth: false, pliable: true, eco: false, txt: "ne rouille pas, très résistant, soudable" },
   "inox.marin": { inox: true, antid: false, esth: false, pliable: true, eco: false, txt: "résiste mieux à l'air salin, soudable", marin: true },
   "inox.miroir": { inox: true, antid: false, esth: true, pliable: true, eco: false, txt: "esthétique, effet miroir" },
@@ -146,7 +146,7 @@ export function conseiller(rep: Reponses): Recommandation[] {
     } else if (env === "exterieur" || env === "humide") {
       if (nk === "corten") {
         score += 22;
-        raisons.push("sa rouille se stabilise d'elle-même — c'est fait pour rester dehors");
+        raisons.push("sa rouille se stabilise d'elle-même : il est conçu pour l'extérieur");
       } else if (inoxydable) {
         score += 22;
         raisons.push("ne rouille pas");
@@ -156,25 +156,25 @@ export function conseiller(rep: Reponses): Recommandation[] {
       }
     } else {
       score += 8;
-      if (!inoxydable) raisons.push("à l'abri, l'acier non traité suffit largement");
+      if (!inoxydable) raisons.push("à l'abri des intempéries, l'acier non traité convient parfaitement");
     }
 
     // --- usage ---
     if (usage === "marche") {
       score += 35;
-      raisons.push("antidérapant, prévu pour être marché dessus");
+      raisons.push("antidérapant, conçu pour les zones de passage");
     } else if (usage === "decor") {
       if (p.esth) {
         score += 30;
-        raisons.push("choisi pour être vu");
+        raisons.push("conçu pour rester apparent");
       } else {
         score += 4;
-        reserves.push("aspect brut — prévoyez une finition si la pièce est visible");
+        reserves.push("aspect brut : prévoyez une finition si la pièce est visible");
       }
     } else if (usage === "structure") {
       if (p.alu) {
         score += 8;
-        reserves.push("l'alu se raye plus vite et encaisse moins bien les chocs");
+        reserves.push("l'aluminium se raye plus facilement et résiste moins bien aux chocs");
       } else if (mk === "inox") {
         score += 20;
         raisons.push("très résistant");
@@ -189,7 +189,7 @@ export function conseiller(rep: Reponses): Recommandation[] {
     // --- pliage / soudure ---
     if (pliage === "oui") {
       score += 6;
-      raisons.push("se plie sans problème");
+      raisons.push("se plie facilement");
     }
     if (rep.soudure === "oui") {
       score += 6;
@@ -221,10 +221,10 @@ export function conseiller(rep: Reponses): Recommandation[] {
     } else if (prio === "legerete") {
       if (p.alu) {
         score += 30;
-        raisons.push("environ 3x plus léger que l'acier à volume égal");
+        raisons.push("environ 3 fois plus léger que l'acier à volume égal");
       } else {
         score -= 8;
-        reserves.push("lourd — l'aluminium serait 3x plus léger");
+        reserves.push("lourd : l'aluminium serait 3 fois plus léger");
       }
     } else if (prio === "esthetique") {
       if (p.esth) {
@@ -254,7 +254,7 @@ export function conseiller(rep: Reponses): Recommandation[] {
 }
 
 export const MESSAGE_AUCUNE_MATIERE =
-  "Aucune matière du catalogue ne coche toutes ces cases — écrivez-nous, on trouvera la bonne solution ensemble.";
+  "Aucune matière du catalogue ne répond à tous ces critères. Écrivez-nous : nous trouverons ensemble la bonne solution.";
 
 export function recommander(reponses: Reponses, nb = 3): { recommandations: Recommandation[]; message: string | null } {
   const classement = conseiller(reponses);

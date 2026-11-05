@@ -30,21 +30,21 @@ export default function Accueil() {
 
       {/* ------------------------------------------------ Savoir-faire */}
       <Section aria-labelledby="savoir-faire">
-        <EnTete id="savoir-faire" surTitre="Notre savoir-faire" titre="Nous découpons, plions et soudons le métal — avec la précision qui évite l'aller-retour.">
+        <EnTete id="savoir-faire" surTitre="Notre savoir-faire" titre="Nous découpons, plions et soudons le métal avec une précision qui évite les allers-retours.">
           <p>
             De la pièce unique à la petite série, nous travaillons l&apos;acier, l&apos;inox et l&apos;aluminium sur notre parc
-            Trumpf, du laser à la soudure — sans sous-traiter d&apos;étape.
+            Trumpf. Toutes les étapes, de la découpe à la soudure, sont réalisées dans notre atelier, sans sous-traitance.
           </p>
         </EnTete>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {[
-            { Icone: IconeLaser, titre: "Découpe laser de précision", texte: "Acier, inox et aluminium sur notre TruLaser Trumpf." },
+            { Icone: IconeLaser, titre: "Découpe laser de précision", texte: "Acier, inox et aluminium, découpés sur notre Trumpf TruLaser." },
             {
               Icone: IconePliage,
-              titre: "Pliage & soudure",
-              texte: "Mise en forme sur plieuses Trumpf et assemblage par soudure — des pièces prêtes à poser, pas juste découpées.",
+              titre: "Pliage et soudure",
+              texte: "Mise en forme sur presses plieuses Trumpf et assemblage par soudure : vous recevez des pièces prêtes à poser.",
             },
-            { Icone: IconeQualite, titre: "Qualité & livraison premium", texte: "Zéro rayure, emballage soigné, livraison partout en France." },
+            { Icone: IconeQualite, titre: "Finition et livraison soignées", texte: "Pièces sans rayure, emballage soigné, livraison dans toute la France." },
           ].map(({ Icone, titre, texte }) => (
             <Card key={titre}>
               <span className="flex h-12 w-12 items-center justify-center rounded-btn-lg bg-accent/10 text-accent">
@@ -78,7 +78,7 @@ export default function Accueil() {
               <li>
                 {laser.nom}, {laser.puissance}
               </li>
-              <li>Format tôle {formatTole()}</li>
+              <li>Format de tôle : {formatTole()}</li>
               <li>Acier {plage("acier")}</li>
               <li>Inox {plage("inox")}</li>
               <li>Aluminium {plage("alu")}</li>
@@ -103,7 +103,7 @@ export default function Accueil() {
           <Card className="flex flex-col border-accent/30">
             <IconeDevis className="text-accent" />
             <h3 className="mt-4 text-2xl text-steel">Devis instantané</h3>
-            <p className="mt-3 text-[15px] text-texte-doux">Matière, épaisseur, forme, cotes : le prix s&apos;affiche tout de suite.</p>
+            <p className="mt-3 text-[15px] text-texte-doux">Matière, épaisseur, forme, cotes : le prix s&apos;affiche immédiatement.</p>
             <Link href="/devis" className="mt-auto inline-flex items-center gap-1.5 pt-4 font-semibold text-accent hover:text-accent-hover">
               Configurer ma pièce <IconeFleche />
             </Link>
@@ -111,7 +111,7 @@ export default function Accueil() {
         </div>
         <p className="mt-8">
           <Link href="/savoir-faire" className="inline-flex items-center gap-1.5 font-semibold text-steel hover:text-accent">
-            Toutes nos capacités machine <IconeFleche />
+            Toutes nos capacités machines <IconeFleche />
           </Link>
         </p>
       </Section>
@@ -119,13 +119,13 @@ export default function Accueil() {
       {/* ------------------------------------------------ Matières */}
       <Section aria-labelledby="matieres">
         <EnTete id="matieres" surTitre="Matières" titre="Matières et finitions disponibles">
-          <p>Les tôles que nous découpons au quotidien. Les autres métaux se traitent sur demande.</p>
+          <p>Les tôles que nous découpons au quotidien. Pour les autres métaux, consultez-nous.</p>
         </EnTete>
         <ul className="mt-10 flex flex-wrap gap-3">
           {[
             ["Acier brut", "acier-brut"],
             ["Acier galvanisé", "acier-galvanise"],
-            ["Corten", "acier-corten"],
+            ["Acier Corten", "acier-corten"],
             ["Inox brossé", "inox-brosse"],
             ["Inox miroir", "inox-miroir"],
             ["Aluminium", "alu-brut"],
@@ -150,10 +150,10 @@ export default function Accueil() {
       {/* ------------------------------------------------ Devis en ligne */}
       <Section ton="sombre" aria-labelledby="devis-en-ligne">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <EnTete id="devis-en-ligne" surTitre="Devis en ligne" titre="Votre prix, en quelques secondes." sombre>
+          <EnTete id="devis-en-ligne" surTitre="Devis en ligne" titre="Votre prix en quelques secondes." sombre>
             <p>
               Choisissez la matière, l&apos;épaisseur, la forme et les dimensions : le prix s&apos;affiche instantanément. Pour une
-              pièce complexe ou une grande série, notre équipe reprend la main par message.
+              pièce complexe ou une grande série, notre équipe prend le relais sur demande.
             </p>
           </EnTete>
           <div>
@@ -179,7 +179,7 @@ export default function Accueil() {
 
       {/* ------------------------------------------------ Réalisations */}
       <Section aria-labelledby="realisations">
-        <EnTete id="realisations" surTitre="Réalisations" titre="Sorties de l'atelier." />
+        <EnTete id="realisations" surTitre="Réalisations" titre="Pièces sorties de notre atelier." />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {[
             { titre: "Découpe laser", photo: "/images/vitrine-bride-epaisse.webp", alt: "Bride épaisse découpée au laser, deux perçages" },
@@ -207,7 +207,7 @@ export default function Accueil() {
               Un plan à découper ? Discutons-en.
             </h2>
             <p className="mt-4 text-[17px] leading-relaxed text-gris-clair-3">
-              Envoyez votre plan ou décrivez votre besoin — réponse sous 48 h pour les pièces hors configurateur.
+              Envoyez-nous votre plan ou décrivez votre besoin : nous répondons sous 48 h pour les pièces hors configurateur.
             </p>
             <p className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-gris-clair-2">
               <a href={`tel:${site.telephoneIntl}`} className="inline-flex items-center gap-2 hover:text-blanc">

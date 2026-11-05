@@ -35,13 +35,13 @@ export function Hero() {
             Vos pièces métalliques, découpées avec <span className="text-accent">précision</span>.
           </h1>
           <p className="mt-6 max-w-[540px] text-lg leading-relaxed text-gris-clair-3">
-            Découpe laser, pliage et soudure sur mesure — acier, inox et aluminium, façonnés dans notre atelier de{" "}
-            {site.adresse.ville}.
+            Découpe laser, pliage et soudure sur mesure de l&apos;acier, de l&apos;inox et de l&apos;aluminium, dans notre atelier
+            de {site.adresse.ville}.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button href="/devis">Configurer ma pièce</Button>
             <Button href="/contact#formulaire" variante="outline">
-              Envoyer un plan (DXF/STEP)
+              Envoyer un plan (DXF, STEP)
             </Button>
           </div>
 

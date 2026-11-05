@@ -51,7 +51,7 @@ export function localBusiness(): Record<string, unknown> {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Prestations",
-      itemListElement: ["Découpe laser sur mesure", "Pliage de tôle", "Soudure TIG/MIG"].map((nom) => ({
+      itemListElement: ["Découpe laser sur mesure", "Pliage de tôle", "Soudure TIG et MIG"].map((nom) => ({
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: nom, areaServed: site.adresse.departement },
       })),

@@ -167,7 +167,7 @@ export function expedition(r: ResultatDevis, config: ConfigExpedition = EXPEDITI
   let raisonColis: string | null = null;
   const unSeul = dimensionsColisCm(r, 1, config.margeEmballageCm);
   if (poidsPiece > maxKg + 1e-9) {
-    raisonColis = `une pièce pèse ${kg(poidsPiece)} kg emballée (colis jusqu'à ${kg(maxKg)} kg)`;
+    raisonColis = `une pièce emballée pèse ${kg(poidsPiece)} kg (${kg(maxKg)} kg maximum par colis)`;
   } else if (!formatColissimo(unSeul, g)) {
     raisonColis = `colis de ${unSeul.join(" × ")} cm, plus de ${sommeMax} cm cumulés (limite Colissimo)`;
   } else {
@@ -188,7 +188,7 @@ export function expedition(r: ResultatDevis, config: ConfigExpedition = EXPEDITI
         prixColis = prix;
       }
     }
-    if (!colis.length) raisonColis = "dimensions ou poids hors limites Colissimo";
+    if (!colis.length) raisonColis = "dimensions ou poids hors des limites Colissimo";
   }
   const grand_format = colis.some((c) => c.volumineux);
 
@@ -309,7 +309,7 @@ export function etapesLivraison(piece: Piece, config: ConfigExpedition = EXPEDIT
 }
 
 export const MESSAGE_TRANSPORT_SUR_DEVIS =
-  "Le transport de cette commande se chiffre sur devis : demandez votre devis, nous vous répondons rapidement avec le prix livré.";
+  "Le transport de cette commande est chiffré sur devis : demandez votre devis, nous vous répondrons rapidement avec le prix livraison comprise.";
 
 export type Commande =
   | {
@@ -346,7 +346,7 @@ export function construireCommande(piece: Piece, cleLivraison: string, envoi?: E
     if (!offre) {
       return {
         ok: false,
-        message: envoi ? "Cet envoi n'est pas proposé pour cette commande : choisissez parmi les envois affichés." : `${exp.raison ?? ""} ${MESSAGE_TRANSPORT_SUR_DEVIS}`.trim(),
+        message: envoi ? "Ce mode d'envoi n'est pas proposé pour cette commande : choisissez l'un des envois affichés." : `${exp.raison ?? ""} ${MESSAGE_TRANSPORT_SUR_DEVIS}`.trim(),
         expedition: exp,
       };
     }

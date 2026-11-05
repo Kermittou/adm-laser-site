@@ -60,8 +60,8 @@ export function Conseiller() {
           <div>
             <p className="font-display text-[28px] leading-tight font-extrabold">Votre classement</p>
             <p className="mt-3 text-gris-clair-2">
-              Répondez aux {QUESTIONS.length} questions : nous classons les nuances du catalogue, avec pour chacune ce qui joue pour elle
-              et ce qui mérite attention.
+              Répondez aux {QUESTIONS.length} questions : nous classons les nuances du catalogue et indiquons, pour chacune, ses atouts
+              et les points de vigilance.
             </p>
             <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-blanc/10" aria-hidden>
               <div className="h-full bg-accent transition-[width]" style={{ width: `${(nbRepondues / QUESTIONS.length) * 100}%` }} />

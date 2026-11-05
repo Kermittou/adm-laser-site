@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Découpe laser, pliage et soudure — capacités machine",
   description:
-    "Découpe laser Trumpf 3 kW sur tôle 1500 × 3000 mm, pliage jusqu'à 3 m, soudure TIG et MIG : nos capacités réelles en acier, inox et alu, à Vaires-sur-Marne.",
+    "Découpe laser Trumpf 3 kW sur tôle 1\u202f500 × 3\u202f000 mm, pliage jusqu'à 3 m, soudure TIG et MIG : nos capacités en acier, inox et aluminium, à Vaires-sur-Marne.",
   alternates: { canonical: "/savoir-faire" },
 };
 
@@ -24,15 +24,15 @@ export default function SavoirFaire() {
           <SurTitre>Savoir-faire</SurTitre>
           <h1 className="max-w-[820px] text-[40px] md:text-[54px]">Découpe laser, pliage et soudure sur mesure en Seine-et-Marne</h1>
           <p className="mt-6 max-w-[640px] text-lg leading-relaxed text-gris-clair-3">
-            Atelier de tôlerie industrielle à {site.adresse.ville}, {site.experience}. De la pièce unitaire à la série, sur plan ou
-            sur mesure, nous enchaînons découpe, pliage et soudure sous le même toit.
+            Atelier de tôlerie industrielle à {site.adresse.ville}, fort de {site.experience.toLowerCase()}. De la pièce unitaire à
+            la série, sur plan ou sur mesure, nous enchaînons découpe, pliage et soudure sous le même toit.
           </p>
           <nav aria-label="Sur cette page" className="mt-8 flex flex-wrap gap-3">
             {[
               ["#decoupe-laser", "Découpe laser"],
               ["#pliage", "Pliage"],
               ["#soudure", "Soudure"],
-              ["#fichiers", "Fichiers & tolérances"],
+              ["#fichiers", "Fichiers et tolérances"],
             ].map(([href, label]) => (
               <a key={href} href={href} className="rounded-full border border-blanc/25 px-4 py-2 text-[15px] text-gris-clair-3 hover:border-blanc hover:text-blanc">
                 {label}
@@ -49,15 +49,15 @@ export default function SavoirFaire() {
             <IconeLaser className="text-accent" width={36} height={36} />
             <EnTete id="t-laser" titre="Découpe laser" className="mt-4">
               <p>
-                Une source laser de {laser.puissance} sur une {laser.nom}. Les tôles sont découpées sur notre format maximal, au plus
-                juste pour limiter la chute.
+                Une source laser de {laser.puissance} sur une {laser.nom}. Les pièces sont découpées dans des tôles au format maximal,
+                imbriquées au plus juste pour limiter les chutes.
               </p>
             </EnTete>
             <dl className="mt-8 grid grid-cols-2 gap-4">
               {[
                 ["Machine", laser.nom],
                 ["Puissance", laser.puissance],
-                ["Format tôle maxi", formatTole()],
+                ["Format de tôle maximal", formatTole()],
                 ["Plus petit trou", "Ø ≥ épaisseur"],
               ].map(([k, v]) => (
                 <div key={k} className="rounded-card bg-surface p-4">
@@ -71,7 +71,7 @@ export default function SavoirFaire() {
 
           <div>
             <h3 className="text-[26px] text-steel">Épaisseurs disponibles</h3>
-            <p className="mt-2 text-texte-doux">Ce que nous avons réellement en stock et savons couper, matière par matière.</p>
+            <p className="mt-2 text-texte-doux">Les épaisseurs que nous avons en stock et que nous découpons, matière par matière.</p>
             <div className="mt-6 overflow-x-auto rounded-card border border-bordure">
               <table className="w-full min-w-[440px] text-left text-[15px]">
                 <thead className="bg-surface text-sm text-texte-doux">
@@ -116,9 +116,9 @@ export default function SavoirFaire() {
             </div>
             {matieresSurDevis.length > 0 && (
               <p className="mt-4 text-[15px] text-texte-doux">
-                {matieresSurDevis.map((m) => m.label).join(" et ")} : sur devis uniquement —{" "}
+                {matieresSurDevis.map((m) => m.label).join(" et ")} : sur devis uniquement.{" "}
                 <Link href="/contact#formulaire" className="font-semibold text-steel underline underline-offset-4 hover:text-accent">
-                  écrivez-nous avec votre plan
+                  Écrivez-nous en joignant votre plan
                 </Link>
                 .
               </p>
@@ -131,7 +131,7 @@ export default function SavoirFaire() {
       <Section id="pliage" ton="surface" aria-labelledby="t-pliage">
         <IconePliage className="text-accent" width={36} height={36} />
         <EnTete id="t-pliage" titre="Pliage" className="mt-4">
-          <p>Deux presses plieuses Trumpf pour mettre en forme vos pièces juste après la découpe, sans changer d&apos;atelier.</p>
+          <p>Deux presses plieuses Trumpf mettent en forme vos pièces juste après la découpe, sans changer d&apos;atelier.</p>
         </EnTete>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {plieuses.map((p) => (
@@ -156,7 +156,7 @@ export default function SavoirFaire() {
       <Section id="soudure" aria-labelledby="t-soudure">
         <IconeSoudure className="text-accent" width={36} height={36} />
         <EnTete id="t-soudure" titre="Soudure" className="mt-4">
-          <p>Assemblage de vos pièces découpées et pliées : des ensembles prêts à poser, pas seulement des pièces découpées.</p>
+          <p>Assemblage de vos pièces découpées et pliées : vous recevez des ensembles prêts à poser.</p>
         </EnTete>
         <ul className="mt-8 flex flex-wrap gap-3">
           {site.soudure.procedes.map((p) => (
@@ -178,7 +178,7 @@ export default function SavoirFaire() {
         </div>
       </Section>
 
-      {/* ------------------------------------------------ Fichiers & tolérances */}
+      {/* ------------------------------------------------ Fichiers et tolérances */}
       <Section id="fichiers" ton="surface" aria-labelledby="t-fichiers">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
@@ -193,7 +193,7 @@ export default function SavoirFaire() {
               ))}
             </ul>
             <p className="mt-5 text-[17px] leading-relaxed text-texte-doux">
-              Envoyez votre plan, {site.delaiReponse}. Pas de plan ? Décrivez votre pièce, on la dessine avec vous.
+              Envoyez-nous votre plan : {site.delaiReponse}. Pas de plan ? Décrivez votre pièce, nous la dessinons avec vous.
             </p>
           </div>
           <div>

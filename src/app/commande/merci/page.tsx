@@ -44,17 +44,17 @@ export default async function Merci({ searchParams }: { searchParams: Promise<{ 
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent">
               <IconeCheck width={28} height={28} />
             </span>
-            <h1 className="mt-6 text-[40px] md:text-[54px]">Commande reçue, merci.</h1>
+            <h1 className="mt-6 text-[40px] md:text-[54px]">Merci, nous avons bien reçu votre commande.</h1>
             <div className="mt-6 space-y-3 text-lg leading-relaxed text-gris-clair-3">
               {montant !== null && (
                 <p>
-                  <strong className="text-blanc">{eur(montant)} € TTC</strong> sont bloqués sur votre carte. Ils ne seront débités
-                  qu&apos;après validation de votre pièce par notre atelier.
+                  Un montant de <strong className="text-blanc">{eur(montant)} € TTC</strong> est bloqué sur votre carte. Il ne sera
+                  débité qu&apos;après validation de votre pièce par notre atelier.
                 </p>
               )}
               <p>
-                Un récapitulatif part {email ? `à ${email}` : "par mail"}. Si un point doit être précisé, nous vous contactons avant tout
-                débit.
+                Un récapitulatif vous est envoyé {email ? `à ${email}` : "par e-mail"}. Si un point doit être précisé, nous vous
+                contacterons avant tout débit.
               </p>
             </div>
           </>
@@ -62,8 +62,8 @@ export default async function Merci({ searchParams }: { searchParams: Promise<{ 
           <>
             <h1 className="text-[40px] md:text-[54px]">Nous n&apos;avons pas retrouvé cette commande.</h1>
             <p className="mt-6 text-lg text-gris-clair-3">
-              Si vous venez de payer, pas d&apos;inquiétude : contactez-nous au {site.telephone} ou à {site.email}, nous vérifions tout de
-              suite.
+              Si vous venez de régler votre commande, contactez-nous au {site.telephone} ou à {site.email} : nous vérifierons
+              immédiatement.
             </p>
           </>
         )}

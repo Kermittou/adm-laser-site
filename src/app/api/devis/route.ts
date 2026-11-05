@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   try {
     corps = (await req.json()) as Corps;
   } catch {
-    return erreur("La demande n'a pas pu être lue. Réessayez.");
+    return erreur("Votre demande n'a pas pu être lue. Veuillez réessayer.");
   }
 
   const c = corps.contact ?? {};
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   const telephone = (c.telephone ?? "").trim();
   const message = (c.message ?? "").trim();
   if (!nom || nom.length > 120) return erreur("Indiquez votre nom.");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) return erreur("Votre adresse mail ne semble pas valide.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) return erreur("Votre adresse e-mail ne semble pas valide.");
   if (telephone.length > 40) return erreur("Le numéro de téléphone est trop long.");
   if (message.length > 3000) return erreur("Votre message est trop long (3 000 caractères maximum).");
   if (c.consentement !== true) return erreur("Merci d'accepter que nous utilisions vos coordonnées pour vous répondre.");
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   const resultat = devis(piece);
   if (!resultat.ok) return erreur(resultat.message);
 
-  if (tropDEnvois(ipDe(req))) return erreur(`Trop d'envois en peu de temps. ${repli}`, 429);
+  if (tropDEnvois(ipDe(req))) return erreur(`Trop de demandes envoyées en peu de temps. ${repli}`, 429);
   if (!mailPossible()) {
     console.error("[devis] SMTP non configuré : demande non envoyée.");
     return erreur(`L'envoi en ligne est momentanément indisponible. ${repli}`, 503);
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     });
   } catch (e) {
     console.error("[devis] échec d'envoi", e);
-    return erreur(`Votre demande n'a pas pu partir. ${repli}`, 502);
+    return erreur(`Votre demande n'a pas pu être envoyée. ${repli}`, 502);
   }
 
   return NextResponse.json({ ok: true, total_ht: resultat.total_ht });

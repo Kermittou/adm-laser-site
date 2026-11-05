@@ -8,18 +8,18 @@ const base: Piece = { matiere: "acier", nuance: "brut", epaisseur_mm: 3, forme: 
 const cas: [string, Piece, CodeRefus, RegExp][] = [
   ["galvanisé en 5 mm", { ...base, nuance: "galvanise", epaisseur_mm: 5 }, "epaisseur_indisponible", /1, 2 et 3 mm/],
   ["inox brossé en 10 mm", { ...base, matiere: "inox", nuance: "brosse", epaisseur_mm: 10 }, "epaisseur_indisponible", /1, 2, 3 et 4 mm/],
-  ["trou Ø6 dans 10 mm", { ...base, epaisseur_mm: 10, features: [{ type: "trou", diametre_mm: 6 }] }, "trou_trop_petit", /Ø10 mm/],
+  ["trou Ø6 dans 10 mm", { ...base, epaisseur_mm: 10, features: [{ type: "trou", diametre_mm: 6 }] }, "trou_trop_petit", /Ø 10 mm/],
   [
     "cadre avec Ø intérieur 5 mm en 10 mm",
     { ...base, epaisseur_mm: 10, forme: "cadre_coupe_circulaire", dimensions: { longueur: 300, largeur: 300, diametre_interieur: 5 } },
     "trou_trop_petit",
-    /Ø10 mm/,
+    /Ø 10 mm/,
   ],
   [
     "cadre avec découpe 4 × 50 en 8 mm",
     { ...base, epaisseur_mm: 8, forme: "cadre_coupe_rectangle", dimensions: { longueur: 300, largeur: 300, longueur_interieure: 50, largeur_interieure: 4 } },
     "trou_trop_petit",
-    /Ø8 mm/,
+    /Ø 8 mm/,
   ],
   ["pièce 3500 × 1200", { ...base, dimensions: { longueur: 3500, largeur: 1200 } }, "hors_format", /dépasse notre format de tôle/],
   ["cuivre", { ...base, matiere: "cuivre", nuance: "brut", epaisseur_mm: 2 }, "devis_manuel", /mail/],

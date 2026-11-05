@@ -21,10 +21,10 @@ export async function POST(req: Request) {
   try {
     corps = await req.json();
   } catch {
-    return erreur("La commande n'a pas pu être lue. Réessayez.");
+    return erreur("Votre commande n'a pas pu être lue. Veuillez réessayer.");
   }
   if (corps.cgv !== true) return erreur("Merci d'accepter les conditions générales de vente pour commander.");
-  if (corps.surMesure !== true) return erreur("Merci de confirmer avoir compris que la pièce, fabriquée sur mesure, n'ouvre pas droit à rétractation.");
+  if (corps.surMesure !== true) return erreur("Merci de confirmer que vous avez compris que la pièce, fabriquée sur mesure, n'ouvre pas droit à rétractation.");
 
   const p = corps.piece ?? {};
   const piece: Piece = {
@@ -118,8 +118,8 @@ export async function POST(req: Request) {
       custom_text: {
         submit: {
           message: commande.livraison.retrait
-            ? `Retrait gratuit à l'atelier : ${adresseUneLigne}. Le montant est bloqué sur votre carte, puis débité seulement après validation de votre commande ; nous vous prévenons dès qu'elle est prête.`
-            : "Livraison en France métropolitaine continentale (hors Corse et DOM-TOM). Le montant est bloqué sur votre carte, puis débité seulement après validation de votre commande par notre atelier.",
+            ? `Retrait gratuit à l'atelier : ${adresseUneLigne}. Le montant est bloqué sur votre carte et n'est débité qu'après validation de votre commande ; nous vous prévenons dès qu'elle est prête.`
+            : "Livraison en France métropolitaine continentale (hors Corse et DOM-TOM). Le montant est bloqué sur votre carte et n'est débité qu'après validation de votre commande par notre atelier.",
         },
       },
       success_url: `${origine}/commande/merci?session_id={CHECKOUT_SESSION_ID}`,

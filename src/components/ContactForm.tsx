@@ -28,7 +28,7 @@ export function ContactForm() {
         setEtat({ statut: "erreur", message: data.message });
       }
     } catch {
-      setEtat({ statut: "erreur", message: `Connexion impossible. Écrivez-nous à ${site.email} ou appelez le ${site.telephone}.` });
+      setEtat({ statut: "erreur", message: `Envoi impossible pour le moment. Écrivez-nous à ${site.email} ou appelez-nous au ${site.telephone}.` });
     }
   }
 
@@ -36,7 +36,7 @@ export function ContactForm() {
     return (
       <div role="status" className="rounded-card border border-bordure bg-surface p-8">
         <p className="font-display text-3xl font-extrabold text-steel">Message envoyé.</p>
-        <p className="mt-3 text-texte-doux">Merci — {site.delaiReponse}.</p>
+        <p className="mt-3 text-texte-doux">Merci pour votre demande : {site.delaiReponse}.</p>
         <button type="button" onClick={() => setEtat({ statut: "repos" })} className="mt-5 cursor-pointer font-semibold text-steel underline underline-offset-4 hover:text-accent">
           Envoyer un autre message
         </button>
@@ -57,7 +57,7 @@ export function ContactForm() {
         </label>
       </div>
       <label className="block">
-        <span className={label}>Adresse mail *</span>
+        <span className={label}>Adresse e-mail *</span>
         <input name="email" type="email" required maxLength={200} autoComplete="email" className={champ} />
       </label>
       <label className="block">
@@ -105,7 +105,7 @@ export function ContactForm() {
 
       {etat.statut === "erreur" && (
         <p role="alert" className="rounded-btn border border-accent/30 bg-accent/8 px-4 py-3 text-[15px] text-accent-hover">
-          {etat.message ?? "Une erreur est survenue."}
+          {etat.message ?? "Une erreur est survenue. Veuillez réessayer."}
         </p>
       )}
 

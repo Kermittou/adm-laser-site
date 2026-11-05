@@ -50,7 +50,7 @@ const CATEGORIES = [
     titre: "L'atelier",
     carre: false,
     photos: [
-      { src: "/images/atelier-trulaser-2030.png", alt: "Laser Trumpf TruLaser 2030", legende: "Laser Trumpf TruLaser 2030 — 3 kW, 1500 × 3000 mm" },
+      { src: "/images/atelier-trulaser-2030.png", alt: "Laser Trumpf TruLaser 2030", legende: "Laser Trumpf TruLaser 2030 — 3 kW, 1\u202f500 × 3\u202f000 mm" },
       { src: "/images/atelier-plieuse-trumpf.png", alt: "Plieuse Trumpf de l'atelier", legende: "Plieuse Trumpf" },
       { src: "/images/atelier-soudure.png", alt: "Soudure à l'atelier", legende: "Soudure" },
     ],

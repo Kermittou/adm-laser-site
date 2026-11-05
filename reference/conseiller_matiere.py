@@ -103,7 +103,7 @@ def conseiller(rep: dict) -> list[dict]:
         elif env in ("exterieur", "humide"):
             if nk == "corten":
                 score += 22
-                raisons.append("sa rouille se stabilise d'elle-même — c'est fait pour rester dehors")
+                raisons.append("sa rouille se stabilise d'elle-même : il est conçu pour l'extérieur")
             elif inoxydable:
                 score += 22; raisons.append("ne rouille pas")
             else:
@@ -112,21 +112,21 @@ def conseiller(rep: dict) -> list[dict]:
         else:
             score += 8
             if not inoxydable:
-                raisons.append("à l'abri, l'acier non traité suffit largement")
+                raisons.append("à l'abri des intempéries, l'acier non traité convient parfaitement")
 
         # --- usage ---
         if usage == "marche":
-            score += 35; raisons.append("antidérapant, prévu pour être marché dessus")
+            score += 35; raisons.append("antidérapant, conçu pour les zones de passage")
         elif usage == "decor":
             if p["esth"]:
-                score += 30; raisons.append("choisi pour être vu")
+                score += 30; raisons.append("conçu pour rester apparent")
             else:
                 score += 4
-                reserves.append("aspect brut — prévoyez une finition si la pièce est visible")
+                reserves.append("aspect brut : prévoyez une finition si la pièce est visible")
         elif usage == "structure":
             if p.get("alu"):
                 score += 8
-                reserves.append("l'alu se raye plus vite et encaisse moins bien les chocs")
+                reserves.append("l'aluminium se raye plus facilement et résiste moins bien aux chocs")
             elif mk == "inox":
                 score += 20; raisons.append("très résistant")
             else:
@@ -136,7 +136,7 @@ def conseiller(rep: dict) -> list[dict]:
 
         # --- pliage / soudure ---
         if pliage == "oui":
-            score += 6; raisons.append("se plie sans problème")
+            score += 6; raisons.append("se plie facilement")
         if rep.get("soudure") == "oui":
             score += 6; raisons.append("soudable")
 
@@ -157,9 +157,9 @@ def conseiller(rep: dict) -> list[dict]:
                 score += 20; raisons.append("très bonne tenue mécanique")
         elif prio == "legerete":
             if p.get("alu"):
-                score += 30; raisons.append("environ 3x plus léger que l'acier à volume égal")
+                score += 30; raisons.append("environ 3 fois plus léger que l'acier à volume égal")
             else:
-                score -= 8; reserves.append("lourd — l'aluminium serait 3x plus léger")
+                score -= 8; reserves.append("lourd : l'aluminium serait 3 fois plus léger")
         elif prio == "esthetique":
             if p["esth"]:
                 score += 28; raisons.append("l'un des rendus les plus soignés du catalogue")
