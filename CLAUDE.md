@@ -287,8 +287,9 @@ C'est un vrai enjeu commercial, pas une case à cocher.
   découpage en colis le moins cher ; le mail atelier donne les dimensions de chaque colis.
 - **Colis :** 30 kg facturés, dimensions Colissimo ci-dessus, plusieurs colis si besoin. **Palette TNT 129,90 € HT**
   proposée dès que la commande dépasse un colis (le client choisit colis ou palette) et seule
-  solution si une pièce dépasse 30 kg ou 200 cm cumulés une fois emballée. Limites de la palette : à vérifier
-  (`_calcul.palette_*`, null = aucune limite appliquée). Hors zone : Corse et DOM-TOM
+  solution si une pièce dépasse 30 kg ou 200 cm cumulés une fois emballée. Limites de la palette (TNT Express,
+  fiche TNT transmise par ADM le 05/11/2026) : 500 kg, 2,4 m de long, 1,2 m de large
+  (`_calcul.palette_*`) ; au-delà, livraison sur devis et retrait seul (ex. cadres 1300×1300). Hors zone : Corse et DOM-TOM
   (alerte dans le mail atelier, pas de bordereau).
 - **Transport : Boxtal** (API v3, Colissimo Expert ; jeton Bearer obtenu avec les clés via
   `/iam/account-app/token`, testé sur api.boxtal.build le 15/10/2026). Bordereaux colis générés après paiement ;
@@ -315,7 +316,7 @@ Encore manquant :
 - Tolérances de découpe et de pliage
 - CGV et mentions de vente à distance (juriste)
 - Temps de coupe par pièce du logiciel ADM (3 mm et 10 mm) pour caler les vitesses
-- Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test) et limites de la palette TNT
+- Catégorie de contenu Boxtal définitive (50380 « chaudronnerie » en test)
 
 ---
 

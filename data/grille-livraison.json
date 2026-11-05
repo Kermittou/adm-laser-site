@@ -80,16 +80,16 @@
   },
   "a_verifier": [
     "seuil exact 'non mécanisable' Colissimo (dimension max) dans le comparateur Boxtal",
-    "poids max et dimensions max de l'offre TNT palette",
     "coûts d'emballage réels (carton, mousse, palette) — valeurs actuelles = hypothèses",
     "recalculer dès signature du contrat Colissimo Entreprise"
   ],
   "_calcul": {
     "coef_poids_emballage": 1.15,
     "_note_coef": "poids facturé d'un colis = poids net des pièces × coef_poids_emballage (cf. poids_facture).",
-    "palette_poids_max_kg": null,
-    "palette_longueur_max_cm": null,
-    "_note_palette": "À VÉRIFIER (cf. a_verifier) : poids et longueur max de l'offre TNT palette. null = pas de limite appliquée par le site ; l'atelier valide chaque commande avant d'encaisser.",
+    "palette_poids_max_kg": 500,
+    "palette_longueur_max_cm": 240,
+    "palette_largeur_max_cm": 120,
+    "_note_palette": "Limites TNT Express palette (fiche officielle TNT France, transmise par ADM le 05/11/2026) : 2,4 × 1,2 × 1,5 m et 500 kg par palette. Au-delà (pièce plus longue que 2,4 m, plus large que 1,2 m, ou plus de 500 kg facturés) : livraison sur devis, retrait toujours possible. TNT Economy Express irait jusqu'à 1 000 kg / 1,8 m de haut. Hauteur de pile non contrôlée (le poids limite toujours avant). null = pas de limite.",
     "colissimo": {
       "standard_longueur_max_cm": 100,
       "standard_somme_max_cm": 150,

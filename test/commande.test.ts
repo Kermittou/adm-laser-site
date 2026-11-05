@@ -152,18 +152,31 @@ describe("palette seule (la pièce ne passe pas en colis)", () => {
     expect(e.raison).toMatch(/88,3 kg/);
   });
 
-  it("les cadres 1300×1300 du devis golden", () => {
-    expect(expedition(calculer(cadres1300)).mode).toBe("palette");
+  it("les cadres 1300×1300 du devis golden : trop larges pour une palette TNT (1,2 m), retrait seul", () => {
+    const e = expedition(calculer(cadres1300));
+    expect(e.mode).toBe("sur_devis");
+    expect(e.raison).toMatch(/1,3 m de large, trop large pour une palette/);
+    expect(e.options.map((o) => o.cle)).toEqual(["retrait"]);
+    expect(construireCommande(cadres1300, "standard").ok).toBe(false);
+    expect(construireCommande(cadres1300, "retrait").ok).toBe(true);
   });
 
-  it("au-delà des limites de palette renseignées : livraison sur devis, retrait toujours possible", () => {
-    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul: { ...GRILLE._calcul, palette_poids_max_kg: 500 } } };
-    const e = expedition(calculer(cadres1300), config);
+  it("plus de 500 kg facturés : trop lourd pour une palette TNT", () => {
+    const e = expedition(calculer({ ...lourde, quantite: 6 }));
     expect(e.mode).toBe("sur_devis");
     expect(e.raison).toMatch(/trop lourd pour une palette/);
-    expect(e.options.map((o) => o.cle)).toEqual(["retrait"]);
-    expect(construireCommande(cadres1300, "standard", undefined, config).ok).toBe(false);
-    expect(construireCommande(cadres1300, "retrait", undefined, config).ok).toBe(true);
+    expect(expedition(calculer({ ...lourde, quantite: 5 })).mode).toBe("palette");
+  });
+
+  it("pièce de plus de 2,4 m : trop longue pour une palette TNT", () => {
+    const e = expedition(calculer({ ...petite, epaisseur_mm: 1, dimensions: { longueur: 2500, largeur: 100 }, quantite: 1 }));
+    expect(e.mode).toBe("sur_devis");
+    expect(e.raison).toMatch(/2,5 m, trop longue pour une palette/);
+  });
+
+  it("sans limite renseignée (null) : la palette reste proposée", () => {
+    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul: { ...GRILLE._calcul, palette_poids_max_kg: null, palette_longueur_max_cm: null, palette_largeur_max_cm: null } } };
+    expect(expedition(calculer(cadres1300), config).mode).toBe("palette");
   });
 });
 
@@ -282,8 +295,7 @@ describe("structure du choix de livraison (validée par ADM)", () => {
   });
 
   it("livraison sur devis : le retrait reste proposé, les délais ne sont pas chiffrés", () => {
-    const config = { ...EXPEDITION, grille: { ...GRILLE, _calcul: { ...GRILLE._calcul, palette_poids_max_kg: 500 } } };
-    const e = etapesLivraison(cadres1300, config)!;
+    const e = etapesLivraison(cadres1300)!;
     expect(e.retrait).not.toBeNull();
     expect(e.livraison.disponible).toBe(false);
     expect(e.livraison.envois).toEqual([]);
