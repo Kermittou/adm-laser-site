@@ -165,9 +165,17 @@ export default function SavoirFaire() {
             </li>
           ))}
         </ul>
-        <p className="mt-6">
-          <Todo>matières et épaisseurs soudées — à préciser par ADM</Todo>
-        </p>
+        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          {site.soudure.matieres.map((m) => (
+            <Card key={m.matiere}>
+              <h3 className="text-[26px] text-steel">{m.matiere}</h3>
+              <p className="mt-3 text-sm text-texte-doux">Épaisseurs soudées</p>
+              <p className="font-display text-3xl font-extrabold text-steel">
+                {m.min} à {m.max} mm
+              </p>
+            </Card>
+          ))}
+        </div>
       </Section>
 
       {/* ------------------------------------------------ Fichiers & tolérances */}
