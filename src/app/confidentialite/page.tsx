@@ -76,7 +76,6 @@ const DESTINATAIRES: [ReactNode, ReactNode, ReactNode][] = [
   ["IONOS SE", "Nom de domaine et messagerie", "Allemagne (UE)"],
   [site.hebergeur?.nom ?? <Todo key="h">hébergeur du serveur (voir la facture IONOS)</Todo>, "Hébergement du site", "Union européenne"],
   ["OpenStreetMap Foundation", "Carte de la page Contact (adresse IP du visiteur)", "Royaume-Uni (décision d'adéquation de la Commission européenne)"],
-  ["Expert-comptable", <Todo key="c">nom du cabinet</Todo>, "France"],
 ];
 
 function Titre({ children }: { children: ReactNode }) {
