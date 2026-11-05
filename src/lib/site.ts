@@ -70,7 +70,8 @@ export const site = {
   // TODO : information à fournir par ADM.
   // Fiche Google Maps relevée le 16/10/2026 : 5,0 / 5 sur 6 avis. À mettre à jour de temps en temps.
   avisGoogle: { url: "https://maps.google.com/?cid=2974897766081181147" as string | null, note: 5 as number | null, nombre: 6 as number | null },
-  hebergeur: null as string | null,
+  // Hébergeur du VPS (Dokploy), donné par ADM le 05/11/2026.
+  hebergeur: { nom: "1&1 Internet SARL", adresse: "7, place de la Gare, BP 70109, 57201 Sarreguemines Cedex" } as { nom: string; adresse: string } | null,
 } as const;
 
 export const adresseUneLigne = `${site.adresse.rue}, ${site.adresse.codePostal} ${site.adresse.ville}`;

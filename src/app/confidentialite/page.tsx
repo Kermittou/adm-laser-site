@@ -68,13 +68,13 @@ const TRAITEMENTS: [string, string, string, string][] = [
   ],
 ];
 
-const DESTINATAIRES: [string, ReactNode, ReactNode][] = [
+const DESTINATAIRES: [ReactNode, ReactNode, ReactNode][] = [
   ["Stripe Payments Europe Ltd", "Paiement en ligne sécurisé", "Irlande (UE), transferts possibles vers les États-Unis"],
   ["Boxtal", "Édition des étiquettes d'expédition", "France"],
   ["La Poste – Colissimo", "Livraison des colis", "France"],
   ["TNT", "Livraison sur palette des pièces hors gabarit", "France"],
   ["IONOS SE", "Nom de domaine et messagerie", "Allemagne (UE)"],
-  ["Hébergeur du site", site.hebergeur ?? <Todo key="h">hébergeur du serveur (voir la facture IONOS)</Todo>, "Union européenne"],
+  [site.hebergeur?.nom ?? <Todo key="h">hébergeur du serveur (voir la facture IONOS)</Todo>, "Hébergement du site", "Union européenne"],
   ["OpenStreetMap Foundation", "Carte de la page Contact (adresse IP du visiteur)", "Royaume-Uni (décision d'adéquation de la Commission européenne)"],
   ["Expert-comptable", <Todo key="c">nom du cabinet</Todo>, "France"],
 ];

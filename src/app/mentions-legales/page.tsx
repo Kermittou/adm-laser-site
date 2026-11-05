@@ -25,7 +25,7 @@ export default function MentionsLegales() {
     ["SIRET", site.legal.siret],
     ["Code APE", site.legal.ape],
     ["TVA intracommunautaire", site.legal.tva],
-    ["Hébergeur du site", site.hebergeur ?? <Todo>hébergeur du nouveau site (VPS Dokploy)</Todo>],
+    ["Hébergeur du site", site.hebergeur ? `${site.hebergeur.nom}, ${site.hebergeur.adresse}` : <Todo>hébergeur du nouveau site (VPS Dokploy)</Todo>],
   ];
 
   return (
