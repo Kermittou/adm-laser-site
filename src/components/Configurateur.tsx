@@ -11,7 +11,6 @@ import type { Piece } from "@/lib/devis/types";
 import { adresseUneLigne, site } from "@/lib/site";
 import { DessinTechnique } from "./DessinTechnique";
 import { IconeCheck, IconeFleche } from "./Icones";
-import { Todo } from "./ui";
 
 /* ================================================================== petits éléments */
 
@@ -301,6 +300,7 @@ function DemandeDevis({ piece, onAnnuler }: { piece: Piece; onAnnuler: () => voi
  */
 function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () => void; onDevis: () => void }) {
   const [cgv, setCgv] = useState(false);
+  const [surMesure, setSurMesure] = useState(false);
   const [choix, setChoix] = useState<"" | "retrait" | "livraison">("");
   const [delai, setDelai] = useState("");
   const [envoi, setEnvoi] = useState<"" | Envoi>("");
@@ -329,7 +329,7 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
       const res = await fetch("/api/commande", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ piece, livraison: cleLivraison, envoi: choix === "livraison" ? envoiChoisi : "", cgv }),
+        body: JSON.stringify({ piece, livraison: cleLivraison, envoi: choix === "livraison" ? envoiChoisi : "", cgv, surMesure }),
       });
       const data = (await res.json()) as { ok: boolean; url?: string; message?: string };
       if (data.ok && data.url) {
@@ -580,10 +580,6 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
         </li>
       </ul>
 
-      <p>
-        <Todo>mentions de vente à distance (pièces sur mesure, rétractation) à valider par le juriste</Todo>
-      </p>
-
       <label className="flex items-start gap-2.5 text-sm text-gris-clair-2">
         <input type="checkbox" checked={cgv} onChange={(e) => setCgv(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
         <span>
@@ -592,6 +588,14 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
             conditions générales de vente
           </Link>
           . *
+        </span>
+      </label>
+
+      <label className="flex items-start gap-2.5 text-sm text-gris-clair-2">
+        <input type="checkbox" checked={surMesure} onChange={(e) => setSurMesure(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
+        <span>
+          J&apos;ai compris que ma pièce est fabriquée sur mesure selon mes indications et que je ne dispose donc pas du droit de
+          rétractation (article L221-28, 3° du Code de la consommation). *
         </span>
       </label>
 
@@ -605,10 +609,12 @@ function Commander({ piece, onAnnuler, onDevis }: { piece: Piece; onAnnuler: () 
         <button
           type="button"
           onClick={payer}
-          disabled={!ok || !cgv || etat.statut === "envoi"}
+          disabled={!ok || !cgv || !surMesure || etat.statut === "envoi"}
           className="cursor-pointer rounded-btn-lg bg-accent px-5 py-3 font-semibold text-blanc transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {etat.statut === "envoi" ? "Redirection vers le paiement…" : ok ? `Payer ${eur(ok.total_ttc)} € TTC` : "Payer"}
+          {etat.statut === "envoi"
+            ? "Redirection vers le paiement…"
+            : `Commande avec obligation de paiement${ok ? ` — ${eur(ok.total_ttc)} € TTC` : ""}`}
         </button>
         <button type="button" onClick={onAnnuler} className="cursor-pointer text-sm text-gris-clair-2 underline underline-offset-4 hover:text-blanc">
           Annuler

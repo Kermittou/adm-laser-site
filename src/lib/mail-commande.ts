@@ -10,7 +10,7 @@ import { eur, nb } from "@/lib/devis/configurateur";
 import { genererDxf } from "@/lib/devis/dxf";
 import { devis } from "@/lib/devis/moteur";
 import { libelleCotes, libellePiece } from "@/lib/devis/resume";
-import { site } from "@/lib/site";
+import { site, SITE_URL } from "@/lib/site";
 import type { Piece } from "@/lib/devis/types";
 
 export type Adresse = { ligne1?: string | null; ligne2?: string | null; codePostal?: string | null; ville?: string | null; pays?: string | null };
@@ -270,6 +270,9 @@ export function mailClient(c: DonneesCommande): { sujet: string; texte: string }
           `     (${horaires}).`,
         ]
       : [`  3. Expédition prévue au plus tard le ${echeance ? dateLongue(echeance) : "délai choisi"}${palette ? ", sur palette" : ""}.`]),
+    "",
+    `Votre commande est soumise à nos conditions générales de vente, acceptées lors de la commande : ${SITE_URL}/cgv`,
+    "Pièce fabriquée sur mesure selon vos indications : pas de droit de rétractation (article L221-28, 3° du Code de la consommation).",
     "",
     "Une question ? Répondez simplement à ce mail, ou appelez-nous au " + site.telephone + ".",
     "",

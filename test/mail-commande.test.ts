@@ -163,6 +163,9 @@ describe("mail de confirmation au client", () => {
     expect(m.texte).toMatch(/Livré à\s+: .*1 rue de l'Essai, 77360 Vaires-sur-Marne/);
     expect(m.texte).toMatch(/il n'est débité qu'après cette/);
     expect(m.texte).toMatch(/Expédition prévue au plus tard le mardi 20 octobre 2026/);
+    // CGV (art. 4) : lien vers les CGV et rappel de l'absence de rétractation (art. 12)
+    expect(m.texte).toMatch(/conditions générales de vente.*\/cgv/);
+    expect(m.texte).toMatch(/pas de droit de rétractation/);
     // rien d'interne : ni temps machine, ni coûts de revient, ni lien Stripe
     expect(m.texte).not.toMatch(/min factur|pièces par tôle|Masse facturée|stripe\.com|frais de plan|la pièce|matière \d|découpe \d/i);
   });

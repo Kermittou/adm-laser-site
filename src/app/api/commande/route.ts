@@ -17,13 +17,14 @@ const repli = `Demandez votre devis, écrivez-nous à ${site.email} ou appelez l
  * par ADM depuis le tableau de bord Stripe après validation de la pièce par l'atelier.
  */
 export async function POST(req: Request) {
-  let corps: { piece?: Partial<Piece>; livraison?: string; envoi?: string; cgv?: boolean };
+  let corps: { piece?: Partial<Piece>; livraison?: string; envoi?: string; cgv?: boolean; surMesure?: boolean };
   try {
     corps = await req.json();
   } catch {
     return erreur("La commande n'a pas pu être lue. Réessayez.");
   }
   if (corps.cgv !== true) return erreur("Merci d'accepter les conditions générales de vente pour commander.");
+  if (corps.surMesure !== true) return erreur("Merci de confirmer avoir compris que la pièce, fabriquée sur mesure, n'ouvre pas droit à rétractation.");
 
   const p = corps.piece ?? {};
   const piece: Piece = {
@@ -55,6 +56,9 @@ export async function POST(req: Request) {
     total_pieces_ht: r.total_ht.toFixed(2),
     livraison: commande.livraison.libelle,
     livraison_cle: commande.livraison.cle,
+    // Preuve de l'acceptation (CGV art. 2 et 12), conservée sur le paiement Stripe.
+    cgv_acceptees: new Date().toISOString(),
+    sur_mesure_sans_retractation: "accepte",
     envoi: commande.livraison.envoi?.type ?? "",
     expedition: commande.livraison.retrait
       ? `retrait à l'atelier — ${commande.expedition.poids_kg} kg — pièce la plus longue ${commande.expedition.longueur_mm} mm`
