@@ -158,7 +158,7 @@ describe("mail de confirmation au client", () => {
     expect(m.sujet).toBe("ADM Laser — votre commande AB12CD34 a bien été reçue");
     expect(m.texte).toMatch(/Bonjour Client Test,/);
     expect(m.texte).toMatch(/Quantité\s+: 10 pièces/);
-    expect(m.texte).toMatch(/Prix\s+: 79,00 € HT\n/);
+    expect(m.texte).toMatch(/Prix\s+: 81,00 € HT\n/);
     expect(m.texte).toMatch(/Total payé\s+: 150,00 € TTC|Total payé\s+: [\d ,]+ € TTC\n/);
     expect(m.texte).toMatch(/Livraison\s+: Expédition en 2 jours — 1 colis Colissimo — 10,00 € HT/);
     expect(m.texte).toMatch(/Livré à\s+: .*1 rue de l'Essai, 77360 Vaires-sur-Marne/);

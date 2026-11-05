@@ -1,12 +1,12 @@
 {
   "_meta": {
     "role": "Toutes les valeurs en euros et en secondes du moteur, regroupées ici pour être modifiées sans toucher au code.",
-    "etat": "RÉGLAGES DU LOGICIEL DE DEVIS ADM (15/10/2026) : vrais prix au kg, taux de coupe en €/min par matière et épaisseur, imbrication en bande (10 mm entre pièces et du bord), 20 € de frais de plan par commande, minimum 27 € (manutention comprise), +15 % sur les pièces de plus de 1 m. Ancien calibrage archivé dans archives/calibrage-2026-09-29.",
+    "etat": "RÉGLAGES DU LOGICIEL DE DEVIS ADM (15/10/2026) : vrais prix au kg, taux de coupe en €/min par matière et épaisseur, imbrication en bande (10 mm entre pièces et du bord), 20 € de frais de plan par commande, minimum 37 € (manutention comprise ; 27 € au logiciel, porté à 37 € par ADM le 05/11/2026), +15 % sur les pièces de plus de 1 m. Ancien calibrage archivé dans archives/calibrage-2026-09-29.",
     "reglages_du_logiciel": [
       "prix_kg_eur acier/inox/alu BRUTS = 2 / 8 / 9 €/kg, laiton 18 €/kg (écran « Matériaux »)",
       "densités acier et inox 8 000 kg/m³ (catalogue.json)",
       "taux_coupe_eur_min par épaisseur, petite quantité (écran « Tarifs de coupe »)",
-      "frais_plan_eur = 20 € par commande, prix_minimum_eur = 27 € (manutention comprise)"
+      "frais_plan_eur = 20 € par commande, prix_minimum_eur = 37 € (manutention comprise, décision ADM 05/11/2026)"
     ],
     "encore_estime": [
       "prix_kg_eur des nuances NON brutes : écart relatif d'origine reporté sur le nouveau prix brut",
@@ -74,7 +74,7 @@
   "_note_marges": "prix_kg_eur et taux_coupe_eur_min sont des tarifs de FACTURATION (réglages du logiciel ADM) : marges à 1.0.",
   "marge_matiere": 1.0,
   "marge_machine": 1.0,
-  "_note_temps": "Manutention (chargement, tri) comprise dans le minimum de 27 € : pas de temps machine supplémentaire.",
+  "_note_temps": "Manutention (chargement, tri) comprise dans le minimum de commande : pas de temps machine supplémentaire.",
   "temps_chargement_tole_s": 0.0,
   "temps_tri_par_piece_s": 0.0,
   "marge_entre_pieces_mm": 10.0,
@@ -187,8 +187,8 @@
   },
   "matiere_mode": "bande",
   "matiere_mode_note": "bande = chaque colonne de pièces consomme toute la hauteur de la tôle sur la largeur de la pièce + l'écart entre pièces (imbrication réelle ADM : 10 mm entre pièces et du bord, coupe de chute à 20 mm, voir _note_chute).",
-  "prix_minimum_eur": 27.0,
-  "_note_minimum": "Minimum de commande 27 € HT, manutention comprise : total = max(pièces + frais de plan, 27).",
+  "prix_minimum_eur": 37.0,
+  "_note_minimum": "Minimum de commande 37 € HT (décision ADM 05/11/2026 ; 27 € au logiciel), manutention comprise : total = max(pièces + frais de plan, 37). Il sert aussi de base à la préparation de série (2 % × total d'une pièce seule).",
   "_note_nuances": "Les prix au kg BRUTS viennent du logiciel ADM. Les nuances non brutes gardent leur écart relatif d'origine : ce sont des estimations, un devis par nuance suffirait à les caler.",
   "marge_bord_tole_mm": 10.0,
   "_note_chute": "Coupe de chute, une par commande : elle se fait à ecart_coupe_chute_mm de la dernière colonne de pièces (au lieu de l'écart normal entre pièces). La bande de tôle en plus est facturée une fois par commande, et le temps de la coupe (hauteur de tôle + un amorçage) s'ajoute au temps machine de la commande si coupe_chute vaut true. Laissé à false : le logiciel ADM facture 37 € pour une seule pièce 200×200 acier 10 mm, ce qui exclut le temps de cette coupe (44,20 € sinon) et confirme la bande de 20 mm (34,50 € sans elle).",

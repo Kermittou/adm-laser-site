@@ -80,7 +80,7 @@ pieces         = prix_matiere × quantite + prix_coupe_cmd
 pieces        ×= 1,15 si le plus grand côté > 1000 mm         (grande_piece)
 attenuation    = 0 si quantite = 1, sinon 2 % × total d'une pièce seule, PAR pièce
 total_ht       = max(pieces + prix(bande_chute) + frais_plan (20 €) + features
-                     + attenuation × quantite, 27 €)
+                     + attenuation × quantite, 37 €)
 total_ht       = arrondi à l'euro SUPÉRIEUR (arrondi_total_ht_eur = 1)
 prix_unitaire  = total_ht / quantite
 ```
@@ -93,7 +93,7 @@ prix_unitaire  = total_ht / quantite
 | Vitesses | celles du catalogue (inox 8 mm = 1 m/min, confirmé sur le logiciel de coupe) |
 | Perçage (s) | ≤2 mm 0,3 · ≤4 mm 0,6 · ≤6 mm 1 · ≤8 mm 1,5 · ≤10 mm 6 · ≤15 mm 6 (à confirmer) |
 | Frais de plan | 20 € par commande, **ajoutés** |
-| Minimum de commande | 27 € HT, **plancher**, manutention (chargement, tri) comprise → temps de tri/chargement à 0 |
+| Minimum de commande | **37 € HT** (décision ADM 05/11/2026 ; 27 € au logiciel), **plancher**, manutention (chargement, tri) comprise → temps de tri/chargement à 0 |
 | Imbrication | 10 mm entre pièces, 10 mm du bord, coupe de chute à 20 mm des pièces |
 | Coupe de chute | bande facturée ; **temps de coupe non facturé** (`coupe_chute: false`) — prouvé : 1 pièce 200×200 acier 10 mm = 37 € au logiciel, 36,90 € ainsi, 44,20 € avec le temps |
 | Grandes pièces | +15 % sur matière + découpe au-delà de 1 m (compense la chute de tôle des grands formats) |
@@ -114,9 +114,9 @@ function minutesFacturees(totalSecondes: number): number {
 }
 ```
 
-**2. Frais de plan (20 €) et minimum de commande (27 €) sont DEUX choses différentes.**
+**2. Frais de plan (20 €) et minimum de commande (37 €) sont DEUX choses différentes.**
 Le premier s'ajoute une fois par commande, le second est un plancher :
-`total = max(pièces + 20 + chute, 27)`. Ne pas fusionner les deux.
+`total = max(pièces + 20 + chute, 37)`. Ne pas fusionner les deux.
 
 **3. La matière se facture sur la tôle consommée, pas au poids net.** La chute intérieure
 d'un cadre est payée (cadre 300×300 Ø250 = plaque pleine), et l'écart entre pièces aussi.
@@ -145,7 +145,7 @@ Géométrie exacte : voir `geometrie()` dans `moteur_devis.py`. Deux subtilités
 ## Tests d'acceptation — non négociables
 
 `golden.json` contient 12 devis réels sortis du logiciel de devis d'ADM. Les écarts
-ci-dessous sont mesurés **sans l'atténuation de la dégressivité** (le test le fait aussi) :
+ci-dessous (relevés avec l'ancien minimum de 27 €) sont mesurés **sans l'atténuation de la dégressivité** (le test le fait aussi) :
 ils mesurent la fidélité au logiciel, pas le choix commercial. Le port TypeScript
 doit reproduire chaque `attendu` (calculé par le Python, `generer_golden.py`) **au centime**
 (tolérance 0,01 € sur les totaux, 0,1 sur les grandeurs physiques), et les 3 000 devis de

@@ -68,7 +68,7 @@ describe("Boxtal — requête de création d'expédition", () => {
     expect(b.expectedTakingOverDate).toBe("2026-10-20");
     expect(b.shipment.externalId).toBe("AB12CD34");
     const [colis] = b.shipment.packages;
-    expect(colis).toMatchObject({ type: "PARCEL", length: 34, width: 24, height: 7, weight: 16.56, value: { value: 79, currency: "EUR" } });
+    expect(colis).toMatchObject({ type: "PARCEL", length: 34, width: 24, height: 7, weight: 16.56, value: { value: 81, currency: "EUR" } });
     expect(colis.content.id).toBe("content:v1:99999");
     expect(b.shipment.toAddress).toEqual({
       type: "BUSINESS",

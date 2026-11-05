@@ -196,12 +196,12 @@ describe("commande en ligne", () => {
     const c = construireCommande(petite, "express");
     expect(c.ok).toBe(true);
     if (!c.ok) return;
-    expect(c.resultat.total_ht).toBe(79); // 78,61 → 79
+    expect(c.resultat.total_ht).toBe(81); // 80,61 → 81 (minimum 37 € → préparation de série 2 % × 37 € par pièce)
     expect(c.livraison.port_ht).toBe(34);
-    expect(c.livraison.supplement_ht).toBe(12); // 15 % × 79 = 11,85 → 12
-    expect(c.livraison.prix_ht).toBe(46);
-    expect(c.centimes.livraison).toBe(5520);
-    expect(c.centimes.total).toBe(Math.round(c.resultat.total_ttc * 100) + 5520);
+    expect(c.livraison.supplement_ht).toBe(13); // 15 % × 81 = 12,15 → 13
+    expect(c.livraison.prix_ht).toBe(47);
+    expect(c.centimes.livraison).toBe(5640);
+    expect(c.centimes.total).toBe(Math.round(c.resultat.total_ttc * 100) + 5640);
   });
 
   it("supplément express une seule fois, quel que soit l'envoi", () => {

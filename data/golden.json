@@ -88,10 +88,10 @@
       "pieces_par_tole": 36,
       "minutes_facturees": 4.0,
       "majoration_grande_piece_pct": 0.0,
-      "prix_unitaire_ht": 3.78,
-      "total_ht": 170
+      "prix_unitaire_ht": 3.98,
+      "total_ht": 179
     },
-    "ecart_pct": 23.15
+    "ecart_pct": 29.67
   },
   {
     "cle": "acier-3mm-5",
