@@ -48,8 +48,8 @@ export const site = {
       { matiere: "Aluminium", min: 1, max: 5 },
     ],
   },
-  /** Tolérances confirmées par ADM le 05/11/2026 (pliage : à fournir). */
-  tolerances: { decoupe: "± 0,1 à 0,2 mm selon la matière et l'épaisseur", pliage: null as string | null },
+  /** Tolérances confirmées par ADM le 05/11/2026. */
+  tolerances: { decoupe: "± 0,1 à 0,2 mm selon la matière et l'épaisseur", pliage: "± 0,5 mm" as string | null },
 
   machines: {
     laser: { nom: "Trumpf TruLaser 2030", puissance: "3 kW", format: "1500 × 3000 mm" },
