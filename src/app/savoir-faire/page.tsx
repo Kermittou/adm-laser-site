@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Découpe laser, pliage et soudure — capacités machine",
   description:
-    "Découpe laser Trumpf 3 kW sur tôle 1\u202f500 × 3\u202f000 mm, pliage jusqu'à 3 m, soudure TIG et MIG : nos capacités en acier, inox et aluminium, à Vaires-sur-Marne.",
+    "Découpe laser 3 kW sur tôle 1\u202f500 × 3\u202f000 mm, pliage jusqu'à 3 m, soudure TIG et MIG : nos capacités en acier, inox et aluminium, à Vaires-sur-Marne.",
   alternates: { canonical: "/savoir-faire" },
 };
 
@@ -131,7 +131,7 @@ export default function SavoirFaire() {
       <Section id="pliage" ton="surface" aria-labelledby="t-pliage">
         <IconePliage className="text-accent" width={36} height={36} />
         <EnTete id="t-pliage" titre="Pliage" className="mt-4">
-          <p>Deux presses plieuses Trumpf mettent en forme vos pièces juste après la découpe, sans changer d&apos;atelier.</p>
+          <p>Deux presses plieuses mettent en forme vos pièces juste après la découpe, sans changer d&apos;atelier.</p>
         </EnTete>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {plieuses.map((p) => (

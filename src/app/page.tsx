@@ -42,7 +42,7 @@ export default function Accueil() {
             {
               Icone: IconePliage,
               titre: "Pliage et soudure",
-              texte: "Mise en forme sur presses plieuses Trumpf et assemblage par soudure : vous recevez des pièces prêtes à poser.",
+              texte: "Mise en forme sur presses plieuses et assemblage par soudure : vous recevez des pièces prêtes à poser.",
             },
             { Icone: IconeQualite, titre: "Finition et livraison soignées", texte: "Pièces sans rayure, emballage soigné, livraison dans toute la France." },
           ].map(({ Icone, titre, texte }) => (
@@ -69,7 +69,7 @@ export default function Accueil() {
 
       {/* ------------------------------------------------ Capacités */}
       <Section ton="surface" aria-labelledby="capacites">
-        <EnTete id="capacites" surTitre="Capacités" titre="Un parc Trumpf, de la tôle brute à la pièce finie." />
+        <EnTete id="capacites" surTitre="Capacités" titre="Nos machines, de la tôle brute à la pièce finie." />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <Card className="flex flex-col">
             <IconeLaser className="text-accent" />
