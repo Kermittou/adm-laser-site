@@ -334,6 +334,35 @@ Encore manquant :
 
 ---
 
+## Fonctionnalités à venir
+
+### Dépôt de fichier DXF → devis et commande en ligne (décidé le 06/11/2026, pas commencé)
+
+Le client dépose son DXF à plat ; le site en tire `surface_mm2`, `perimetre_mm` (somme de tous
+les contours), `encombrement_x/y` et `percages` (un par contour fermé), puis chiffre avec la forme
+`personnalisee` du moteur, déjà spécifiée. Le prix est recalculé côté serveur depuis le fichier ;
+le DXF du client est joint au mail atelier. DWG et STEP restent sur devis (format fermé / 3D à
+déplier) ; le pliage aussi.
+
+**Détection bon / mauvais fichier — le cœur de la fonctionnalité.** Trois issues :
+🟢 bon → prix et commande ; 🟠 corrigé sans risque (traits en double ignorés, écart < 0,05 mm
+fermé, conversion d'unité) → signalé au client et dans le mail atelier ; 🔴 mauvais → pas de prix,
+raison précise en français et envoi en devis manuel en un clic. Contrôles : fichier lisible,
+unité ($INSUNITS, sinon taille plausible), contours fermés, doublons, cotes/textes/cartouche/
+hachures ignorés, une seule pièce par fichier, contours qui ne se croisent pas, trous à l'intérieur
+du contour extérieur, format ≤ 3000 × 1500 mm, trou ≥ épaisseur (garde-fou existant), parties
+trop fines, entités non gérées. **Aperçu SVG obligatoire**, défauts surlignés à l'endroit exact ;
+le client confirme sa pièce avant de payer. La validation atelier avant capture reste le dernier
+filet.
+
+À obtenir d'ADM avant de commencer : 10 à 20 vrais DXF clients (bons et mauvais, avec le défaut
+connu), le temps et la longueur de coupe du logiciel ADM pour quelques-uns, la règle « partie trop
+fine », et le choix pour les fichiers à plusieurs pièces (refus ou chiffrage pièce par pièce).
+Première version visible seulement sur l'adresse de test avant le vrai site.
+
+Limite connue : la matière se calcule sur le rectangle englobant (imbrication en bande) ; un peu
+cher pour les formes très irrégulières.
+
 ## Mise en ligne
 
 `DEPLOIEMENT.md` : Dokploy (Dockerfile, port 3000), variables d'environnement, webhook Stripe
